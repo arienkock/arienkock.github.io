@@ -1,5 +1,6 @@
 ---
 layout: post
 ---
-  {% assign post = site.posts.first %}
-  {% assign content = post.content %}
+  {% assign defaultedPost = site.posts.first %}
+  {% assign defaultedTitle = defaultedPost.title %}
+  {% assign defaultedContent = defaultedPost.content %}
