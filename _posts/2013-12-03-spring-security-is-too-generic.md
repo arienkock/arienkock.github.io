@@ -1,8 +1,9 @@
 ---
 layout: post
 ---
-Something I alluded to in my entry [about web tech in general](http://supposed.nl/keeping-up-with-web-technology/) comes back on a daily basis: 
-> "being a jack of all trades means being a master of none"
+A fact I learned while playing Final Fantasy that comes back in my work on a daily basis is that
+
+> being a jack of all trades means being a master of none
 
 What that means in the software world is that frameworks tend to be less optimal at solving problems than a custom made solution. That seems intuitive, but it's not always true. Frameworks are often spawned out of the need for filling one specific use-case. So someone builds a simple solution, but then it starts growing and you see the potential for creating something a lot of people could benefit from. As the scope expands and encompasses way more than the problem it was originally meant to solve, it is usually still pretty great at solving that original use case. Spring Security on the other hand gives the impression of having been __started__ as a framework in mind. Not unlikely, because...
 
