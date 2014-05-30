@@ -15,19 +15,18 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Supposed Knowledge</h1>
+        <div><img src="/images/supp_shew.png" alt="Supposed Knowledge"/></div>
         <p>A Java web development blog</p>
         <p class="view"><a href="https://github.com/arienkock">View My GitHub Profile</a></p>
 		
 		<h1>Blog Posts</h1>
-		<ul>
-			{% for post in site.posts %}
-				<li><a href="{{ post.url }}">{{ post.title }}</a></li>
-			{% endfor %}
-		</ul>
+		{% for it_post in site.posts %}
+			<div><a href="{{ it_post.url }}">{{ it_post.title }}</a></div>
+		{% endfor %}
       </header>
       <section>
-		{{ content }}
+		<h1>{{ post.title }}</h1>
+		{{ post.content }}
       </section>
       <footer>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
