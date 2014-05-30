@@ -7,6 +7,6 @@
     <a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
 {% endif %}
 </h1>
-{% endif %}
 <p><em>by Arien Kock on {% if post.date %}{{post.date | date: "%B %-d, %Y"}}{% endif %}{% if page.date %}{{page.date | date: "%B %-d, %Y"}}{% endif %}</em></p>
+{% endif %}
 <div>{{ content }}</div>
