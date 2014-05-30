@@ -11,22 +11,24 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
   </head>
   <body>
     <div class="wrapper">
       <header>
         <div><img src="/images/supp_shew.png" alt="Supposed Knowledge"/></div>
-        <p>A Java web development blog</p>
+        <p>a (mostly Java-centric) web development blog</p>
         <p class="view"><a href="https://twitter.com/ArenCawk">@ArenCawk</a></p>
 		
-		<h1>Blog Posts</h1>
+		<h2>Entries...</h2>
 		{% for it_post in site.posts %}
 			<div><a href="{{ it_post.url }}">{{ it_post.title }}</a></div>
 		{% endfor %}
       </header>
       <section>
-		<h1>{{ page.title }}{{ defaultedTitle }}</h1>
-		{{ content }}{{ defaultedContent }}
+		{% include post_details.html %}
       </section>
       <footer>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
