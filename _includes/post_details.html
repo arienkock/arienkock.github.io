@@ -8,5 +8,5 @@
 {% endif %}
 </h1>
 {% endif %}
-<div><em>by Arien Kock on {% if post.date %}{{post.date}}{% endif %}{% if page.date %}{{page.date}}{% endif %}</em></div>
+<p><em>by Arien Kock on {% if post.date %}{{post.date | date: "%B %-d, %Y"}}{% endif %}{% if page.date %}{{page.date | date: "%B %-d, %Y"}}{% endif %}</em></p>
 <div>{{ content }}</div>
