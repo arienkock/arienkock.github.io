@@ -4,7 +4,7 @@ layout: post
 Forgive the use of an ancient internet meme, but things like [Spring Boot](http://projects.spring.io/spring-boot/) make me very excited. Whether [eh afraids of anything](http://knowyourmeme.com/memes/pretty-cool-guy) or not, it does allow you to get up and running with Spring MVC + Spring Security really fast.
 
 ###It's a bird... it's an app... it's a webapp###
-You can run a JavaSE application from command line and get all the Spring framework support you want, but I am (as probably most other people are) interested in making web-applications. IMHO the most elegant thing about Spring Boot is being able create a WAR deployable in the traditional manner that is also an executable JAR at the same time. I've created an app like this for one of my clients, and because I was responsible for deploying it and configuring the VPS this saved me a lot of time and effort.
+You can run a Java SE application from command line and get all the Spring framework support you want, but I am (as probably most other people are) interested in making web-applications. IMHO the most elegant thing about Spring Boot is being able create a WAR deployable in the traditional manner that is also an executable JAR at the same time. I've created an app like this for one of my clients, and because I was responsible for deploying it and configuring the VPS this saved me a lot of time and effort.
 
 A tip here is that if you setup your Upstart scripts to restart the service on failure is to make sure the location the WAR is unpacked to (happens each time) is cleaned up regularly. 
 
