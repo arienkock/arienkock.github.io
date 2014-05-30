@@ -16,14 +16,16 @@
   <body>
     <div class="wrapper">
       <header>
-        <div><img src="/images/supp_shew.png" alt="Supposed Knowledge"/></div>
+        <div><img src="/images/supp_shew.png" alt="Supposed Knowledge [cashew]"/></div>
         <p>My (mostly Java) web development blog</p>
         <p class="view"><a href="https://twitter.com/ArenCawk">@ArenCawk</a></p>
 		
 		<h2>Entries...</h2>
+		<p>
 		{% for it_post in site.posts %}
 			<div><a href="{{ it_post.url }}">{{ it_post.title }}</a></div>
 		{% endfor %}
+		</p>
       </header>
       <section>
 		{% include post_details.html %}
