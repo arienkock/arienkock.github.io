@@ -1,3 +1,6 @@
+---
+layout: post
+---
 A week ago Google came out with [big news](http://googlewebmastercentral.blogspot.co.uk/2014/05/understanding-web-pages-better.html). Now all your single page apps get indexed properly without a static page fallback. Pages that rely on `pushState` for navigation used to have to do extra work to [make their sites indexable](https://support.google.com/webmasters/answer/174992?hl=en).
 
 ###The good###
