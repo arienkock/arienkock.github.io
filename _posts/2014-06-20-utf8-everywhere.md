@@ -1,3 +1,6 @@
+---
+layout: post
+---
 Where to begin when you're trying to support Unicode? Or rather where do you draw the line when it comes to supporting any printable character not covered by the first 7 bits worth of code points of ASCII? Only you can answer that question for your own project. Wherever that line is it is always further than: using UTF-8 for *everything*. That should be the minimum and you can filter out or transcode as needed later. Simply trusting system defaults just doesn't cut it.
 
 UTF-8 has been around for so long, but it's not as ubiquitous as you'd expect and so the [UTF-8 Everywhere manifesto](http://www.utf8everywhere.org/) is still very relevant. If you're reading this you probably don't need to be convinced, but you can still make sure you know [the absolute minimum every software developer should know about Unicode and character sets](http://www.joelonsoftware.com/articles/Unicode.html). 
