@@ -2,7 +2,7 @@
 layout: post
 title: Stagger/Delay Your Facebook API Calls
 ---
-Facebook has some guidelines for using their API's and one of them is with regards to [request rate](https://developers.facebook.com/docs/reference/ads-api/api-rate-limiting/). If you get blocked, then you can simply wait for the block to be lifted, but a better way would be to limit your request rate so you **don't** get the infamous...
+Web API providers like Facebook and Twitter have  guidelines for using their API's and one of them is with regards to [request rate](https://developers.facebook.com/docs/reference/ads-api/api-rate-limiting/). If you get blocked, then you can simply wait for the block to be lifted, but a better way would be to limit your request rate so you **don't** get Facebook's infamous...
 > It looks like you were misusing this feature by going too fast. You've been blocked from using it. Learn more about blocks in the Help Center.
 
 My solution to this problem was to use a `HttpRequestInterceptor` to use together with [HttpComponents HttpClient](http://hc.apache.org/). 
@@ -50,4 +50,4 @@ The next step is to create an HttpClient instance that uses this. In Spring I de
 		}
 	}
 
-Facebook isn't 100% clear about the limits, but slightly less than 1 request every 2 seconds tends to work pretty well in my experience.
+Facebook isn't 100% clear about the limits, but slightly less than 1 request every 2 seconds tends to work pretty well in my experience. Twitter is [a bit more clear about it](https://dev.twitter.com/docs/rate-limiting/1.1).
