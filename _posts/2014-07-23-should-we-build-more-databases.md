@@ -13,7 +13,7 @@ Also, educational organizations and government are not so eager to adopt closed 
 
 ###Being your own best friend
 Google makes in-house storage systems in close coordination with their client, which is Google itself.
-Jeff Dean mentions it several times in his talk at the same XLDB conference. Here he talks about [knowing the requirements for GFS](http://youtu.be/gCGvneeHbPQ?t=4m20s). In order to do a specific thing better than before Sacrifices in functionality need to be made in order to do other things better. This means sometimes ignoring your client's request, which is easier if **you** are your own client. It is the opposite of design by committee. It's design by dictatorship.
+Jeff Dean mentions it several times in his talk at the same XLDB conference. Here he talks about [knowing the requirements for GFS](http://youtu.be/gCGvneeHbPQ?t=4m20s). In order to do a specific thing better than before sacrifices in functionality need to be made. This means sometimes ignoring your client's request, which is easier if **you** are your own client. It is the opposite of design by committee. It is design by dictatorship.
 
 I believe in the [Benevolent Dictator For Life](http://en.wikipedia.org/wiki/Benevolent_dictator_for_life) system. Sometimes long meetings about the direction of a product or company yield new insights that eventually lead to something good, but most of the time what you really want is a shared vision. If unable to agree on such a vision, a hero must arise. The decider. 
 
