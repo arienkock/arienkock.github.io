@@ -9,6 +9,7 @@ It speeds up page loads by allowing multiple resources to be sent across a singl
 
 In addition to this it supports the pushing of resources by the server ahead of the client's realizing it needs them. Keep in mind that this is probably the biggest game-changer of SPDY. Before a browser can parse the HTML and figure out what stylesheets, scripts, and images it needs, it could already be receiving the data. By the time it figures out the HTML, there could be no more requests left to be made!
 
+
 ### SPDY support
 When Safari 8 becomes the current version, [SPDY will be supported across the board](http://caniuse.com/#feat=spdy) for all 'major browsers' (which at the time of this writing is not yet the case).
 
