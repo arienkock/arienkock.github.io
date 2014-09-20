@@ -1,2 +1,2 @@
 pygments: false
-markdown: kramdown
+markdown: redcarpet
