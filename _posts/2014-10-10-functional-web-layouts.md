@@ -19,7 +19,7 @@ Obviously... complex layouts can't be one-liners. Or can they? If you have a lay
 2. sandboxed JS discourages re-use of functions and may balloon your code size from all the dependent libraries
 3. polyfills for older browsers aren't a perfect solution
 
-However, if these do not bother you, then "yes", these will do the trick (I do believe down the line WebComponents will be the dominant life-form on the web). Polymer provides [some nice layout components](https://www.polymer-project.org/docs/elements/layout-elements.html) to get you started. The unfortunately named [Mozilla Brick](https://mozbrick.github.io/docs/brick-layout.html) has some too. On a sidenote: I hope there comes a way to (intentionally) affect styles of elements *inside* of shadow-DOM. Using a special CSS selector or the like.
+However, if these do not bother you, then "yes", these will do the trick and I believe, down the line, WebComponents will be the dominant life-form on the web. Polymer provides [some nice layout components](https://www.polymer-project.org/docs/elements/layout-elements.html) to get you started. The unfortunately named [Mozilla Brick](https://mozbrick.github.io/docs/brick-layout.html) has some too. On a sidenote: I hope there will be a way to (intentionally) affect styles of elements *inside* of shadow-DOM. Using a special CSS selector is the simplest solution I can think of.
 
 Another solution I considered and dismissed is GSS. [Grid Style Sheets](http://gridstylesheets.org/) have the JavaScript doing the layout, which isn't ideal when it comes to supporting low-end devices. That and, despite how expressive it is, when it comes to layout, it's not addressing the reusability problem.
 
