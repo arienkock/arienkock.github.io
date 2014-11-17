@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Cache Busting Filter: Java-only solution to long cache expiry
+title: Cache Busting Filter\: Java-only solution to long cache expiry
 ---
+
 ### TL;DR
 1. make a `Filter`
 2. rewrite URI's in your pages to contain a hash of your files by wrapping `HttpServletResponse`
