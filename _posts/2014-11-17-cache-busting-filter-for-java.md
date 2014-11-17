@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cache Busting Filter\: Java-only solution to long cache expiry
+title: Cache Busting Filter - a Java-only solution to long cache expiry
 ---
 
 ### TL;DR
