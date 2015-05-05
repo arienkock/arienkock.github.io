@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Cache Busting Filter - a Java-only solution to long cache expiry
+title: "Cache Busting Filter - a Java-only solution to long cache expiry"
+published: true
 ---
 
 ### TL;DR
@@ -23,3 +24,8 @@ You can use this feature, which is intended for handling session ID's, to rewrit
 Below is the code, which I documented more than I do most other stuff I write. I use a `CheckedInputStream` to calculate the hash in a streaming fashion.
 
 <script src="https://gist.github.com/arienkock/c0a236aad1ed7e31f134.js"></script>
+
+Thanks to @eranievs for pointing out a bug in the implementation. The filter didn't work with non-root context paths. The Gist has been updated.
+
+<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/ArenCawk">@ArenCawk</a> Using your Cache Busting Filter, but running into some issues. <a href="http://t.co/Y6exo4VEsc">http://t.co/Y6exo4VEsc</a></p>&mdash; Svein Are (@eranievs) <a href="https://twitter.com/eranievs/status/595511122066804736">May 5, 2015</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
