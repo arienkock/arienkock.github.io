@@ -3,7 +3,6 @@ published: true
 layout: post
 ---
 
-
 To organize code I've started to adopt certain tools and methods. [Dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) is the principle that is fundamental in achieving this, and [interfaces](/2015/06/25/the-point-of-interfaces.html) are the primary tool (or language feature, if you prefer) Java devs use to achieve dependency inversion. But wait, there's more...
 
 ### Maven `runtime` Scope
