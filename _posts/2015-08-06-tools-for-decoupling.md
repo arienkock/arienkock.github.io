@@ -3,6 +3,7 @@ published: true
 layout: post
 ---
 
+
 To organize code I've started to adopt certain tools and methods. [Dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle) is the principle that is fundamental in achieving this, and [interfaces](/2015/06/25/the-point-of-interfaces.html) are the primary tool (or language feature, if you prefer) Java devs use to achieve dependency inversion. But wait, there's more...
 
 ### Maven `runtime` Scope
@@ -14,5 +15,5 @@ There's Spring, OSGi and to a lesser extent DI-only tools like Dagger and Guice.
 ### Microservices
 As much as the microservice hype is overblown, it _is_ (like it or not) a good way to decouple. What it's missing is the plug&play nature of something like DI. If all your applica... err.. I mean... **microservices**... were to magically wire themselves up, wouldn't that be great? Is there something like that? If there is, I don't know about it. Right now you still have to do most of the legwork yourself with tools like [Zookeeper](https://zookeeper.apache.org/) or [etcd](https://coreos.com/etcd/). Orchestration of application modules is something that is rapidly moving from the  multi-library, to the multi-process, and up to the multi-machine scale. Though I think in most cases we can do without this upscaling (most applications are not Twitter), it seems to be the trend. What is missing from that trend, is the awareness that it is the same age-old problem.
 
-### Roll your own
+### Good people
 The challenge of modularizing your code is one of knowledge and discipline. Knowledge of your subject matter and the business it's meant to service, and discipline to throw away previous assumptions and work (read: code) when new knowledge shines light on past mistakes. So, whether you write all your code into a single library, or write multiple distinct applications: ensuring your present and future productivity takes smart and hard-working people. i.e. the team is everything.
