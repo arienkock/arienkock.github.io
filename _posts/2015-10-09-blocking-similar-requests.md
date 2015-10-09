@@ -4,8 +4,6 @@ layout: post
 ---
 
 
-
-
 When regular users can cause serious contention issues in your web-application (that make the whole thing unresponsive) simply by refreshing a specific page, it's probably a sign that something needs to be re-thought. Faced with just such an issue, I tried optimizing the requests, but some requests are still just really slow and cannot be easily cached. The ACTUAL solution is re-designing the interaction, possibly splitting it up into smaller steps, but until then! Rate limiting to the rescue!
 
 Using Guava's cache and custom collections I made this [SimilarRequestLimitingFilter](https://gist.github.com/arienkock/3fc5e06db51f5b1eb04a). Incoming requests are remembered until they complete, and if the number of 'similar' requests exceeds a certain number, BAM! HTTP error 429! You don't know status code 429? It means ["slow your roll"](http://httpstatusdogs.com/429-too-many-requests).
