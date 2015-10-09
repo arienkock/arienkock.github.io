@@ -1,6 +1,7 @@
 ---
-published: false
+published: true
 ---
+
 
 
 When regular users can cause serious contention issues in your web-application (that make the whole thing unresponsive) simply by refreshing a specific page, it's probably a sign that something needs to be re-thought. Faced with just such an issue, I tried optimizing the requests, but some requests are still just really slow and cannot be easily cached. The ACTUAL solution is re-designing the interaction, possibly splitting it up into smaller steps, but until then! Rate limiting to the rescue!
