@@ -1,6 +1,8 @@
 ---
-published: false
+published: true
+layout: post
 ---
+
 
 Free conferences don't come along very often, and when Software Circus was announced, the 200 spots filled up in less than a day. I had never been to a conference before. Yes, a Google Cloud Platform event, and an AWS event, but those felt more like showcases than conferences. On the day of Software Circus it finally dawned on me that, in addition to the chance to expand your professional network and to learn new things, conferences can just be a fun experience. Fun was a nice side-effect, while two speakers gave presentations that really resonated with me.
 
