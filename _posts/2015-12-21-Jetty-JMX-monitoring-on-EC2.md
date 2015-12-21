@@ -1,7 +1,8 @@
 ---
-published: false
+published: true
 layout: post
 ---
+
 
 I hope I this post will save someone from the frustration I've lived through trying to get this to work.
 
