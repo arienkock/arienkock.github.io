@@ -1,7 +1,8 @@
 ---
-published: false
+published: true
 layout: post
 ---
+
 
 When I wanted to try out Ansible on my dev machine I felt like booting a sufficiently large EC2 instance was a bit of a waste. So, I used Vagrant. Vagrant makes using VirtualBox directly seem like a terrible chore. So this is what you need to start playing around with Ansible on Windows.
 
@@ -31,4 +32,3 @@ Now, append the contents of the file to the `authorized_keys` file running `cat 
 
 ## Try it out
 Create the inventory file on VM1 contianing only VM2's IP address: `sudo sh -c "echo 192.168.33.10 > /etc/ansible/hosts"`. Now, run your first ad-hoc play (don't worry about the terminology if you're just getting started): `ansible all -m setup`. If you're having connection issues, make sure the IP address is pointing to VM2's IP address on your windows machine (the IP addresses in the commands on this page are just examples).
-    
