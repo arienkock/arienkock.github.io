@@ -14,7 +14,10 @@ One Ansible host (let's call it VM1) and one Ansible target (let's call it VM2).
 
     vagrant init minimal/trusty64
 
-## Configure a static IP address for the Ansible target
+## Install Ansible on VM1
+Read [the documentation for your OS](http://docs.ansible.com/ansible/intro_installation.html).
+
+## Configure a static IP address for VM2
 You don't want to have to update your Ansible configuration (the inventory file) each time your Ansible target gets a new IP address. So, somewhere in your `Vagrantfile` set something along the lines of:
 
     config.vm.network "private_network", ip: "192.168.33.10"
