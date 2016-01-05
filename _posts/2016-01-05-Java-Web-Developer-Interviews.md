@@ -1,6 +1,8 @@
 ---
-published: false
+published: true
+layout: post
 ---
+
 
 I've tried conducting interviews with developers in different ways, and I've learned a few things from my own experiences:
 
@@ -40,5 +42,3 @@ When asked to implement their own version of the capitalizer functionality, and 
 String concatenation in a for-loop cannot be optimized into `StringBuffer` appends by the compiler, does the candidate know this? Do they know why it matters?
 
 During such an exercise the candidate will most likely feel a lot of pressure to perform. I tried to lighten this, but I think most interviewers will invariably fail. People get nervous, and you can't completely avoid this without drugs. However, it's not a bad thing to see how they deal with this. Above almost every technical aspect and despite what some code-whisperers may say, during a pair programming exercise you will see much more of the person's personality than you would through their code alone.
-
-
