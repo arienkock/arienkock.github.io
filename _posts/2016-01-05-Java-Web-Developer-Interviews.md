@@ -29,16 +29,16 @@ Our exercise was:
 
 > "When I submit this form I can update entity X. I want the first letter of each word of this entity's field Y to be converted to upper-case when I do so."
 
-Can the candidate figure out where in the code base the save action is performed? Once found, what are their considerations when deciding where to add the functionality? Do they think to check if the entity is modified anywhere else?
+Can the candidate figure out where in the code-base the save action is performed? Once found, what are their considerations when deciding where to add the functionality? Do they think to check if the entity is modified anywhere else?
 
 At a high level, do they understand what the components should do? Do they have any useful feedback about naming, dependencies and project structure?
 
-Do they consdier looking online for a utility that capitalizes words or do they dive straight into writing a for-loop?
+Do they consdier looking online for a utility that capitalizes words or do they dive straight into writing a for-loop? Do they know what you're talking about when you discuss `StringTokenizer` vs `String.split()`?
 
-When asked to implement their own version of the capitalizer functionality, and given some hints about Unicode, are they aware of the consequences of treating everything like ASCII?
+When asked to implement their own version of the capitalizer functionality, and perhaps given some hints about Unicode, are they aware of the consequences of treating everything like ASCII?
 
-String concatenation in a for-loop cannot be optimized into `StringBuffer` appends by the compiler, does the candidate know this? Do they know why that matters?
+String concatenation in a for-loop cannot be optimized into `StringBuffer` appends by the compiler, does the candidate know this? Do they know why it matters?
 
-During such an exercise the candidate will most likely feel a lot of pressure to perform. I tried to lighten it, but I think most interviewers will inevitable fail. People get nervous, and you can't completely avoid this without drugs. However, it's not a bad thing to see how they deal with this. Above almost everything and despite what some code-whisperers may say, during a pair programming exercise you will see much more of the person's personality than you would through their code alone.
+During such an exercise the candidate will most likely feel a lot of pressure to perform. I tried to lighten this, but I think most interviewers will invariably fail. People get nervous, and you can't completely avoid this without drugs. However, it's not a bad thing to see how they deal with this. Above almost every technical aspect and despite what some code-whisperers may say, during a pair programming exercise you will see much more of the person's personality than you would through their code alone.
 
 
