@@ -12,7 +12,7 @@ I've tried conducting interviews with developers in different ways, and I've lea
 4. Day to day challenges require "Googling it", which coding challenges purposely try to avoid.
 
 ## No more coding tests?
-In the latest interview I conducted, decided to do a pair programming exercise. It's more of a "talk me through your process while solving a fictional issue"-exercise. This was much more effective in showcasing this candidate's experience, proficiency with his/her preferred IDE, and basic Java language knowledge.
+In the latest interview I conducted, I decided to do a pair programming exercise. It's more of a "talk me through your process while solving a fictional issue"-exercise. This was much more effective in showcasing this candidate's experience, proficiency with his/her preferred IDE, and basic Java language knowledge.
 
 ## How is it any different?
 You might say: "..but that's still a coding test". I suppose that's true, but it's still very different. The best part is that I could see and talk to the person doing the test, which told me a lot more than only the end-product could.
