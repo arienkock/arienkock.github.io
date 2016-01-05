@@ -35,7 +35,7 @@ Can the candidate figure out where in the code-base the save action is performed
 
 At a high level, do they understand what the components should do? Do they have any useful feedback about naming, dependencies and project structure?
 
-Do they consdier looking online for a utility that capitalizes words or do they dive straight into writing a for-loop? Do they know what you're talking about when you discuss `StringTokenizer` vs `String.split()`?
+Do they consider looking online for a utility that capitalizes words or do they dive straight into writing a for-loop? Do they know what you're talking about when you discuss `StringTokenizer` vs `String.split()`?
 
 When asked to implement their own version of the capitalizer functionality, and perhaps given some hints about Unicode, are they aware of the consequences of treating everything like ASCII?
 
