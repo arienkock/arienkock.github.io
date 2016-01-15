@@ -1,0 +1,157 @@
+//$icon-font-path: '../fonts/';
+
+// bower:scss
+// @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+@import url(https://fonts.googleapis.com/css?family=Fugaz+One);
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import 'reset.scss';
+
+$font-family-heading: 'Fugaz One', cursive;
+$font-family-body: 'Lato', sans-serif;
+$line-height: 1.2;
+$font-size-scale-down: 0.5rem;
+$font-size-scale-1: 1.5rem;
+$font-size-scale-2: 2rem;
+$length-base: $line-height * $font-size-scale-down;
+
+$color-body-bg: #002B36;
+$color-body-fg: #839496;
+$color-link: #DC322F;
+$color-aside: #B58900;
+$color-notification-bg: #121B28;
+$color-notification-fg: #2AA198;
+$color-notification-link: #8FB5E0;
+$color-bright: #E0E2E4;
+$color-quote: #657B83;
+$color-subtitle: #2AA198;
+
+$length-sentence: 17em;
+
+body {
+	font-family: $font-family-body;
+	font-size: 100%;
+	line-height: $line-height;
+	padding: 5vmin;
+	background-color: $color-body-bg;
+	color: $color-body-fg;
+}
+h1 {
+	font-size: $font-size-scale-2;
+	font-family: $font-family-heading;
+}
+h2,h3,h4,h5,h6 {
+	font-size: $font-size-scale-1;
+	font-family: $font-family-heading;
+}
+.notificationBlock {
+	background-color: $color-notification-bg;
+	color: $color-notification-fg;
+	padding: 1em;
+	text-align: center;
+}
+.notificationBlock a:link {
+	color: $color-notification-link;
+	font-weight: bold;
+}
+.browserupgrade {
+	@extend .notificationBlock;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: $length-sentence * 3;
+}
+
+.header {
+	display: flex;
+}
+.logo {
+	color: $color-bright;
+	p {
+		color: $color-subtitle;
+		font-style: italic;
+	}
+}
+.menu {
+	display: flex;
+	flex-grow:1;
+	margin-top: $length-base * 3;
+	justify-content: space-around;
+}
+.menu > .item {
+	width: 50%;
+}
+.menu > .navItem {
+	text-align: center;
+	font-weight: bold;
+	&:after {
+		content: '';
+		box-sizing: border-box;
+		height: $length-base;
+		border-bottom: $color-link ($length-base / 2) solid;
+		margin: 0 $length-base;
+		display: block;
+	}
+}
+
+.navItem a {
+	text-decoration: none;
+}
+.navItem a:link, .navItem a:visited {
+	color: $color-link;
+}
+.navItem a:hover, .navItem a:active, {
+	color: lighten($color-link, 4%);
+}
+.navItem:hover:after {
+	border-bottom-color: lighten($color-link, 4%)
+}
+
+.content {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: $length-base * 4;
+	> .item {
+		width: 50%;
+		box-sizing: border-box;
+		flex-grow: 1;
+		padding: 0 ($length-base * 2);
+		margin-bottom: ($length-base * 2);
+		position: relative;
+		// &:after {
+			// content: '';
+			// position: absolute;
+			// height: 100%;
+			// width: ($length-base * 2);
+			// background-color: black;
+			// top: 0;
+			// right: -($length-base * 1);
+		// }
+		> .date, .item-title, .teaser-line {
+		}
+		> .date {
+			color: $color-aside;
+			// font-weight: bold;
+		}
+		> .teaser-line {
+			color: $color-quote;
+			font-style: italic;
+			&:before {
+				content: '“';
+			}
+			&:after {
+				content: '...”';
+			}
+		}
+	}
+	> .item:nth-child(odd) {
+		text-align: right;
+	}
+	> .item:nth-child(even) {
+		//transform: translateY($length-base * 4);
+		position: relative;
+		top: $length-base * 5;
+	}
+}
