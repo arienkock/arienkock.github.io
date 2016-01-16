@@ -1,9 +1,11 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ site.title }}{% endblock %}
+{% block title %}{{ page.title }} - {{ site.title }}{% endblock %}
 
 {% block content %}
 <div class="article">
+<h1 class="articleTitle">{{ page.title|safe }}</h1>
+<div class="posted-on-date">Posted on {{page.date.getFullYear()}}-{{page.date.getMonth() + 1}}-{{page.date.getDate()}}</div>
 {{ content|safe }}
 </div>
 {% endblock %}

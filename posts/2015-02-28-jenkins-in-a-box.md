@@ -1,5 +1,6 @@
 ---
 title: Jenkins in a Box
+teaser: A tale of build automation, Docker and legacy applications
 ---
 
 At my work we've had experience with CI before. We had a Jenkins instance running, but we didn't actively maintain the job configuration. We only ever really stripped out parts of the build and we grew to hate its automated emails about failed tests we didn't understand and did not feel responsible for. The problem was with our *attitudes* towards CI and the evergreen excuse of not "being given" any time to fix it properly. There were some attempts at rectifying this, but nothing stuck. It was time to take a stand. This article is about how I went about using Docker and some other tools to right this wrong.

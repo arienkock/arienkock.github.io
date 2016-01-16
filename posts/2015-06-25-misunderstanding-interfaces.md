@@ -1,5 +1,6 @@
 ---
-title: Misunderstanding (Java) Interfaces
+title: Misunderstanding Java Interfaces
+teaser: Confessing my own short-sightedness
 ---
 
 

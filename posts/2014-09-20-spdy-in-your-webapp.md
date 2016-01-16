@@ -1,5 +1,6 @@
 ---
 title: Please use SPDY in your webapps
+teaser: A plea to myself and others
 ---
 _As SPDY has been superceded by HTTP/2, you can consider this post outdated._
 

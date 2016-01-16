@@ -12,7 +12,7 @@
 $font-family-heading: 'Fugaz One', cursive;
 $font-family-mono: 'Inconsolata', Courier;
 $font-family-body: 'Lato', sans-serif;
-$line-height: 1;
+$line-height: 1.15;
 $font-size-scale-down: 0.5rem;
 $font-size-scale-1: 2rem;
 $font-size-scale-2: 3rem;
@@ -21,6 +21,9 @@ $length-base: $line-height * 1rem;
 $color-body-bg: #002B36;
 $color-body-fg: #839496;
 $color-link: #D33682;
+$color-code-bg: darken(#002B36, 5%);
+$color-code-fg: #B58900;
+$color-code-inline-fg: #E0E2E4;
 $color-aside: #B58900;
 $color-notification-bg: #121B28;
 $color-notification-fg: #2AA198;
@@ -29,7 +32,7 @@ $color-bright: #E0E2E4;
 $color-quote: #657B83;
 $color-subtitle: #2AA198;
 
-$length-sentence: 17em;
+$length-sentence: 39rem; 
 
 body {
 	font-family: $font-family-body;
@@ -52,6 +55,13 @@ h2,h3,h4,h5,h6 {
 	font-size: $font-size-scale-1;
 	font-family: $font-family-heading;
 }
+
+em {
+	font-style: italic;
+}
+strong {
+	font-weight: bold;
+}
 .notificationBlock {
 	background-color: $color-notification-bg;
 	color: $color-notification-fg;
@@ -72,14 +82,16 @@ code {
 
 .container {
 	margin: 0 auto;
-	max-width: $length-sentence * 3;
+	max-width: $length-sentence * 1.2;
 }
 
 .header {
 	display: flex;
 }
 .logo {
-	color: $color-bright;
+	h1 {
+		color: $color-bright;
+	}
 	p {
 		color: $color-subtitle;
 		font-style: italic;
@@ -108,23 +120,19 @@ code {
 	}
 }
 
-.navItem a {
+a {
 	text-decoration: none;
 }
-.navItem a:link, .navItem a:visited {
+a:link, a:visited {
 	color: $color-link;
 }
-.navItem a:hover, .navItem a:active, {
+a:hover, a:active, {
 	color: lighten($color-link, 8%);
 }
-.navItem:hover:after {
-	// border-bottom-color: lighten($color-link, 8%)
-}
-
 .content {
 	display: flex;
 	flex-wrap: wrap;
-	margin-top: $length-base * 4;
+	margin-top: $length-base * 3;
 	> .item {
 		width: 50%;
 		box-sizing: border-box;
@@ -141,26 +149,30 @@ code {
 			// top: 0;
 			// right: -($length-base * 1);
 		// }
-		> .date, .item-title, .teaser-line {
-			font-family: $font-family-mono;
-			font-size: 1rem;
-		}
-		> .item-title a:link, a:visited {
-			text-decoration: none;
-			color: $color-body-fg;
-		}
-		> .date {
-			color: $color-aside;
-		}
-		> .teaser-line {
-			color: $color-quote;
-			font-style: italic;
-			font-family: $font-family-body;
-			&:before {
-				content: '“';
+		> a {
+			> .date, .item-title, .teaser-line {
+				font-family: $font-family-mono;
+				font-size: 1rem;
 			}
-			&:after {
-				content: '...”';
+			> .item-title {
+				text-decoration: none;
+				color: $color-body-fg;
+				font-size: $font-size-scale-1;
+				font-family: $font-family-heading;
+			}
+			> .date {
+				color: $color-aside;
+			}
+			> .teaser-line {
+				color: $color-quote;
+				font-style: italic;
+				font-family: $font-family-body;
+				&:before {
+					content: '“';
+				}
+				&:after {
+					content: '...”';
+				}
 			}
 		}
 	}
@@ -172,11 +184,76 @@ code {
 		top: $length-base * 3;
 	}
 	> .article {
-		> p, h1, pre {
-			margin-bottom: 2rem;
+		margin: 0 auto;
+		max-width: $length-sentence;
+		> ol, ul {
+			padding-left: $length-base;
+			li {
+				padding-left: $length-base;
+				position: relative;
+			}
+			li:before {
+				content: '•';
+				display: block;
+				position: absolute;
+				left: -0.25rem;
+			}
+		}
+		> blockquote > p {
+			font-style: italic;
+			padding: 0 $length-base;
+			box-sizing: border-box;
+			border-left: ($length-base / 4) solid $color-body-fg; 
+		}
+		> p code {
+			color: $color-code-inline-fg;
+		}
+		> p, h1, pre, ol, ul, blockquote {
+			margin-bottom: $length-base * 2;
+		}
+		> pre {
+			white-space: pre-wrap;
+			padding: ($length-base);
+			background-color: $color-code-bg;
+			color: $color-code-fg;
+			border-radius: 0.5rem;
 		}
 		> h2, h3, h4, h5, h6 {
-			margin-bottom: 1rem;
+			margin-bottom: $length-base;
 		}
+		> .articleTitle {
+			margin-bottom: 0;
+		}
+		> .posted-on-date {
+			color: $color-aside;
+			font-family: $font-family-mono;
+			margin-bottom: $length-base * 2;
+		}
+	}
+}
+
+@media (max-width: 47em) {
+	.header {
+		flex-wrap: wrap;
+	}
+	.logo {
+		width: 100%;
+	}
+	.menu {
+		margin-top: $length-base;
+	}
+	.menu > .item {
+		display: none;
+	}
+	.menu > .item.navItem {
+		display: block;
+	}
+	.content {
+		flex-wrap: wrap;
+	}
+	.content > .item.item {
+		width: 100%;
+		top: 0;
+		text-align: left;
 	}
 }

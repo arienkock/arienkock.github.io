@@ -5,9 +5,11 @@
 {% block content %}
 	{% for post in site.posts %}
 		<div class="item">
-			<div class="date">{{post.date.getFullYear()}}-{{post.date.getMonth() + 1}}-{{post.date.getDate()}}</div>
-			<h2 class="item-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
-			<div class="teaser-line">{{ post.teaser }}</div>
+			<a href="{{post.url}}">
+				<div class="date">{{post.date.getFullYear()}}-{{post.date.getMonth() + 1}}-{{post.date.getDate()}}</div>
+				<h2 class="item-title">{{ post.title }}</h2>
+				<div class="teaser-line">{{ post.teaser }}</div>
+			</a>
 		</div>
 	{% endfor %}
 {% endblock %}

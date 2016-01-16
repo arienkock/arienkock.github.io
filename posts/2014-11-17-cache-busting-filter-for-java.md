@@ -1,5 +1,6 @@
 ---
 title: "Cache Busting Filter"
+teaser: You may find this useful
 ---
 
 ### TL;DR

@@ -1,5 +1,6 @@
 ---
 title: Tools for Decoupling
+teaser: Searching for the silver bullet
 ---
 
 

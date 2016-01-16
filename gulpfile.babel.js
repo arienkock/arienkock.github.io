@@ -136,7 +136,7 @@ gulp.task('html', ['styles', 'posts'], () => {
 });
 
 gulp.task('html:index', ['posts'], () => {
-  return gulp.src('app/index.html')
+  return gulp.src(['app/index.html', 'app/profile.html'])
         .pipe(through.obj(function (file, enc, cb) {            
             var data = {
                 site: site,
@@ -201,8 +201,8 @@ gulp.task('serve', ['styles', 'fonts', 'html:index', 'posts'], () => {
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/fonts/**/*', ['fonts']);
-  gulp.watch('posts/**/*', ['posts']);
-  gulp.watch('app/index.html', ['html:index']);
+  gulp.watch('posts/**/*.md', ['posts', 'html:index']);
+  gulp.watch('app/**/*.html', ['html:index']);
 });
 
 gulp.task('serve:dist', () => {

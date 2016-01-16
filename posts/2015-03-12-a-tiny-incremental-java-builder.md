@@ -1,5 +1,6 @@
 ---
 title: An Incremental Java Builder
+teaser: An idea I had that actually works
 ---
 It's probably rare for a Java developer to run `javac` directly nowadays. Though it's gotten better, there was a time when it didn't even support wildcards, it's still hard to use for even moderately complex projects. Fortunately there's very little need for it thanks to Maven and Gradle. Feature-rich project builders that call the compiler *for* you, which makes it irrelevant how unfriendly the interface is. However, what neither of these tools do, is minimal **complete** rebuilds. 
 

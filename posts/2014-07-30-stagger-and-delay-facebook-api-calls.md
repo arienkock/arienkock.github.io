@@ -1,5 +1,6 @@
 ---
 title: Stagger/Delay Your Facebook API Calls
+teaser: How to not get blocked
 ---
 Web API providers like Facebook and Twitter have  guidelines for using their API's and one of them is with regards to [request rate](https://developers.facebook.com/docs/reference/ads-api/api-rate-limiting/). If you get blocked, then you can simply wait for the block to be lifted, but a better way would be to limit your request rate so you **don't** get Facebook's infamous...
 

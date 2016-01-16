@@ -1,5 +1,6 @@
 ---
 title: Keeping up with Web Technology
+teaser: Why consultants are necessary
 ---
 After getting into Spring Roo I had a look at JBoss Seam, which does some of the same RAD stuff. JBoss Forge is actually eerily similar to Spring Roo. I don't know enough about it yet, but [it doesn't look different enough](http://forge.jboss.org/docs/using/faq.html). While looking at videos I found this interesting [video that summarizes JVM Web Frameworks](http://www.youtube.com/watch?v=RDGAQXyp19s) (my niche). Then one thing struck me...
 
@@ -25,4 +26,4 @@ I have to say that before writing it down like that I was cursing the lack of __
 
 ...they shout. They're __not__ wrong, they're just assholes. They bill hours based on the whims of an account-manager that has very little (if any) idea of what realization would entail. They invent SLA's that bleed companies dry. Well, not all the time. Some companies have a LOT of blood.  
 
-I'm going off on a tangent here, but it sort of ties together. Watch me tie it all together. Keeping up with the state of the art in any fast developing field is hard. If it's hard for domain experts, __of course__ it's hard for laymen. You can't fault a business-person for not wanting to take risks where he/she (gender neutrality is important!) sees them, even if they're not really there. That's why a good consultant would be worth so much, but too much of that and you end up with a big consultancy bureau with its claws in you all over again.
+I'm going off on a tangent here, but it sort of ties together. Watch me tie it all together. Keeping up with the state of the art in any fast developing field is hard. If it's hard for domain experts, __of course__ it's hard for laymen. You can't fault a business-person for not wanting to take risks where he/she sees them, even if they're not really there. That's why a good consultant would be worth so much, but too much of that and you end up with a big consultancy bureau with its claws in you all over again.

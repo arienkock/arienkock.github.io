@@ -1,5 +1,6 @@
 ---
 title: Functional Web Layouts
+teaser: A rant born from CSS sucking
 ---
 Watching Strange Loop 2014 conference videos I was reminded about Elm, a functional reactive programming language for the web. One of my favorite features is the functional graphics. You can say things like `flow up [item1, item2, item3]` and they will appear vertically stacked in reverse order! The creator said in a talk that, being a traditionally server-side guy, while working on a layout issue he asked himself
 

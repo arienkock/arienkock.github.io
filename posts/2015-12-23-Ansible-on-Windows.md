@@ -1,5 +1,6 @@
 ---
 title: Ansible on Windows
+teaser: A little Getting Started guide
 ---
 
 
