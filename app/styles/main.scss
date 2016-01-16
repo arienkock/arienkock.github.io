@@ -6,19 +6,21 @@
 
 @import url(https://fonts.googleapis.com/css?family=Fugaz+One);
 @import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 @import 'reset.scss';
 
 $font-family-heading: 'Fugaz One', cursive;
+$font-family-mono: 'Inconsolata', Courier;
 $font-family-body: 'Lato', sans-serif;
-$line-height: 1.2;
+$line-height: 1;
 $font-size-scale-down: 0.5rem;
-$font-size-scale-1: 1.5rem;
-$font-size-scale-2: 2rem;
-$length-base: $line-height * $font-size-scale-down;
+$font-size-scale-1: 2rem;
+$font-size-scale-2: 3rem;
+$length-base: $line-height * 1rem;
 
 $color-body-bg: #002B36;
 $color-body-fg: #839496;
-$color-link: #DC322F;
+$color-link: #D33682;
 $color-aside: #B58900;
 $color-notification-bg: #121B28;
 $color-notification-fg: #2AA198;
@@ -37,6 +39,11 @@ body {
 	background-color: $color-body-bg;
 	color: $color-body-fg;
 }
+::selection {
+	color: #93A1A1;
+	background-color: #073642;
+}
+
 h1 {
 	font-size: $font-size-scale-2;
 	font-family: $font-family-heading;
@@ -57,6 +64,10 @@ h2,h3,h4,h5,h6 {
 }
 .browserupgrade {
 	@extend .notificationBlock;
+}
+
+code {
+	font-family: $font-family-mono;
 }
 
 .container {
@@ -84,13 +95,14 @@ h2,h3,h4,h5,h6 {
 	width: 50%;
 }
 .menu > .navItem {
+	font-family: $font-family-mono;
 	text-align: center;
 	font-weight: bold;
 	&:after {
 		content: '';
 		box-sizing: border-box;
 		height: $length-base;
-		border-bottom: $color-link ($length-base / 2) solid;
+		border-bottom: $color-link ($length-base / 4) solid;
 		margin: 0 $length-base;
 		display: block;
 	}
@@ -103,10 +115,10 @@ h2,h3,h4,h5,h6 {
 	color: $color-link;
 }
 .navItem a:hover, .navItem a:active, {
-	color: lighten($color-link, 4%);
+	color: lighten($color-link, 8%);
 }
 .navItem:hover:after {
-	border-bottom-color: lighten($color-link, 4%)
+	// border-bottom-color: lighten($color-link, 8%)
 }
 
 .content {
@@ -117,7 +129,7 @@ h2,h3,h4,h5,h6 {
 		width: 50%;
 		box-sizing: border-box;
 		flex-grow: 1;
-		padding: 0 ($length-base * 2);
+		padding: 0 ($length-base);
 		margin-bottom: ($length-base * 2);
 		position: relative;
 		// &:after {
@@ -130,14 +142,20 @@ h2,h3,h4,h5,h6 {
 			// right: -($length-base * 1);
 		// }
 		> .date, .item-title, .teaser-line {
+			font-family: $font-family-mono;
+			font-size: 1rem;
+		}
+		> .item-title a:link, a:visited {
+			text-decoration: none;
+			color: $color-body-fg;
 		}
 		> .date {
 			color: $color-aside;
-			// font-weight: bold;
 		}
 		> .teaser-line {
 			color: $color-quote;
 			font-style: italic;
+			font-family: $font-family-body;
 			&:before {
 				content: '“';
 			}
@@ -150,8 +168,15 @@ h2,h3,h4,h5,h6 {
 		text-align: right;
 	}
 	> .item:nth-child(even) {
-		//transform: translateY($length-base * 4);
 		position: relative;
-		top: $length-base * 5;
+		top: $length-base * 3;
+	}
+	> .article {
+		> p, h1, pre {
+			margin-bottom: 2rem;
+		}
+		> h2, h3, h4, h5, h6 {
+			margin-bottom: 1rem;
+		}
 	}
 }

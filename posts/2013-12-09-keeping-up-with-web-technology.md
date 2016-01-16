@@ -1,5 +1,5 @@
 ---
-layout: post
+title: Keeping up with Web Technology
 ---
 After getting into Spring Roo I had a look at JBoss Seam, which does some of the same RAD stuff. JBoss Forge is actually eerily similar to Spring Roo. I don't know enough about it yet, but [it doesn't look different enough](http://forge.jboss.org/docs/using/faq.html). While looking at videos I found this interesting [video that summarizes JVM Web Frameworks](http://www.youtube.com/watch?v=RDGAQXyp19s) (my niche). Then one thing struck me...
 

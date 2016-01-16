@@ -1,7 +1,5 @@
 ---
-layout: post
-title: "Cache Busting Filter - a Java-only solution to long cache expiry"
-published: true
+title: "Cache Busting Filter"
 ---
 
 ### TL;DR

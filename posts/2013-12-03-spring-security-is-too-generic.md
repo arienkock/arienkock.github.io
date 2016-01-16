@@ -1,5 +1,5 @@
 ---
-layout: post
+title: Spring Security is too Generic
 ---
 A fact I learned while playing Final Fantasy that comes back in my work on a daily basis is that
 

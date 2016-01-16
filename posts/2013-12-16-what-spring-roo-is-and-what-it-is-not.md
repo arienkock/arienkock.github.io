@@ -1,5 +1,5 @@
 ---
-layout: post
+title: What Spring Roo is and What it is Not
 ---
 I just had my first encounter with [Spring Roo](http://projects.spring.io/spring-roo/). Encounter sounds like I had no choice in the matter, but it was my own decision. I had seen the name floating around for a long time, but it didn't seem to pop up as much as other Rapid Application Development tools. Why was this? "I like Spring, I should give it a try", I thought. This is my take on it.
 

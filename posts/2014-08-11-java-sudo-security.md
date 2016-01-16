@@ -1,5 +1,4 @@
 ---
-layout: post
 title: A `sudo` security model for Java
 ---
 I like the way Unix-like systems deal with security and during the course of my work I've encountered many occasions where such a model would be very useful in my Java code. When setting up a Unix-like OS, the security model often boils down to:

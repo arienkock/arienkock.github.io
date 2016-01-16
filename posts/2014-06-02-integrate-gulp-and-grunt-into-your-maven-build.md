@@ -1,5 +1,5 @@
 ---
-layout: post
+title: Integrating Gulp and Grunt into your Maven Build
 ---
 I think it's safe to say that NodeJS modules like [Gulp](http://gulpjs.com) and [Grunt](http://gruntjs.com/) have revolutionized the way the frontend workflows... well... work. There is one notable effort to integrate frontend workflows into your Java build. Namely [JHipster](http://jhipster.github.io/). Setting aside the J-prefix, I dislike the name. It seems to suggest that using AngularJS or Yeoman puts you ahead of the curve or on the bleeding edge of something. How can you expect it to ever be taken seriously when you call your project J__Hipster__ for keeping up with the normal evolution of technology. Java has an image of stable, but boring and old-fashioned. Names like JHipster make me think that it is in no small part thanks to the Java community itself.
 

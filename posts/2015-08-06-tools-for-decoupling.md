@@ -1,6 +1,5 @@
 ---
-published: true
-layout: post
+title: Tools for Decoupling
 ---
 
 

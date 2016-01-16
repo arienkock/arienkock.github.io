@@ -1,6 +1,6 @@
 ---
-published: true
-layout: post
+title: Java Web Developer Interviews
+teaser: No more coding tests
 ---
 
 

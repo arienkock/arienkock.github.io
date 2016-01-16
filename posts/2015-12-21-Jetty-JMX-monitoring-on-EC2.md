@@ -1,6 +1,5 @@
 ---
-published: true
-layout: post
+title: Jetty JMX Monitoring on EC2
 ---
 
 

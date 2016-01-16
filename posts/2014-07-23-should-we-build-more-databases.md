@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Should we be making new Databases?
 ---
 At the [2013 edition of the XLDB conference](https://conf-slac.stanford.edu/xldb-2013/) there was an interesting panel discussion called "__Buy vs Build: Why Large Projects Rebuild, Not Reuse?__". Some database engineering big-shots entertained the question whether it is better to adopt and adapt a mechanism for storing data (like SQL, a document store, or simple a distributed file-system for OLAP) or to make a tailored to fit solution. At the [:50 second mark](http://youtu.be/jjrYIRywxok?t=50s) Mike Stonebreaker does a short exposition of the good that happened when the industry collectively decided on SQL. As he puts it:

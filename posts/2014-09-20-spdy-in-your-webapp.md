@@ -1,7 +1,8 @@
 ---
-layout: post
 title: Please use SPDY in your webapps
 ---
+_As SPDY has been superceded by HTTP/2, you can consider this post outdated._
+
 I hope you've heard about the SPDY protocol. I "discovered" it only a half a year ago reading Jetty's documentation which proudly announced supporting it. Since then... I've become a believer/advocate. With SPDY support finally landing in Safari 8, a large number of people can **potentially** benefit from the improved page loading times it promises. However, at smaller scales it's not as well-supported (**citation needed**), but pretty much all of Google's web servers support it as well as most large CDN's.
 
 ### What does SPDY do?

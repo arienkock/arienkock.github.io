@@ -1,5 +1,5 @@
 ---
-layout: post
+title: Spring Boot is a Pretty Cool Guy
 ---
 Forgive the use of an ancient internet meme, but things like [Spring Boot](http://projects.spring.io/spring-boot/) make me very excited. Whether [eh afraids of anything](http://knowyourmeme.com/memes/pretty-cool-guy) or not, it does allow you to get up and running with Spring MVC, Spring Data and Spring Security (among other things) really fast.
 
