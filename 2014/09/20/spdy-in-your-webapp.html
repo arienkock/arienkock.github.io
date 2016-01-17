@@ -1,0 +1,84 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Please use SPDY in your webapps - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Please use SPDY in your webapps</h1>
+<div class="posted-on-date">Posted on 2014-10-20</div>
+<p><em>As SPDY has been superceded by HTTP/2, you can consider this post outdated.</em></p>
+<p>I hope you&#39;ve heard about the SPDY protocol. I &quot;discovered&quot; it only a half a year ago reading Jetty&#39;s documentation which proudly announced supporting it. Since then... I&#39;ve become a believer/advocate. With SPDY support finally landing in Safari 8, a large number of people can <strong>potentially</strong> benefit from the improved page loading times it promises. However, at smaller scales it&#39;s not as well-supported (<strong>citation needed</strong>), but pretty much all of Google&#39;s web servers support it as well as most large CDN&#39;s.</p>
+<h3 id="what-does-spdy-do-">What does SPDY do?</h3>
+<p>It speeds up page loads by allowing multiple resources to be sent across a single connection. More so than a persistent connection, because it multiplexes/interleaves bytes/frames so that multiple resources can be requested and received <strong>&#39;simultaneously&#39;</strong>. Read the <a href="http://dev.chromium.org/spdy/spdy-whitepaper">SPDY whitepaper</a> for more details.</p>
+<p>In addition to this it supports the pushing of resources by the server ahead of the client&#39;s realizing it needs them. Keep in mind that this is probably the biggest game-changer of SPDY. Before a browser can parse the HTML and figure out what stylesheets, scripts, and images it needs, it could already be receiving the data. By the time it figures out the HTML, there could be no more requests left to be made!</p>
+<h3 id="spdy-support">SPDY support</h3>
+<p>When Safari 8 becomes the current version, <a href="http://caniuse.com/#feat=spdy">SPDY will be supported across the board</a> for all &#39;major browsers&#39; (which at the time of this writing is not yet the case).</p>
+<p>What about web servers, you ask? I feel like I&#39;m simply quoting the <a href="http://en.wikipedia.org/wiki/SPDY">Wikipedia SPDY page</a>, but it&#39;s supported in Apache (by a <a href="https://code.google.com/p/mod-spdy/">module implemented by Google itself</a>), Nginx and <a href="https://github.com/indutny/node-spdy">node.js</a>. What&#39;s not on there is that apparently <a href="https://github.com/SlyMarbo/spdy">you can use SPDY in a Go server</a> and <a href="http://www.theserverside.com/news/thread.tss?thread_id=76803">Tomcat has experimental support</a>. Since many sites use either Apache HTTPd or Nginx as a proxy to their application server, there isn&#39;t really much stopping anyone from getting SPDY.</p>
+<h3 id="getting-started-requirements">Getting started: Requirements</h3>
+<p>To start, you can: </p>
+<ol>
+<li>Grab a Jetty 9 distribution and use the SPDY config, or</li>
+<li>setup Apache with <code>mod_spdy</code> or <a href="https://developers.google.com/speed/pagespeed/module/https_support"><code>mod_pagespeed</code>, which supports SPDY almost automatically</a>.</li>
+<li>There is an alternate scenario if you use static pages with a RESTful API as a backend (which is often the case in single page apps). You could offload ALL your content to a CDN like Cloudflare and benefit from their SPDY support without writing a single line of SPDY-enabling configuration.</li>
+</ol>
+<p>What else you&#39;ll need:</p>
+<ol>
+<li>You need a valid certificate obviously, because SSL is required to use SPDY transparently.</li>
+<li>Your resources need to be on the same server as your application (assuming the HTML is application generated and not static).</li>
+<li>Logic that connects resources to enable SPDY Push. In case of Jetty, there is a component which auto-detects and remembers these relationships (<a href="https://www.eclipse.org/jetty/documentation/9.2.2.v20140723/spdy-implementing-push.html"><code>ReferrerPushStrategy</code></a>). In <code>mod_spdy</code> you work with a header passed by the backend that lists the <code>X-Associated-Content</code>, which allows the module to pre-fetch the content from the server it&#39;s proxying and push it to the client.</li>
+</ol>
+<h3 id="the-down-side-of-spdy-push">The down side of SPDY Push</h3>
+<p>Imagine you&#39;ve set all this up and you are amazed at the precognition of your web-page loads. You now realize you&#39;re pushing resources to users that may already have locally cached versions. You&#39;re sending useless duplicate bytes over the line. It may at first seem like acceptable collateral damage, but you&#39;re a good developer and this itch needs to be scratched. So instead, you want to: <strong>Push on first view only</strong>.</p>
+<p>To accomplish this you need to remember a user&#39;s visit, e.g. set a session cookie with a value identifying the page, or better yet the set of resources belonging together. The same can be done with a server side session, but it&#39;s nice to offload this state onto the client if you want to improve performance by not having sessions in the first place. In both cases you need to write this code yourself, because at this time neither Jetty&#39;s bundled PushStrategy nor mod_spdy support this type of behaviour.</p>
+<h3 id="in-conclusion">In conclusion</h3>
+<p>Now that Google makes SSL support a variable in your PageRank, most people have started serving their sites securely for this reason. Though it may not be the most noble of motivations, it&#39;s a step in the right direction. Any CDN worth their salt will support serving your content over SSL on your own domain, even though this probably means buying a certificate through them from which they benefit. This takes care of our first requirement. What&#39;s left is a bit of time invested by us, the developers, to make the web a <del>better</del> faster place.</p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+  </body>
+</html>

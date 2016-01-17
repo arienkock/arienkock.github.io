@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Tools for Decoupling - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Tools for Decoupling</h1>
+<div class="posted-on-date">Posted on 2015-9-6</div>
+<p>To organize code I&#39;ve started to adopt certain tools and methods. <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency inversion</a> is the principle that is fundamental in achieving this, and <a href="/2015/06/25/misunderstanding-interfaces.html">interfaces</a> are the primary tool (or language feature, if you prefer) Java devs use to achieve dependency inversion. But wait, there&#39;s more...</p>
+<h3 id="maven-runtime-scope">Maven <code>runtime</code> Scope</h3>
+<p>I like this one, but I don&#39;t think it&#39;s very common. When you split your project into modules, you&#39;re trying to seperate concerns. You&#39;re trying to make sure that each module has clear responsibilities. At some point the implementations of your abstractions have to interact. Your actual top-level application depends on all your modules, either directly or transitively. Normally, using only your abstraction modules (maven modules containing <em>only</em> interfaces) that would create a very large number of modules: one for each layer, one for each abstraction between layers, +1 for the final top level layer of your application. This is where the <code>runtime</code> scope can help. Using this you can depend on code that you&#39;re not allowed to use directly. If you do, <code>mvn compile</code> will fail. However, all the dependencies are included in your artifacts, so using a dependency-injection framework you can load all the implementations at runtime while still decoupling your components at build-time.</p>
+<h3 id="application-containers">Application Containers</h3>
+<p>There&#39;s Spring, OSGi and to a lesser extent DI-only tools like Dagger and Guice. They implement some form of inversion-of-control. An application can be composed declaratively. Instead of saying &quot;Use component A&quot;, your code now says &quot;I require something that looks/behaves like component A&quot;. Where &quot;component A&quot; could be an abstraction/interface. This declarative style let&#39;s you hook into a larger process, one that is aware of or can discover components <em>for</em> you. It&#39;s basically a plug-in mechanism... or service discovery... which means...</p>
+<h3 id="microservices">Microservices</h3>
+<p>As much as the microservice hype is overblown, it <em>is</em> (like it or not) a good way to decouple. What it&#39;s missing is the plug&amp;play nature of something like DI. If all your applica... err.. I mean... <strong>microservices</strong>... were to magically wire themselves up, wouldn&#39;t that be great? Is there something like that? If there is, I don&#39;t know about it. Right now you still have to do most of the legwork yourself with tools like <a href="https://zookeeper.apache.org/">Zookeeper</a> or <a href="https://coreos.com/etcd/">etcd</a>. Orchestration of application modules is something that is rapidly moving from the  multi-library, to the multi-process, and up to the multi-machine scale. Though I think in most cases we can do without this upscaling (most applications are not Twitter), it seems to be the trend. What is missing from that trend, is the awareness that it is the same age-old problem.</p>
+<h3 id="good-people">Good people</h3>
+<p>The challenge of modularizing your code is one of knowledge and discipline. Knowledge of your subject matter and the business it&#39;s meant to service, and discipline to throw away previous assumptions and work (read: code) when new knowledge shines light on past mistakes. So, whether you write all your code into a single library, or write multiple distinct applications: ensuring your present and future productivity takes smart and hard-working people. i.e. the team is everything.</p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+  </body>
+</html>

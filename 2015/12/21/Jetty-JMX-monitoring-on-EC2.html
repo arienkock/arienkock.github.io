@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Jetty JMX Monitoring on EC2 - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Jetty JMX Monitoring on EC2</h1>
+<div class="posted-on-date">Posted on 2016-1-21</div>
+<p>I hope I this post will save someone from the frustration I&#39;ve lived through trying to get this to work.</p>
+<p>The RMI JMX ConnectorServer (what a name!) is the component that responds to the client when you try to load your MBeans into Visual VM or JConsole. The RMI documentation is pretty clear that a secondary connection is opened up which serves the actual remote object stub. This is why Jetty comes with a component that makes this slightly easier by unifying the ports. Did I lose you? I think it&#39;s likely that most Java devs don&#39;t work with RMI very often. Suffice it to say, two connections are required to get your JMX MBeans data. </p>
+<p>It was my grave mistake to assume that: Since, the second connection&#39;s endpoint is in the service URL, that must also the endpoint my client actually uses. Surely that would make sense. However, RMI (rightfully) doesn&#39;t know or care about JMX. So, RMI just knows that it needs to respond to the initial request with an IP and a port. That IP address is where things go wrong on EC2. EC2 instances don&#39;t know their external IP address. None of the network interfaces have it bound, so it cannot be resolved purely inside the instance. In <code>/$JETTY_HOME/etc/jetty-jmx-remote.xml</code> you can set a system property which tells the RMI Registry what its hostname is:</p>
+<pre><code>  &lt;Call class=&quot;java.lang.System&quot; name=&quot;setProperty&quot;&gt;
+    &lt;Arg&gt;java.rmi.server.hostname&lt;/Arg&gt;
+    &lt;Arg&gt;[ec2_ip].[availability_zone].compute.amazonaws.com&lt;/Arg&gt;
+  &lt;/Call&gt;
+</code></pre><p>Now it will respond with something that makes sense to the outside world.</p>
+<p>This wouldn&#39;t have been a problem if Visual VM or JConsole gave more information than just <em>&quot;I can&#39;t connect, yo&quot;</em>. Writing a test application finally gave me a hint when I saw the instance&#39;s internal IP show up in the exception. RMI is pretty cool, considering how old it is. Cool, &quot;Yes&quot;. Intuitive and user friendly, &quot;No&quot;.</p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+  </body>
+</html>

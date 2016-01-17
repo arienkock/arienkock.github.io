@@ -1,0 +1,68 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring Boot is a Pretty Cool Guy - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Spring Boot is a Pretty Cool Guy</h1>
+<div class="posted-on-date">Posted on 2014-6-30</div>
+<p>Forgive the use of an ancient internet meme, but things like <a href="http://projects.spring.io/spring-boot/">Spring Boot</a> make me very excited. Whether <a href="http://knowyourmeme.com/memes/pretty-cool-guy">eh afraids of anything</a> or not, it does allow you to get up and running with Spring MVC, Spring Data and Spring Security (among other things) really fast.</p>
+<h3 id="it-s-a-bird-it-s-an-app-it-s-a-webapp">It&#39;s a bird... it&#39;s an app... it&#39;s a webapp</h3>
+<p>You can run a Java SE application from command line and get all the Spring framework support you want, but I am (as probably most other people are) interested in making web-applications. IMHO the most elegant thing about Spring Boot is being able create a WAR deployable in the traditional manner that is also an executable JAR at the same time. I&#39;ve created an app like this for one of my clients, and because I was responsible for deployment and configuration management of the VPS, this saved me a lot of time and effort.</p>
+<p>A tip here is that if you setup your Upstart scripts to restart the service on failure is to make sure the location the WAR is unpacked to (happens each time) is cleaned up. This is normally the <code>/tmp</code> directory, so it shouldn&#39;t be a problem. </p>
+<h3 id="the-defaults">The defaults</h3>
+<p>With <code>@EnableAutoConfiguration</code> Spring Boot will inspect your classpath during startup and load things like: Spring MVC with a lot of useful beans pre-defined, and embedded container (Tomcat or Jetty), and an embedded database like HSQLDB. The  <code>Datasource</code> will be available to wire into any beans you define like a SessionFactory or EntityManager, but if you add Hibernate to your classpath you won&#39;t even need to do THAT. To kickstart this process even more, you can add a starter project as a Maven dependency, which in turn includes the things you need in a more concise manner without creating a huge POM. In case of the persistence layer you can use <code>spring-boot-starter-data-jpa</code> POM and the <code>@EnableJpaRepositories</code> annotation. Think of it as a buffet. Pick some Spring Data JPA... or no... MongoDB for persistence, a little bit of Thymeleaf for templating, etc. The complete list is available <a href="https://github.com/spring-projects/spring-boot/tree/master/spring-boot-starters">here</a>.</p>
+<p>The more you care about your configuration (like the location of your HSQLDB file) the more work you need to do. It&#39;s like I said in my post on Spring Roo, if you use it for what it&#39;s good at, it&#39;s smooth sailing through and through. I may not have said that exactly, but I meant to. You can start writing a class that is your Configuration class with <code>@Bean</code> annotated methods, as well as your Controller with your <code>@RequestMapping</code>s. A single file application! Who <strong>DOESN&#39;T</strong> want that? Am I right? Ok, so no reasonably sized application would do that, but you don&#39;t <strong>always</strong> make big webapps.</p>
+<h2 id="bottom-line">Bottom line</h2>
+<p>Like a framework, Spring Boot does more than you need. It will never be a slim fit. Customizing Spring Boot behavior is easy, so your experience with Spring Boot will be very similar to having a template starter project of your own that you can clone each time and adapt to your needs. Even though Spring Boot now has made the creation of such a template project extremely easy with the added benefit of flexible deployment.</p>
+<p>I would like to point out that I am not a fan of Spring Framework and Spring MVC&#39;s startup times. Spring Boot does add a bit to that by default and so it isn&#39;t as fast as I&#39;d like it to be. In the future I&#39;d like to see stripped down versions of certain Spring components that do nothing by default, forcing you to think about what you want and what you need instead of remembering to turn off the things you don&#39;t. That, however, is the opposite of what Spring Boot is for.</p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+  </body>
+</html>

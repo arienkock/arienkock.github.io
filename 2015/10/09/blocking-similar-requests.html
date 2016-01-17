@@ -1,0 +1,77 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Blocking Similar Requests - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Blocking Similar Requests</h1>
+<div class="posted-on-date">Posted on 2015-11-9</div>
+<p>When regular users can cause serious contention issues in your web-application (that make the whole thing unresponsive) simply by refreshing a specific page, it&#39;s probably a sign that something needs to be re-thought. Faced with just such an issue, I tried optimizing the requests, but some requests are still just really slow and cannot be easily cached. The ACTUAL solution is re-designing the interaction, possibly splitting it up into smaller steps, but until then! Rate limiting to the rescue!</p>
+<p>Using Guava&#39;s cache and custom collections I made this <a href="https://gist.github.com/arienkock/3fc5e06db51f5b1eb04a">SimilarRequestLimitingFilter</a>. Incoming requests are remembered until they complete, and if the number of &#39;similar&#39; requests exceeds a certain number, BAM! HTTP error 429! You don&#39;t know status code 429? It means <a href="http://httpstatusdogs.com/429-too-many-requests">&quot;slow your roll&quot;</a>.</p>
+<p>To make sure this thing can actually withstand the high frequency of requests without itself becoming the point of contention, I did some measurements with JMeter and optimized the part where I do some logging. The most interesting part of that class is perhaps this:</p>
+<pre><code>    if (loggedKeysSet.getIfPresent(key) == null) {
+        // lock on cache to do atomic putIfNotPresent
+        synchronized (loggedKeysSet) {
+            // must re-check if key exists once we have the lock
+            // as some other thread may have gone before is 
+            if (loggedKeysSet.getIfPresent(key) == null) {
+                loggedKeysSet.put(key, key);
+                // and continue
+            } else {
+                return;
+            }
+        }
+    } else {
+        return;
+    }
+</code></pre><p>It&#39;s interesting because it has a synchronization block which is used to perform an atomic operation. However, blocking is slow. So what I did was do the &quot;should I do X?&quot; check before getting a lock, then after acquiring the lock I do a &quot;should I <em>still</em> do X?&quot; check to make sure nothing&#39;s changed between the first and second checks. Doing double the work may seem wasteful, but locking tends to be slow and the idea is that most code will NOT do double work, but back off after the first check fails.</p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+  </body>
+</html>
