@@ -15,7 +15,7 @@ In addition to this it supports the pushing of resources by the server ahead of 
 ### SPDY support
 When Safari 8 becomes the current version, [SPDY will be supported across the board](http://caniuse.com/#feat=spdy) for all 'major browsers' (which at the time of this writing is not yet the case).
 
-What about web servers, you ask? I feel like I'm simply quoting the [Wikipedia SPDY page](http://en.wikipedia.org/wiki/SPDY), but it's supported in Apache (by a [module implemented by Google itself](https://code.google.com/p/mod-spdy/)), Nginx and [node.js](https://github.com/indutny/node-spdy). What's not on there is that apparently [you can use SPDY in a Go server](https://godoc.org/code.google.com/p/go.net/spdy) and [Tomcat has experimental support](http://www.theserverside.com/news/thread.tss?thread_id=76803). Since many sites use either Apache HTTPd or Nginx as a proxy to their application server, there isn't really much stopping anyone from getting SPDY.
+What about web servers, you ask? I feel like I'm simply quoting the [Wikipedia SPDY page](http://en.wikipedia.org/wiki/SPDY), but it's supported in Apache (by a [module implemented by Google itself](https://code.google.com/p/mod-spdy/)), Nginx and [node.js](https://github.com/indutny/node-spdy). What's not on there is that apparently [you can use SPDY in a Go server](https://github.com/SlyMarbo/spdy) and [Tomcat has experimental support](http://www.theserverside.com/news/thread.tss?thread_id=76803). Since many sites use either Apache HTTPd or Nginx as a proxy to their application server, there isn't really much stopping anyone from getting SPDY.
 
 ### Getting started: Requirements
 To start, you can: 
@@ -28,7 +28,7 @@ What else you'll need:
 
 1. You need a valid certificate obviously, because SSL is required to use SPDY transparently.
 2. Your resources need to be on the same server as your application (assuming the HTML is application generated and not static).
-3. Logic that connects resources to enable SPDY Push. In case of Jetty, there is a component which auto-detects and remembers these relationships ([`ReferrerPushStrategy`](http://www.eclipse.org/jetty/documentation/current/spdy-implementing-push.html)). In `mod_spdy` you work with a header passed by the backend that lists the `X-Associated-Content`, which allows the module to pre-fetch the content from the server it's proxying and push it to the client.
+3. Logic that connects resources to enable SPDY Push. In case of Jetty, there is a component which auto-detects and remembers these relationships ([`ReferrerPushStrategy`](https://www.eclipse.org/jetty/documentation/9.2.2.v20140723/spdy-implementing-push.html)). In `mod_spdy` you work with a header passed by the backend that lists the `X-Associated-Content`, which allows the module to pre-fetch the content from the server it's proxying and push it to the client.
 
 ### The down side of SPDY Push
 Imagine you've set all this up and you are amazed at the precognition of your web-page loads. You now realize you're pushing resources to users that may already have locally cached versions. You're sending useless duplicate bytes over the line. It may at first seem like acceptable collateral damage, but you're a good developer and this itch needs to be scratched. So instead, you want to: __Push on first view only__.

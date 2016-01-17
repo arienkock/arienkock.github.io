@@ -4,12 +4,12 @@
 // @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-@import url(https://fonts.googleapis.com/css?family=Fugaz+One);
 @import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Inconsolata);
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif:700italic);
 @import 'reset.scss';
 
-$font-family-heading: 'Fugaz One', cursive;
+$font-family-heading: 'Noto Serif', serif;//Fugaz One', cursive;
 $font-family-mono: 'Inconsolata', Courier;
 $font-family-body: 'Lato', sans-serif;
 $line-height: 1.15;
@@ -183,22 +183,9 @@ a:hover, a:active, {
 		position: relative;
 		top: $length-base * 3;
 	}
-	> .article {
+	> .profile, .article {
 		margin: 0 auto;
 		max-width: $length-sentence;
-		> ol, ul {
-			padding-left: $length-base;
-			li {
-				padding-left: $length-base;
-				position: relative;
-			}
-			li:before {
-				content: '•';
-				display: block;
-				position: absolute;
-				left: -0.25rem;
-			}
-		}
 		> blockquote > p {
 			font-style: italic;
 			padding: 0 $length-base;
@@ -222,12 +209,17 @@ a:hover, a:active, {
 			margin-bottom: $length-base;
 		}
 		> .articleTitle {
-			margin-bottom: 0;
+			margin-bottom: $length-base;
 		}
 		> .posted-on-date {
 			color: $color-aside;
 			font-family: $font-family-mono;
 			margin-bottom: $length-base * 2;
+		}
+	}
+	> .profile {
+		h3, h4, h5, h6 {
+			font-size: 1rem;
 		}
 	}
 }
@@ -255,5 +247,44 @@ a:hover, a:active, {
 		width: 100%;
 		top: 0;
 		text-align: left;
+	}
+}
+
+.portfolio-samples {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: flex-start;
+	li {
+		margin: 0.5rem;
+		border: 1px dotted $color-body-fg;
+		img {
+			display: block;
+			border: none;
+		}
+	}
+}
+
+ol.restyled, ul.restyled, .article > ul, .article > ol {
+	padding-left: $length-base;
+	li {
+		padding-left: $length-base;
+		position: relative;
+	}
+	li:before {
+		content: '•';
+		display: block;
+		position: absolute;
+		left: -0.25rem;
+	}
+}
+
+.work-experience-item {
+	margin: $length-base 0;
+	> .time-span {
+		color: $color-aside;
+	}
+	> .company {
+		color: $color-bright;
 	}
 }

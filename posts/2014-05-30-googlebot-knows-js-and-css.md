@@ -2,7 +2,7 @@
 title: Googlebot Knows JS and CSS
 teaser: and it's not a valid excuse
 ---
-A week ago Google came out with [big news](http://googlewebmastercentral.blogspot.co.uk/2014/05/understanding-web-pages-better.html). Now all your single page apps get indexed properly without a static page fallback. Pages that rely on `pushState` for navigation used to have to do extra work to [make their sites indexable](https://support.google.com/webmasters/answer/174992?hl=en).
+A week ago Google came out with [big news](http://googlewebmastercentral.blogspot.co.uk/2014/05/understanding-web-pages-better.html). Now all your single page apps get indexed properly without a static page fallback. Pages that rely on `pushState` for navigation used to have to do extra work to [make their sites indexable](https://developers.google.com/webmasters/ajax-crawling/docs/learn-more).
 
 ### The good###
 Google being the gods of search and by extension the masters to which all of e-commerce caters, is now saying that they can better handle your complex webapps. You can use Ajax calls from the get-go and not pay a hefty price. This makes development simpler and that is good. 

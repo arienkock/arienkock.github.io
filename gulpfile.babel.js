@@ -201,8 +201,7 @@ gulp.task('serve', ['styles', 'fonts', 'html:index', 'posts'], () => {
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/fonts/**/*', ['fonts']);
-  gulp.watch('posts/**/*.md', ['posts', 'html:index']);
-  gulp.watch('app/**/*.html', ['html:index']);
+  gulp.watch(['posts/**/*.md', 'app/**/*.html'], ['posts', 'html:index']);
 });
 
 gulp.task('serve:dist', () => {

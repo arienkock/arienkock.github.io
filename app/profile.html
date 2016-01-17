@@ -1,10 +1,232 @@
 {% extends 'layout.html' %}
 
-{% block title %}{{ page.title }} - {{ site.title }}{% endblock %}
+{% block title %}Professional Profile: Arien Kock - {{ site.title }}{% endblock %}
 
 {% block content %}
-<div class="article">
-<h1 class="articleTitle">I am a builder</h1>
-<p>I devise, design, and build connected applications.</p>
+<div class="profile">
+<h1 class="articleTitle">Arien Kock</h1>
+<div class="posted-on-date">Last updated on 2016-1-17</div>
+<p>I'm a Java developer specialized in web applications. I know my way around the full stack, 
+I'm serious about code, and <a href="#endorsements">people say I'm nice to work with</a>.
+</p>
+
+<p>
+	
+	<strong>Contact / hire / poke me:</strong><br/> 
+	<a href="mailto:arien@positor.nl">Email<a/> - <a href="https://twitter.com/arencawk">Twitter</a> - <a href="tel:+31614278936">Mobile</a>
+</p>
+
+
+<h2>Skills</h2>
+<h3>Web back-end</h3>
+<p>I have broad experience with the Servlet spec, but prefer working with the Spring Framework abstractions and rapid development using Spring Boot. I find the web container spec to be lagging behind the times and have chosen to investigate and experiment with Undertow as lower level high-performance alternative to servlet containers as well as hooking into Jetty’s extensions, SPDY in particular. I’ve also have implemented several search engines from the ground up with Solr and in one case using Lucene directly.</p>
+<p>I spend some nights in bed thinking about software architecture. This may not be healthy for me, but you can always use this to your advantage by hiring me to do consulting.</p>
+<h3>Persistence</h3>
+<p>I have a love-hate relationship with Hibernate. I once wasted a lot of time debugging a problem that was solved by flushing the session in between editing persistent bags. Still, for simple entity graphs it beats having to write RowMappers. However, even in that case Spring’s JDBC support really is quite sufficient. I’ve dealt with custom RDBMS sharding schemes (that didn’t work very well) and would like to work with more distributed data abstractions in the future.</p>
+<h3>Web front-end</h3>
+<p>I’ve done several personal projects using Yeoman for scaffolding. I’ve used Sass extensively and despite the relatively recent popularity of using the scripts section in package.json, I still prefer building assets with Gulp. It feels like FRP.</p>
+<h3>Continuous Testing, Integration and Delivery</h3>
+<p>I’ve helped a company go from unmaintained unit tests to adopting a full CI cycle using several Dockerized applications (including Jenkins itself) as well as build slaves that provided clean bootstrapped MySQL databases for each Selenium integration test. This required a lot of shell scripting and far reaching extension of the 18 module Maven project.</p>
+<p>Automated deployment is hugely interesting to me. If you have work like this for me, get in touch!</p>
+<h3>Other Skills</h3>
+<p>Git, Subversion, Eclipse, MySQL, Thymeleaf, JSP’s (in case anyone’s Ctrl+F’ing)  and for some reason I’m a Zend certified PHP developer.</p>
+
+<h2>Past Work Experience</h2>
+<h3 class="title">Lead Java Developer and de facto Software Architect</h3>
+<p class="work-experience-item">
+<em class="company">@Symbaloo</em>
+<br/><span class="time-span">March 2013 - March 2016 (3 years)</span>
+<ul class="restyled">
+<li>Developed and maintained a web application serving ~17k concurrent users and 22k requests per minute
+and still growing. </li>
+<li>Worked with Spring Framework, Hibernate, Jenkins, Docker, Amazon EC2, Ansible and
+the list goes on. </li>
+<li>Led a team of 4 Java developers and coordinated back-end development tasks. Introduced
+distributed transactions, a unified project build, automated deployments and integration testing. </li>
+<li>Constantly
+juggling maintenance, improvements and an endless stream of new functionality.</li>
+</ul>
+</p>
+
+<h3 class="title">
+Senior Java Developer
+</h3>
+<p class="work-experience-item">
+<em class="company">@ABN AMRO Bank N.V.</em><br/>
+<span class="time-span">August 2012 - February 2013 (7 months)</span>
+</p>
+<ul><li>Worked on the backend of the system feeding the Tridion CMS. Worked with IBM Websphere, JAX-WS and
+a lot of legacy tools. </li>
+<li>Participated in more meetings than actual programming.</li>
+</ul>
+
+<h3 class="title">
+Java Web Developer 
+</h3>
+<p class="work-experience-item">
+<em class="company">@Sogeti Nederland B.V.</em><br/>
+<span class="time-span">April 2008 - February 2013 (4 years 11 months)</span>
+</p>
+<p>
+Sogeti is a IT consulting company. They gave me training, paid for my certification exams, and put me to
+work at Sonepar, BBIE and ABN Amro.
+</p>
+
+<h3 class="title">
+Java Web Developer 
+</h3>
+<p class="work-experience-item">
+<em class="company">@Benelux Office for Intellectual Property</em><br/>
+<span class="time-span">May 2011 - June 2012 (1 year 2 months)</span>
+</p>
+<ul class="restyled">
+<li>Worked with IBM Webshpere AS, Portlet container, Spring Framework, MyBatis and lots of XML</li>
+<li>Developed enterprise integrations, upgraded numerous legacy web-applications, internal tools for processing
+submissions from the Dutch caribbean as well as an end-user search engine for registered designs, which is
+still in use today.</li>
+</ul>
+
+<h3 class="title">
+Java web developer
+</h3>
+<p class="work-experience-item">
+<em class="company">@Sonepar Nederland Information Services BV</em><br/>
+<span class="time-span">2008 - 2011 (3 years)</span>
+</p>
+<ul class="restyled">
+<li>First job. Learning the trade of Servlets, JSP and Lucene</li>
+<li>Used <code>String.intern()</code> to fit the whole product
+database in memory for huge performance gains.</li>
+<li>Learned a lot about writing good SQL queries and stored
+procedures. </li>
+<li>Worked on a Swing desktop application deployed using Java Web Start.</li>
+</ul>
+
+
+
+
+<h2>Samples</h2>
+<p>
+A lot of the work I do it not visual, but here are some screenshots of the web applications I've worked on.
+<ul class="portfolio-samples">
+{% for image in ["symbaloo.png", "arubandonkey-org.png", "register-boip-int-designs.png", "www-abnamro-com-nl-carriere.png"] %}
+<li><a href="/images/{{ image }}"><img src="/images/thumbnails/{{ image }}"/></a></li>
+{% endfor %}
+</ul>
+</p>
+
+<h2><a name="endorsements">Endorsements (copied from LinkedIn)</a></h2>
+<p><em>(mostly in dutch)</em></p>
+<blockquote><p>
+"Arien is een ervaren Java ontwikkelaar, maar bovenal een erg aardige kerel om mee samen te werken. Bij
+ABN AMRO wist hij erg zich erg snel in te werken in de uitgebreide en complexe omgeving."
+<br/>— Sieger Veenstra, werkte direct samen met Arien Kock bij ABN AMRO Bank N.V.
+</p></blockquote>
+<blockquote><p>
+"Arien gaat voor de duurzame oplossing en houdt daarbij het klantbelang goed in het oog. Een fijne collega
+om mee samen te werken."
+<br/>— Rens Kokke, werkte direct samen met Arien Kock bij ABN AMRO Bank N.V.
+</p></blockquote>
+<blockquote><p>
+"Arien is a creative, out-of-the-box-thinking, developer. Its been a pleasure pleasure working with him"
+<br/>— Julien Langeveld, werkte direct samen met Arien Kock bij ABN AMRO Bank N.V.
+</p></blockquote>
+<blockquote><p>
+
+"Arien is a highly skilled, flexible and fun professional. He brings expertise, experience and tranquility to the
+team, especially in projects with high pressure, which creates comfort and ambition at the same time."
+<br/>— Lotte Cornelissen, werkte direct samen met Arien Kock bij ABN AMRO Bank N.V.
+</p></blockquote>
+<blockquote><p>
+"Arien was very helpful to me, it was a pleasure to working with him at ABN Amro,"
+<br/>— Cung Do Nguyen, werkte direct samen met Arien Kock bij ABN AMRO Bank N.V.
+</p></blockquote>
+<blockquote><p>
+
+"Arien is een zeer ervaren Java ontwikkelaar en minstens even prettig persoon om mee te werken."
+<br/>— Adriaan van der Eijk, werkte direct samen met Arien Kock bij ABN AMRO Bank N.V.
+
+</p></blockquote>
+<blockquote><p>
+"I worked with Arien at ABN AMRO Mobile and Internet Team, where he brought in his Senior Java
+Developer talent to provide technical overview for the team. Arien quickly assesses problem areas in the
+Scrum stories and finds workable solutions. He also provided the much needed liaison role between the
+developers. A detail oriented, broad-minded and multi-skilled engineer. Lots of work and little talk. Deliver
+results and move on. That's Arien Kock's way!"
+<br/>— Laurens Hartog ., was een klant van Arien Kock
+
+</p></blockquote>
+<blockquote><p>
+"Arien kijkt niet enkel naar de korte termijn oplossing. Hij heeft oog voor de lange termijn en het geheel.
+Door deze benadering helpt hij bouwen aan een structurele oplossing."
+<br/>— Peer Smeets, gaf indirect leiding aan Arien Kock bij ABN AMRO Bank N.V.
+
+</p></blockquote>
+<blockquote><p>
+"Arien was een fijn persoon om mee samen te werken en heeft bij ons een aantal mooie projecten opgeleverd.
+Snel,betrouwbaar creatief en innovatief"
+<br/>— Daan Biere, werkte samen met Arien Kock bij Sogeti Nederland B.V.
+
+</p></blockquote>
+<blockquote><p>
+"Arien is in staat om gevraagde requirements snel en vakkundig om te zetten in bruikbare oplossingen."
+<br/>— Leo Meijboom, werkte samen met Arien Kock bij Benelux Office for Intellectual Property
+
+</p></blockquote>
+<blockquote><p>
+"Ik kan terugkijken op een prettige samenwerking. Arien is heel gedreven. Actief in het vinden/voorstellen
+van oplossingen. HIj staat ook open voor de wensen van de gebruikers, is toegankelijk. Hij wil absoluut iets
+moois ontwikkelen waar de gebruiker wat aan heeft."
+<br/>— Henriette Soonius, werkte direct samen met Arien Kock bij Benelux Office for Intellectual Property
+
+</p></blockquote>
+<blockquote><p>
+"While working at BOIP, Arien profiled himself as a true professional. All the projects he worked on were
+delivered on time while maintaining high quality coding. It was a pleasure to work with him."
+<br/>— Hugo Groeneveld, werkte direct samen met Arien Kock bij Benelux Office for Intellectual Property
+
+</p></blockquote>
+<blockquote><p>
+"Arien is een serieuze ontwikkelaar met oog voor details en zeer gedreven om de juiste technische oplossing
+te kiezen waarbij hij wel altijd het resultaat van de klant of eindgebruiker voorop stelt."
+<br/>— Johannes Schuitemaker, werkte bij een ander bedrijf tijdens de samenwerking met Arien Kock bij
+Benelux Office for Intellectual Property
+
+</p></blockquote>
+<blockquote><p>
+"During the period Arjan worked for BOIP we have experienced that he is a hard working and professional
+java developer who easily fitted in the team, we have learned a lot from Arjan."
+<br/>— Hein van Wijk, was een klant van Arien Kock
+
+</p></blockquote>
+<blockquote><p>
+"Arien is een uitstekende Java Developer en hij heeft bovendien veel kennis van bijvoorbeeld html, css en
+jquery. Dit maakt hem een zeer allround developer. Ik vond het heel prettig om met Arien samen te werken."
+<br/>— Robert van Hall, werkte samen met Arien Kock bij Benelux Office for Intellectual Property
+
+</p></blockquote>
+<blockquote><p>
+"We hired Arien from Sogeti as a junior programmer in 2008. He mostly worked in developing new
+functionalities for our our e-commerce platform and supporting system-to-system integration with our large
+customers. An exceptional feat was his out-of-the-box thinking solution to speedup our search engine by ten
+fold. He was a pleasant and pragmatic person to work with and I wish him all the best in his further career."
+<br/>— Arul Elangovan, was een klant van Arien Kock
+
+</p></blockquote>
+<blockquote><p>
+"Arien weet gebruikerswensen te vertalen in de juiste functionaliteit met veel oog voor de kwaliteit. Daarbij is
+het heel prettig met hem samen te werken."
+<br/>— Chantal Boon, werkte samen met Arien Kock bij Sonepar Nederland Information Services BV
+
+</p></blockquote>
+<blockquote><p>
+"Arien is a down to earth and patient guy and his java skills are excellent. It was a pleasure to work with
+him."
+<br/>— Mathieu van der Linden, werkte direct samen met Arien Kock bij Sonepar Nederland Information
+Services BV
+</p></blockquote>
+</p>
+
+
 </div>
 {% endblock %}
