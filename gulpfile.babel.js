@@ -6,10 +6,16 @@ import del from 'del';
 import through from 'through2';
 import swig from 'swig';
 import path from 'path';
+import ghPages from 'gulp-gh-pages';
 import site from './site.json';
 
 const $ = gulpLoadPlugins({ rename: {'front-matter': 'frontMatter'}});
 const reload = browserSync.reload;
+
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages({branch: 'master'}));
+});
 
 gulp.task('styles', () => {
   return gulp.src('app/styles/*.scss')
@@ -126,7 +132,7 @@ function collectPosts() {
         cb();
     });
 }
-gulp.task('html', ['styles', 'posts'], () => {
+gulp.task('html', ['styles', 'html:index'], () => {
   return gulp.src(['.tmp/**/*.html'])
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
@@ -175,6 +181,7 @@ gulp.task('fonts', () => {
 gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
+    'app/CNAME',
     '!app/*.html'
   ], {
     dot: true
