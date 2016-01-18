@@ -288,3 +288,10 @@ ol.restyled, ul.restyled, .article > ul, .article > ol {
 		color: $color-bright;
 	}
 }
+.profile-picture {
+	float: right;
+	width: 33%;
+	border-radius: 1rem;
+	box-shadow: 0 0 1rem $color-code-bg;
+	margin: $length-base;
+}
