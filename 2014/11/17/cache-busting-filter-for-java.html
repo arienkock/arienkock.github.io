@@ -1,0 +1,80 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cache Busting Filter - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+	
+	<link rel="stylesheet" href="/styles/highlight/solarized-dark-custom.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Cache Busting Filter</h1>
+<div class="posted-on-date">Posted on 2014-12-17</div>
+<h3 id="tl-dr">TL;DR</h3>
+<ol>
+<li>make a <code>Filter</code></li>
+<li>rewrite URI&#39;s in your pages to contain a hash of your files by wrapping <code>HttpServletResponse</code></li>
+<li>remove the hash from incoming requests in the same filter </li>
+</ol>
+<h3 id="the-why-">The &quot;why?&quot;</h3>
+<p>This weekend I was looking for a cache-busting solution in the form of a Gulp plugin. Cache busting, in case you&#39;re not familiar with the term, is a name for any method of circumventing the (ideally) long time-to-live of cached static resources in web-applications. The simplest of such solutions would be to add a querystring to your js and css URL&#39;s each time you update them. The query string has no effect other than to make the browser think the resource is dynamic. However, this breaks in the face of some optimistic CDN&#39;s. We need to rename the actual resource file name.</p>
+<h3 id="-gulp-rev-etc-"><code>gulp-rev</code> etc.</h3>
+<p>Many methods exist to accomplish the actual rewriting. Usually as part of the build tool du jour. These have counterparts in the backend code that resolve references inside templates and code to the newly rewritten file names. I found this two-tiered approach to be too involved, since the obvious solution isn&#39;t very complicated at all. </p>
+<h3 id="encodeurl-">encodeURL()</h3>
+<p>At least in Java, where (if you keep to the best-practices) your URL&#39;s all pass through <a href="https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String">one central piece of code</a>). Even if you use Thymeleaf&#39;s <code>@{/style.css}</code> or JSP&#39;s with JSTL <code>&lt;c:url/&gt;</code> tags, they all pass through <code>encodeURL()</code>.</p>
+<p>You can use this feature, which is intended for handling session ID&#39;s, to rewrite all your static resource URI&#39;s to the hashed equivalent, but that&#39;s not all. Since you&#39;re able to wrap the response object in a filter, the same filter will also be able to receive the hashed URI from browsers once they try to load your pages. That&#39;s our chance to remove the hash from the URI and forward the request to the default handling mechanism of our application container. That will fetch the resource who&#39;s real file name hasn&#39;t changed at all. So there is no need for build tools to mangle our file names.</p>
+<h3 id="the-code">The code</h3>
+<p>Below is the code, which I documented more than I do most other stuff I write. I use a <code>CheckedInputStream</code> to calculate the hash in a streaming fashion.</p>
+<script src="https://gist.github.com/arienkock/c0a236aad1ed7e31f134.js"></script>
+
+<p>Thanks to @eranievs for pointing out a bug in the implementation. The filter didn&#39;t work with non-root context paths. The Gist has been updated.</p>
+<p><blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/ArenCawk">@ArenCawk</a> Using your Cache Busting Filter, but running into some issues. <a href="http://t.co/Y6exo4VEsc">http://t.co/Y6exo4VEsc</a></p>&mdash; Svein Are (@eranievs) <a href="https://twitter.com/eranievs/status/595511122066804736">May 5, 2015</a></blockquote></p>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+	<script src="/scripts/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

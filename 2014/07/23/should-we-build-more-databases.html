@@ -1,0 +1,75 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Should we be making new Databases? - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+	
+	<link rel="stylesheet" href="/styles/highlight/solarized-dark-custom.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Should we be making new Databases?</h1>
+<div class="posted-on-date">Posted on 2014-8-23</div>
+<p>At the <a href="https://conf-slac.stanford.edu/xldb-2013/">2013 edition of the XLDB conference</a> there was an interesting panel discussion called &quot;<strong>Buy vs Build: Why Large Projects Rebuild, Not Reuse?</strong>&quot;. Some database engineering big-shots entertained the question whether it is better to adopt and adapt a mechanism for storing data (like SQL, a document store, or simple a distributed file-system for OLAP) or to make a tailored to fit solution. At the <a href="http://youtu.be/jjrYIRywxok?t=50s">:50 second mark</a> Mike Stonebreaker does a short exposition of the good that happened when the industry collectively decided on SQL. As he puts it:</p>
+<blockquote>
+<p>Sometimes &quot;good enough&quot; is better than rebuilding.</p>
+</blockquote>
+<h3 id="bad-enterprise">Bad Enterprise</h3>
+<p>Having commercially backed DB vendors is a good thing, right? Yes, it mostly is and I love SQL. It&#39;s really good an all the years of development have made it really good at what it does. Time eventually narrows the optimal deployment environment for software. You write more code and you commit more and more to a certain solution space. Being gradually locked in means less room for innovation. Add to this the fact that enterprise solutions more likely to cater to too many wishes, trying to make the most feature-rich product they can. This makes it attractive to anyone reading the brochure, but anyone having to implement the product breaks out in a cold sweat. A jack of all trades is a master of none. A poignant example of enterprise level products seeming to live in a different world than regular people is in the development of OAuth 2.0, which is painfully documented in the article <a href="http://hueniverse.com/2012/07/26/oauth-2-0-and-the-road-to-hell/">OAuth 2.0 and the Road to Hell</a>. </p>
+<p>Also, educational organizations and government are not so eager to adopt closed source software. Even if labeled as open core and/or dual-licensed, it hurts to think about your continuity being in danger. Neo4j, is a sad example of a very cool product, not fully open sourced.</p>
+<h3 id="being-your-own-best-friend">Being your own best friend</h3>
+<p>Google makes in-house storage systems in close coordination with their client, which is Google itself.
+Jeff Dean mentions it several times in his talk at the same XLDB conference. Here he talks about <a href="http://youtu.be/gCGvneeHbPQ?t=4m20s">knowing the requirements for GFS</a>. In order to do a specific thing better than before sacrifices in functionality need to be made. This means sometimes ignoring your client&#39;s request, which is easier if <strong>you</strong> are your own client. It is the opposite of design by committee. It is design by dictatorship.</p>
+<p>I believe in the <a href="http://en.wikipedia.org/wiki/Benevolent_dictator_for_life">Benevolent Dictator For Life</a> system. Sometimes long meetings about the direction of a product or company yield new insights that eventually lead to something good, but most of the time what you really want is a shared vision. If unable to agree on such a vision, a hero must arise. The decider. </p>
+<h3 id="and-yet-fragmentation-is-bad">And yet... fragmentation is bad</h3>
+<p>Starting over is not so much reinventing the wheel as it is making a version of the wheel that better suits your individual needs, possibly using the <strong>hard-learned</strong> lessons of the wheel-invention process. After millions  invested in wheel technology, you can&#39;t expect to <strong>fully</strong> replace it so easily. Mike Stonebreaker is very clear about MapReduce <strong>not being a database</strong> and that it might one day grow up to be one. He&#39;s not saying the premise or technology is bad, he&#39;s saying it&#39;s not <strong>yet</strong> a replacement for commercial parallel RDBMSes.</p>
+<p>So full steam ahead on starting new-paradigm projects? If everyone thought that way we would have many not-so-good solutions and no &quot;great&quot; ones. People just like new stuff, datastores are no exception. I like them too, even though I fail to get excited for things like LevelDB and its Node.js binding <a href="https://github.com/rvagg/node-levelup">LevelUP</a>. I&#39;m not saying Hadoop based products are not good. However, if Mike is to be believed, we should be making more progress. If the Hadoop vendors give back to the upstream, then it shouldn&#39;t be a problem, but I&#39;m always skeptical of the modern-day free-market, stereotypically looking to cash in on the latest trends. </p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+	<script src="/scripts/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

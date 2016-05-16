@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Stagger/Delay Your Facebook API Calls - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+	
+	<link rel="stylesheet" href="/styles/highlight/solarized-dark-custom.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Stagger/Delay Your Facebook API Calls</h1>
+<div class="posted-on-date">Posted on 2014-8-30</div>
+<p>Web API providers like Facebook and Twitter have  guidelines for using their API&#39;s and one of them is with regards to <a href="https://developers.facebook.com/docs/reference/ads-api/api-rate-limiting/">request rate</a>. If you get blocked, then you can simply wait for the block to be lifted, but a better way would be to limit your request rate so you <strong>don&#39;t</strong> get Facebook&#39;s infamous...</p>
+<blockquote>
+<p>It looks like you were misusing this feature by going too fast. You&#39;ve been blocked from using it. Learn more about blocks in the Help Center.</p>
+</blockquote>
+<p>My solution to this problem was to use a <code>HttpRequestInterceptor</code> to use together with <a href="http://hc.apache.org/">HttpComponents HttpClient</a>. </p>
+<script src="https://gist.github.com/arienkock/58efbc6f0e1426546e41.js"></script>
+
+<p>The next step is to create an HttpClient instance that uses this. In Spring I defined a bean as follows:</p>
+<pre><code>import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.apache.http.impl.client.HttpClients;
+...
+public class AppConfig {
+    ...
+    @Autowired
+    private Environment environment;
+    ...
+
+    @Bean
+    public FacebookTemplate  facebookTemplate() {
+        FacebookTemplate facebookTemplate = new FacebookTemplate(
+                environment.getRequiredProperty(&quot;facebook.accessToken&quot;));
+        facebookTemplate.setRequestFactory(httpRequestFactory());
+        return facebookTemplate;
+    }
+
+    @Bean
+    public HttpComponentsClientHttpRequestFactory httpRequestFactory() {
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient());
+        requestFactory.setConnectTimeout(Integer.parseInt(environment
+                .getProperty(&quot;httpclient.connectTimeout&quot;)));
+        requestFactory.setReadTimeout(Integer.parseInt(environment
+                .getProperty(&quot;httpclient.soTimeout&quot;)));
+        return requestFactory;
+    }
+
+    @Bean(destroyMethod = &quot;close&quot;)
+    public HttpClient httpClient() {
+        return HttpClients
+                .custom()
+                .setConnectionManager(new PoolingHttpClientConnectionManager())
+                .addInterceptorFirst(
+                        new FixedRateInterceptor(0.42D, &quot;graph.facebook.com&quot;))
+                .build();
+    }
+}
+</code></pre><p>Facebook isn&#39;t 100% clear about the limits, but slightly less than 1 request every 2 seconds tends to work pretty well in my experience. Twitter is <a href="https://dev.twitter.com/docs/rate-limiting/1.1">a bit more clear about it</a>.</p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+	<script src="/scripts/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

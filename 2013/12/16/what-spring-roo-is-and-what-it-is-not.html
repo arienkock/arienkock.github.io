@@ -1,0 +1,93 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>What Spring Roo is and What it is Not - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+	
+	<link rel="stylesheet" href="/styles/highlight/solarized-dark-custom.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">What Spring Roo is and What it is Not</h1>
+<div class="posted-on-date">Posted on 2014-1-16</div>
+<p><em>This is a pretty old article. Instead of trying Spring Roo I suggest Spring Boot. If you&#39;re unfamiliar with it I suggest reading <a href="/2014/05/30/spring-boot-is-a-pretty-cool-guy.html">this blog post I made about it</a>.</em></p>
+<p>I just had my first encounter with <a href="http://projects.spring.io/spring-roo/">Spring Roo</a>. Encounter sounds like I had no choice in the matter, but it was my own decision. I had seen the name floating around for a long time, but it didn&#39;t seem to pop up as much as other Rapid Application Development tools. Why was this? &quot;I like Spring, I should give it a try&quot;, I thought. This is my take on it.</p>
+<h3 id="roo-as-a-config-generator">Roo as a config generator</h3>
+<p>I don&#39;t like it when the main page of any product leaves me guessing as to what that product actually does. Spring Roo is culpable in this respect. It says a whole lot about nothing. IMO all they should have said was</p>
+<blockquote>
+<p>Get up and running with Spring&#39;s most popular components, without writing boilerplate.</p>
+</blockquote>
+<p>I would have given it a shot based on that alone, because I hate writing boilerplate, and I hate the huge amount of base context XML configuration. That brings me to my first gripe: <strong>no way to generate Java Configuration</strong>. I thought XML config would slowly be phased out as people adopted Java Configuration, but in Spring Roo it is the only way to set up your context. It has been added as a <a href="https://jira.springsource.org/browse/ROO-2906">feature request</a>.</p>
+<p>Roo lets you generate complex config using simple commands from a specialized shell for the following components:</p>
+<ul>
+<li>JPA backed by several providers (Hibernate, Datanucleus and OpenJPA)</li>
+<li>MongoDB through Spring Data</li>
+<li>Spring Security (Web)</li>
+<li>A web framework of choice (Spring MVC, GWT and JSF)</li>
+</ul>
+<h3 id="development-support-for-your-domain-layer">Development support for your domain layer</h3>
+<p>When you watch the promo videos one thing seems to get a justifiable amount of attention is the use of AOP (AspectJ) to enrich your entity objects. Oh, did I not mention that? When you configure a persistence layer you can start defining entities that</p>
+<ul>
+<li>have JSR 303 validated properties</li>
+<li>automatic toString generating aspect</li>
+<li>automatic getter and setter generating aspect</li>
+<li>automatic persistence save/update/remove methods aspect</li>
+<li>have relationships with other entities</li>
+</ul>
+<p>I don&#39;t think I&#39;ve ever really felt like writing the base domain layer code was very time consuming, but if you are already setting up boilerplate with Roo, then going the extra step and defining the entities does save you writing DAO&#39;s, which Spring Roo <a href="http://docs.spring.io/spring-roo/reference/html/architecture.html#architecture-dao">does not believe in</a>. For the record, I agree. I&#39;ve had to work with DAO&#39;s based on DAI(interfaces) with the argument that &quot;we may one day want to switch vendors&quot;, but we all know that if that ever does happen, there is probably going to be a rewrite of massive scale anyway. <a href="/2015/06/25/misunderstanding-interfaces.html">Pointless abstractions suck</a>.</p>
+<p>Your objects get updated by the Roo shell and the shell detects your code changes. Once you have the entities setup and you&#39;re not targeting <a href="https://developers.google.com/appengine/">Google App Engine</a> or using GWT, I think you should stop using Roo, but you can also use it for...</p>
+<h3 id="scaffolding-a-web-tier">Scaffolding a web tier</h3>
+<p>This is a very powerful feature, don&#39;t get me wrong. The web layer includes a fully functional web application with CRUD style controllers and views. At that point it&#39;s only a matter of adding custom operations and removing unnecessary elements. You can have have your cake and eat it too... as long as you don&#39;t care too much about the view layer. The generated code can be influenced. The appearance tweaked, but looking at the sheer number of files that are generated by running <code>web mvc all</code>, I can tell that I&#39;m not going to be happy plowing through it. Spring MVC can be nice and minimal, but that command gives you Apache Tiles, JSPX files and Dojo Ajax support. Nothing <strong>wrong</strong> with any of that. They are just not my personal choices. So the lack of standard out of the box options when generating the web layer is the biggest disappointment of Roo. </p>
+<p>The GWT support is supposedly amazing, as it was written by the Google devs. Add to that the fact that you can use GAE&#39;s Datastore as a persistence provider for your JPA entities means that developing an enterprise (&quot;You keep using that word. I don&#39;t think it means what you think it means.&quot;) application for GAE with minimal changes to the way you develop. I really like the free tier GAE platform for personal use webapps. It&#39;s a great target platform and I was always sad that it wasn&#39;t more VPS in nature. Requiring some tricks to get things like Apache Wicket to run on it.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Roo is amazingly useful for developers wanting to start a new Spring project that fits the generic webapp formula (View &gt; Controller &gt; Domain &gt; Persistence). The scaffolding of the web layer can be customized, but this takes work. If you see the power of Roo and are sure to use it a lot, then investing the time into customizing the scaffolding will definitely pay itself back. If you&#39;re targetting Google App Engine and like Spring framework: Roo is for you.</p>
+<p>However, if your webapp is going to use some custom view tech, then stop before you scaffold. Or optionally, setup the base web layer so you can get the Spring Security config for free, then remove the unneeded web artifacts. Also, if your webapp will use a persistence mechanism not provided by Roo, or if it doesn&#39;t need much persistence at all, then Roo will add very little to your productivity.</p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+	<script src="/scripts/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
