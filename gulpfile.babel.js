@@ -249,7 +249,7 @@ gulp.task('serve:test', () => {
 });
 
 
-gulp.task('build', ['lint', 'html', 'images', 'copy:js', 'copy:css', 'fonts', 'extras'], () => {
+gulp.task('build', ['html', 'images', 'copy:js', 'copy:css', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
