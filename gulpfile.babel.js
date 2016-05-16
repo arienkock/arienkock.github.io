@@ -178,6 +178,16 @@ gulp.task('fonts', () => {
     .pipe(gulp.dest('dist/fonts'));
 });
 
+gulp.task('copy:css', () => {
+  return gulp.src('app/styles/**/*.css')
+    .pipe(gulp.dest('dist/styles'));
+});
+
+gulp.task('copy:js', () => {
+  return gulp.src('app/scripts/**/*.js')
+    .pipe(gulp.dest('dist/scripts'));
+});
+
 gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
@@ -190,7 +200,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'fonts', 'html:index', 'posts'], () => {
+gulp.task('serve', ['styles', 'copy:js', 'copy:css', 'fonts', 'html:index', 'posts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -239,7 +249,7 @@ gulp.task('serve:test', () => {
 });
 
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'html', 'images', 'copy:js', 'copy:css', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
