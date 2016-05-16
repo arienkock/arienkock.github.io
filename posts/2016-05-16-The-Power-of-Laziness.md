@@ -13,8 +13,11 @@ I was using streams to process structured data from a web API. They contained ne
 
 ```java
 public class LazyConcat {
-  public static <T> Stream<T> lazyConcat(Stream<T> first, Supplier<Stream<T>> secondSupplier) {
-    return Stream.of(() -> first, secondSupplier).flatMap(Supplier::get);
+  public static <T> Stream<T> lazyConcat(
+    Stream<T> first, 
+    Supplier<Stream<T>> secondSupplier) {
+    return Stream.of(() -> first, secondSupplier)
+      .flatMap(Supplier::get);
   }
 }
 ```
@@ -34,10 +37,14 @@ The pointer is changed in place and there is no recursion. This solution can gen
 
 ```java
 public class LazyConcat {
-  public static <T> Stream<T> trampoline(Supplier<StreamBounce<T>> bouncer) {
+  public static <T> Stream<T> trampoline(
+    Supplier<StreamBounce<T>> bouncer) {
+    // Anonymous inner class doing all the work
     Iterator<? extends T> iterator = new Iterator<T>() {
       private Iterator<T> currentIterator = null;
       private StreamBounce currentBounce = null;
+      
+      // lazy init the firt stream on demand
       public Iterator<T> getCurrentIterator() {
         if (currentIterator == null) {
           currentBounce = bouncer.get();
@@ -46,9 +53,13 @@ public class LazyConcat {
         return currentIterator;
       }
 
+      // only return false if:
+      //  - the current stream has no more elements
+      //  - there is no next bounce
       public boolean hasNext() {
         if (!getCurrentIterator().hasNext()) {
           if (currentBounce != null) {
+            // advance the pointer
             Supplier<StreamBounce> b = currentBounce.getNextBouncer();
             currentBounce = b == null ? null : b.get();
           }
@@ -66,7 +77,12 @@ public class LazyConcat {
         return getCurrentIterator().next();
       }
     };
-    return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED), false);
+    // return stream built from the spliterator built from the iterator
+    return StreamSupport.stream(
+      Spliterators.spliteratorUnknownSize(
+        iterator, 
+        Spliterator.ORDERED), 
+      false);
   }
 }
 ```
