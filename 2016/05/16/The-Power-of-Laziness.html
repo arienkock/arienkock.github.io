@@ -47,8 +47,11 @@
  However, there is no facility to concatenate streams lazily on demand. </p>
 <h3 id="proposed-solution-1-">Proposed solution 1:</h3>
 <pre><code class="lang-java">public class LazyConcat {
-  public static &lt;T&gt; Stream&lt;T&gt; lazyConcat(Stream&lt;T&gt; first, Supplier&lt;Stream&lt;T&gt;&gt; secondSupplier) {
-    return Stream.of(() -&gt; first, secondSupplier).flatMap(Supplier::get);
+  public static &lt;T&gt; Stream&lt;T&gt; lazyConcat(
+    Stream&lt;T&gt; first, 
+    Supplier&lt;Stream&lt;T&gt;&gt; secondSupplier) {
+    return Stream.of(() -&gt; first, secondSupplier)
+      .flatMap(Supplier::get);
   }
 }
 </code></pre>
@@ -61,10 +64,14 @@ This is a way to do recursion without actually consuming stack space. Invented h
 <p><code>LazyConcat.trampoline</code> creates an iterator which returns all items in the current stream and advances the <code>StreamBounce</code> pointer until there is no &quot;next&quot; bounce.
 The pointer is changed in place and there is no recursion. This solution can generate infinite streams.</p>
 <pre><code class="lang-java">public class LazyConcat {
-  public static &lt;T&gt; Stream&lt;T&gt; trampoline(Supplier&lt;StreamBounce&lt;T&gt;&gt; bouncer) {
+  public static &lt;T&gt; Stream&lt;T&gt; trampoline(
+    Supplier&lt;StreamBounce&lt;T&gt;&gt; bouncer) {
+    // Anonymous inner class doing all the work
     Iterator&lt;? extends T&gt; iterator = new Iterator&lt;T&gt;() {
       private Iterator&lt;T&gt; currentIterator = null;
       private StreamBounce currentBounce = null;
+
+      // lazy init the firt stream on demand
       public Iterator&lt;T&gt; getCurrentIterator() {
         if (currentIterator == null) {
           currentBounce = bouncer.get();
@@ -73,9 +80,13 @@ The pointer is changed in place and there is no recursion. This solution can gen
         return currentIterator;
       }
 
+      // only return false if:
+      //  - the current stream has no more elements
+      //  - there is no next bounce
       public boolean hasNext() {
         if (!getCurrentIterator().hasNext()) {
           if (currentBounce != null) {
+            // advance the pointer
             Supplier&lt;StreamBounce&gt; b = currentBounce.getNextBouncer();
             currentBounce = b == null ? null : b.get();
           }
@@ -93,7 +104,12 @@ The pointer is changed in place and there is no recursion. This solution can gen
         return getCurrentIterator().next();
       }
     };
-    return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED), false);
+    // return stream built from the spliterator built from the iterator
+    return StreamSupport.stream(
+      Spliterators.spliteratorUnknownSize(
+        iterator, 
+        Spliterator.ORDERED), 
+      false);
   }
 }
 </code></pre>
