@@ -135,8 +135,8 @@ function collectPosts() {
 gulp.task('html', ['styles', 'html:index'], () => {
   return gulp.src(['.tmp/**/*.html'])
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.cssnano()))
+    //.pipe($.if('*.js', $.uglify()))
+    //.pipe($.if('*.css', $.cssnano()))
     .pipe($.if('*.html', $.htmlmin()))
     .pipe(gulp.dest('dist'));
 });
