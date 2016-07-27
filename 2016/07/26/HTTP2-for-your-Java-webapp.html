@@ -1,0 +1,124 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Simple and free HTTP/2 - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+	
+	<link rel="stylesheet" href="/styles/highlight/solarized-dark-custom.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div>
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Simple and free HTTP/2</h1>
+<div class="posted-on-date">Posted on 2016-8-26</div>
+<p>If you&#39;re wondering about <a href="https://http2.github.io/faq/">the what and why of HTTP/2</a>, then maybe this article isn&#39;t for you. However, if you you&#39;re interested in an overview of the steps required to set it up quickly and safely, then it just might be. One thing I will say in case there is any doubt in your mind about the value: it promotes the use of HTTPS (which means a safer internet) while also improving performance.</p>
+<h3 id="the-stack">The Stack</h3>
+<p>I&#39;ll be going through the creation of a web server stack comprised of (most notably) <a href="http://www.haproxy.org/">HAProxy</a>, <a href="http://www.eclipse.org/jetty/">Jetty</a> and <a href="https://letsencrypt.org/">Let’s Encrypt</a>. I&#39;ll explain these choices briefly...</p>
+<p>When <a href="http://positor.nl/2014/09/20/spdy-in-your-webapp.html" title="An older article about SPDY">I wrote about SPDY</a> the clear winner on Java server side implementations was Jetty. You have a lot of <a href="https://github.com/http2/http2-spec/wiki/Implementations">Java servers with HTTP/2 support</a> to choose from, but I&#39;m a fan of Jetty&#39;s innovative tendencies, so it&#39;s my go to project.</p>
+<p>The aim is to set up a 2-tiered web server with HAProxy in front of Jetty doing TLS offloading. HAProxy has a tcp mode allowing it to send the cleartext HTTP/2 requests to Jetty but not parsing or processing any of the content, letting the Server PUSH and all other features work transparently. Why not let Jetty do everything? For one, HAProxy can do TLS faster than Java can. I&#39;ve never tested this myself, but it seems commonly accepted. Secondly, having a quasi-permanent reverse proxy in front of the application allows for smoother deployment scenarios.</p>
+<p>TLS is a requirement to use HTTP/2 and that&#39;s where &quot;Let&#39;s Encrypt&quot; comes in. Being a free Certificate Authority, it has brought the potential of TLS and HTTP/2 to the masses.</p>
+<h3 id="the-steps">The Steps</h3>
+<p>TL;DR</p>
+<ol>
+<li>Compile HAProxy with a version of OpenSSL that supports ALPN (protocol negotiation, required). <em>Skip this if you&#39;re reading from the future where your Linux distro&#39;s prepackaged HAProxy is already up-to-date.</em></li>
+<li>Configure Jetty&#39;s HTTP/2 connector.</li>
+<li>Run the &quot;Let&#39;s Encrypt&quot; bot</li>
+<li>Configure HAProxy with A-rated security features (rated by SSLLabs)</li>
+<li>Configure HAProxy + Let&#39;s Encrypt bot for automatic certificate renewal</li>
+</ol>
+<h4 id="1-compile-haproxy">1. Compile HAProxy</h4>
+<p>According to Wikipedia </p>
+<blockquote>
+<p>&quot;OpenSSL [supports ALPN] since version 1.0.2 released in January 2015&quot;. </p>
+</blockquote>
+<p>Yet, at the time of this writing many Linux distributions haven&#39;t updated their OpenSSL versions yet. We need to compile and statically link a newer version. <a href="https://gist.githubusercontent.com/arienkock/72ef8d5607dea00022041838b839d392/raw/provide-haproxy.sh">Here is a script that does it for you</a> (made for and tested on Debian Jessie). I also made <a href="https://hub.docker.com/r/arienkock/haproxy-alpn/">a Docker image for HAProxy with ALPN support</a>. Pretty simple.</p>
+<h4 id="2-configure-jetty-s-http-2-connector">2. Configure Jetty&#39;s HTTP/2 connector</h4>
+<p>If you&#39;re using Jetty&#39;s official distribution package, then enabling the right modules takes care of everything. No need to edit XML or anything like that. Here&#39;s what the command would look like using the official Jetty Docker image:</p>
+<pre><code class="lang-sh">/usr/bin/docker run --name my-jetty \
+  -p 8080:8080 \
+  -v /path/to/your/webapps/:/var/lib/jetty/webapps/ \
+  jetty --module=http2c,deploy,servlet
+</code></pre>
+<h4 id="3-run-the-let-s-encrypt-bot">3. Run the &quot;Let&#39;s Encrypt&quot; bot</h4>
+<p>I hate to be all RTFM on you, but it&#39;s really as simple as running:</p>
+<pre><code class="lang-sh">curl -sO https://dl.eff.org/certbot-auto
+chmod a+x certbot-auto
+./certbot-auto certonly -n --agree-tos --standalone \
+  --email your@emailaddress.com -d &quot;www.example.org&quot;
+# a dir to store your combined certificates
+mkdir -p /etc/haproxy/certs/
+cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem \
+  /etc/letsencrypt/live/$DOMAIN/privkey.pem &gt; /etc/haproxy/certs/$DOMAIN.pem
+</code></pre>
+<h4 id="4-configure-haproxy-with-a-rated-security-features">4. Configure HAProxy with A-rated security features</h4>
+<p>After setting these config values, you should be able to get this little (very satisfying) report:</p>
+<p><img src="/images/ssllabs_report_thumb.png" alt="A-rated recurity report" title="ssllabs report: A-rating" style="margin: auto; display: block"></p>
+<p>Add the following lines to your listener or global sections of haproxy.cfg (for a complete example config look at step 5)</p>
+<pre><code>tune.ssl.default-dh-param 2048
+ssl-default-bind-ciphers EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+</code></pre><p>and in your frontend section, make sure you use these (the location of your cert file may differ, of course):</p>
+<pre><code>bind :443 ssl no-sslv3 no-tls-tickets crt /usr/local/etc/haproxy/haproxy-cert.pem alpn h2,http/1.1
+</code></pre><h4 id="5-automatic-certificate-renewal">5. Automatic certificate renewal</h4>
+<p>Few things feel as good as automating menial tasks. What you&#39;re doing in this step is allowing the &quot;Let&#39;s Encrypt&quot; service get its challenge response (a file needed to prove that you own the domain) be served through HAProxy. This is something that is supported out of the box for many other proxies/servers, but requires some extra effort for us. Here is <a href="https://gist.githubusercontent.com/arienkock/aedc48b2d44acf4e06bd13840100fdee/raw/haproxy.cfg">a full haproxy.cfg example</a> that includes a special <code>backend letsencrypt</code> section and <code>acl</code> rule for exactly this purpose. Lastly, you can run the following script (which makes certain assumptions, so make sure you read it before use) from cron to ensure your certificate never expires:</p>
+<pre><code class="lang-sh">#!/usr/bin/env bash
+set -x -e
+MD5_BEFORE=`md5sum /etc/letsencrypt/live/your.domain.com/fullchain.pem`
+certbot-auto --agree-tos --noninteractive --standalone --standalone-supported-challenges http-01 --http-01-port 9999 renew
+MD5_AFTER=`md5sum /etc/letsencrypt/live/your.domain.com/fullchain.pem`
+
+# concatenate the certificates and only restart on change
+if [ &quot;$MD5_BEFORE&quot; != &quot;$MD5_AFTER&quot; ]; then
+  cat /etc/letsencrypt/live/your.domain.com/{fullchain.pem,privkey.pem} &gt; /home/uitguru/haproxy/haproxy-cert.pem
+  systemctl restart haproxy
+fi
+</code></pre>
+<h3 id="conclusion">Conclusion</h3>
+<p>HTTP/2 is faster and requires TLS, promoting security while improving the user experience. There are plenty of OSS projects to choose from and the only reasons for not using it are laziness and unfamiliarity. If you think anyone needs convincing, link them to this article. Everyone wins.</p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+	<script src="/scripts/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
