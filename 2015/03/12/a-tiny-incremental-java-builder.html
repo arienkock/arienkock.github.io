@@ -40,7 +40,7 @@
 			
 <div class="article">
 <h1 class="articleTitle">An Incremental Java Builder</h1>
-<div class="posted-on-date">Posted on 2015-4-12</div>
+<div class="posted-on-date">Posted on 2015-3-12</div>
 <p>It&#39;s probably rare for a Java developer to run <code>javac</code> directly nowadays. Though it&#39;s gotten better, there was a time when it didn&#39;t even support wildcards, it&#39;s still hard to use for even moderately complex projects. Fortunately there&#39;s very little need for it thanks to Maven and Gradle. Feature-rich project builders that call the compiler <em>for</em> you, which makes it irrelevant how unfriendly the interface is. However, what neither of these tools do, is minimal <strong>complete</strong> rebuilds. </p>
 <p>Maven&#39;s <code>useIncrementalCompilation</code> option (which is currently bugged in 3.2.5 and the meaning of the value is reversed) uses the last modified date to determine if something needs to be rebuilt. However, if you change a file that other files depend on, those files will not be rebuilt and the resulting class files will <em>not</em> run correctly. A proper incremental compiler would understand the relationships between classes. Eclipse and other IDE&#39;s have intimate knowledge of class dependencies, which they need for things like code completion, so they can already do this.</p>
 <p>I recently discovered a new tool in Java 8 called <a href="http://docs.oracle.com/javase/8/docs/technotes/tools/unix/jdeps.html"><code>jdeps</code></a>. With it you can list dependencies, which now lets anyone construct a dependency graph for any compiled jvm bytecode. Using this, how hard would it be to make a proper incremental compiler for java? Turns out, not so hard...</p>

@@ -40,7 +40,7 @@
 			
 <div class="article">
 <h1 class="articleTitle">Blocking Similar Requests</h1>
-<div class="posted-on-date">Posted on 2015-11-9</div>
+<div class="posted-on-date">Posted on 2015-10-9</div>
 <p>When regular users can cause serious contention issues in your web-application (that make the whole thing unresponsive) simply by refreshing a specific page, it&#39;s probably a sign that something needs to be re-thought. Faced with just such an issue, I tried optimizing the requests, but some requests are still just really slow and cannot be easily cached. The ACTUAL solution is re-designing the interaction, possibly splitting it up into smaller steps, but until then! Rate limiting to the rescue!</p>
 <p>Using Guava&#39;s cache and custom collections I made this <a href="https://gist.github.com/arienkock/3fc5e06db51f5b1eb04a">SimilarRequestLimitingFilter</a>. Incoming requests are remembered until they complete, and if the number of &#39;similar&#39; requests exceeds a certain number, BAM! HTTP error 429! You don&#39;t know status code 429? It means <a href="http://httpstatusdogs.com/429-too-many-requests">&quot;slow your roll&quot;</a>.</p>
 <p>To make sure this thing can actually withstand the high frequency of requests without itself becoming the point of contention, I did some measurements with JMeter and optimized the part where I do some logging. The most interesting part of that class is perhaps this:</p>

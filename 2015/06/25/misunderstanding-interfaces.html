@@ -40,7 +40,7 @@
 			
 <div class="article">
 <h1 class="articleTitle">Misunderstanding Java Interfaces</h1>
-<div class="posted-on-date">Posted on 2015-7-25</div>
+<div class="posted-on-date">Posted on 2015-6-25</div>
 <p>I used to think interfaces were a premature abstraction. In other words: something you did so that you could migrate or switch implementations/providers in some not so probable future. In all my software engineering classes the true value of decoupling was never explained to me in such a way that it made me a believer. After an unpleasant experience programming against interfaces as a junior programmer I found them quite distasteful.</p>
 <h2 id="dai-dao">DAI &amp; DAO</h2>
 <p>I was 25 years old and I had just started my first job as a developer. When I opened up my IDE and explored the codebase, I came across the data-access layer of the code. &quot;Data Access Interfaces&quot; (DAI&#39;s) and &quot;Data Access Objects&quot; (DAO&#39;s), you say? Well, I guess that makes sense. After all, I remember my professors saying it was good to separate the public API from the implementation. A few months in I wasn&#39;t so convinced. The DAO&#39;s were ever changing and evolving. I wasn&#39;t as comfortable with my IDE at the time, so all this jumping back and forth between interfaces and implementations, keeping them up to date as you &quot;tried stuff out&quot; was a real pain in the ass. The number DAI/DAO&#39;s was growing and I couldn&#39;t make sense of what purpose they served. The DAO implementations were <em>right there</em>! I could cast down to them or use them directly, and why wouldn&#39;t I?</p>

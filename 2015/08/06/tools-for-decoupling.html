@@ -40,7 +40,7 @@
 			
 <div class="article">
 <h1 class="articleTitle">Tools for Decoupling</h1>
-<div class="posted-on-date">Posted on 2015-9-6</div>
+<div class="posted-on-date">Posted on 2015-8-6</div>
 <p>To organize code I&#39;ve started to adopt certain tools and methods. <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency inversion</a> is the principle that is fundamental in achieving this, and <a href="/2015/06/25/misunderstanding-interfaces.html">interfaces</a> are the primary tool (or language feature, if you prefer) Java devs use to achieve dependency inversion. But wait, there&#39;s more...</p>
 <h3 id="maven-runtime-scope">Maven <code>runtime</code> Scope</h3>
 <p>I like this one, but I don&#39;t think it&#39;s very common. When you split your project into modules, you&#39;re trying to seperate concerns. You&#39;re trying to make sure that each module has clear responsibilities. At some point the implementations of your abstractions have to interact. Your actual top-level application depends on all your modules, either directly or transitively. Normally, using only your abstraction modules (maven modules containing <em>only</em> interfaces) that would create a very large number of modules: one for each layer, one for each abstraction between layers, +1 for the final top level layer of your application. This is where the <code>runtime</code> scope can help. Using this you can depend on code that you&#39;re not allowed to use directly. If you do, <code>mvn compile</code> will fail. However, all the dependencies are included in your artifacts, so using a dependency-injection framework you can load all the implementations at runtime while still decoupling your components at build-time.</p>
