@@ -84,11 +84,13 @@ cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem \
 <p>After setting these config values, you should be able to get this little (very satisfying) report:</p>
 <p><img src="/images/ssllabs_report_thumb.png" alt="A-rated recurity report" title="ssllabs report: A-rating" style="margin: auto; display: block"></p>
 <p>Add the following lines to your listener or global sections of haproxy.cfg (for a complete example config look at step 5)</p>
-<pre><code>tune.ssl.default-dh-param 2048
+<pre><code class="lang-text">tune.ssl.default-dh-param 2048
 ssl-default-bind-ciphers EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
-</code></pre><p>and in your frontend section, make sure you use these (the location of your cert file may differ, of course):</p>
-<pre><code>bind :443 ssl no-sslv3 no-tls-tickets crt /usr/local/etc/haproxy/haproxy-cert.pem alpn h2,http/1.1
-</code></pre><h4 id="5-automatic-certificate-renewal">5. Automatic certificate renewal</h4>
+</code></pre>
+<p>and in your frontend section, make sure you use these (the location of your cert file may differ, of course):</p>
+<pre><code class="lang-text">bind :443 ssl no-sslv3 no-tls-tickets crt /usr/local/etc/haproxy/haproxy-cert.pem alpn h2,http/1.1
+</code></pre>
+<h4 id="5-automatic-certificate-renewal">5. Automatic certificate renewal</h4>
 <p>Few things feel as good as automating menial tasks. What you&#39;re doing in this step is allowing the &quot;Let&#39;s Encrypt&quot; service get its challenge response (a file needed to prove that you own the domain) be served through HAProxy. This is something that is supported out of the box for many other proxies/servers, but requires some extra effort for us. Here is <a href="https://gist.githubusercontent.com/arienkock/aedc48b2d44acf4e06bd13840100fdee/raw/haproxy.cfg">a full haproxy.cfg example</a> that includes a special <code>backend letsencrypt</code> section and <code>acl</code> rule for exactly this purpose. Lastly, you can run the following script (which makes certain assumptions, so make sure you read it before use) from cron to ensure your certificate never expires:</p>
 <pre><code class="lang-sh">#!/usr/bin/env bash
 set -x -e
