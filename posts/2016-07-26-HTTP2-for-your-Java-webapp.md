@@ -63,14 +63,14 @@ After setting these config values, you should be able to get this little (very s
 
 Add the following lines to your listener or global sections of haproxy.cfg (for a complete example config look at step 5)
 
-```
+```text
 tune.ssl.default-dh-param 2048
 ssl-default-bind-ciphers EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
 ```
 
 and in your frontend section, make sure you use these (the location of your cert file may differ, of course):
 
-```
+```text
 bind :443 ssl no-sslv3 no-tls-tickets crt /usr/local/etc/haproxy/haproxy-cert.pem alpn h2,http/1.1
 ```
 
