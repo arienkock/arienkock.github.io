@@ -25,9 +25,10 @@
 //   src: local('Inconsolata'), url(https://fonts.gstatic.com/s/inconsolata/v12/BjAYBlHtW3CJxDcjzrnZCI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
 //   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 // }
-@import url(https://fonts.googleapis.com/css?family=Lato);
-@import url(https://fonts.googleapis.com/css?family=Inconsolata);
-@import url(https://fonts.googleapis.com/css?family=Noto+Serif:700italic);
+//@import url(https://fonts.googleapis.com/css?family=Lato);
+//@import url(https://fonts.googleapis.com/css?family=Inconsolata);
+//@import url(https://fonts.googleapis.com/css?family=Noto+Serif:700italic);
+@import url(https://fonts.googleapis.com/css?family=Lato|Inconsolata|Noto+Serif:700);
 @import 'reset.scss';
 
 $font-family-heading: 'Noto Serif', serif;//Fugaz One', cursive;
