@@ -1,0 +1,162 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Front-end Wars: Ember vs Mithril - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+	
+	<link rel="stylesheet" href="/styles/highlight/solarized-dark-custom.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<!--div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div-->
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">Front-end Wars: Ember vs Mithril</h1>
+<div class="posted-on-date">Posted on 2017-3-2</div>
+<p>JavaScript fatigue is <a href="https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4">a thing</a>. Commit to any framework and your investment will pay itself back... but how soon and how much? If you stick to your first choice, then you can&#39;t really judge it accurately. Try many, and your time and mental resources get spread thin. So, I limited my scope during 2016 on things that for some ethereal reason gelled with me. I&#39;ve worked with Ember (v2.10) and Mithril (v1.0) on personal projects and React+Flux on a commercial project. In this retrospective I&#39;ll focus on the former two.</p>
+<h2 id="scope">Scope</h2>
+<p>Mithril and Ember are both comprehensive. In order to compare apples with apples, I&#39;m going to compare the following related concepts which they both address:</p>
+<ul>
+<li>Views</li>
+<li>Components</li>
+<li>Data binding</li>
+</ul>
+<h2 id="views-templates-and-vnodes">Views: templates and vnodes</h2>
+<p>Ember views are expressed in <a href="http://handlebarsjs.com/">Handlebars</a> templates, while Mithril by default uses plain JavaScript to construct virtual DOM nodes. Compare Ember and Mithril snippets producing similar results:</p>
+<pre><code class="lang-handlebars">&lt;div class=&quot;container&quot;&gt;
+    &lt;button {{action &quot;doSomething&quot;}}&gt;{{label}}&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="lang-javascript">m(&#39;.container&#39;, 
+    m(&#39;button&#39;, { onclick: doSomething }, vnode.attrs.label))
+</code></pre>
+<p>Having your view expressed in code in (potentially the same file) is an important distinction. Handlebars, similar to <a href="https://mustache.github.io/">Mustache</a> wants the template to be dumb. That is, to not contain any logic. To that end, the template language constructs are kept to a minimum, and any extension needs to be written <a href="https://guides.emberjs.com/v2.11.0/templates/writing-helpers/">as a helper</a>. As a Handlebars/Mustache user you are left wondering &quot;Is joining an array of strings with a comma separator really <em>logic</em>?&quot;. Regardless of your answer, you <strong>have</strong> to implement outside of the template in the (view)model layer. Mithril OTOH, does not impose guard rails. Giving you more power to do in-view transformations without context switches. This, however, puts the responsibility of keeping business logic out of our presentation layer, entirely on the developer.</p>
+<h2 id="components-ui-building-blocks">Components: UI building blocks</h2>
+<p>Like everything else in Ember, Components use the object model. In case you&#39;re new to Ember: there are a lot of concepts to learn in order to fully understand the framework. Ember applications live inside a container object that takes care of wiring together controllers, services and components. Ember also has its own class extension mechanism, and an object model which includes extensions to native arrays so that it can monitor changes to trigger redraws and calculate computed properties and other multi-directional binding magic. All these concepts come to a head in the <a href="http://emberjs.com/api/classes/Ember.Component.html"><code>Ember.Component</code></a> class. Here is some sample code behind the Ember template from the previous chapter.</p>
+<pre><code class="lang-javascript">let Component = Ember.Component.extend({
+    // lifecycle method called after DOM render
+    didRender() {
+        // do some manual stuff to DOM
+    },
+    actions: {
+        doSomething() {
+            // perform some action 
+        }
+    }
+})
+</code></pre>
+<p>Mithril defines a different lifecycle for components, but the concept is similar. It may be an implementation detail, but components in Mithril are an extension to its virtual DOM representation. In order to understand components in Mithril, you have to become familiar with at least part of its <code>vnode</code> structure, lifecycle and rendering capabilities. Mithril has a much more bare-bones feel to components developers have more choices they are allowed/forced to make (depending on your perspective).</p>
+<pre><code class="lang-javascript">var Component = {
+    onCreate: function(vnode) {
+        // do some manual stuff to DOM, which is 
+        // available through vnode.dom
+    },
+    view: function() {/* see previous chapter */}
+}
+</code></pre>
+<p>This snippet doesn&#39;t contain a definition of your actions, because there is no <em>one</em> way to do this. You can define your action functions anywhere you like. I like putting them in the <code>vnode.state</code> object so I can reference them through <code>this.doSomething</code>, but it&#39;s entirely up to you the developer.</p>
+<h2 id="data-binding">Data binding</h2>
+<p>Data binding here is informally defined as anything the frameworks provide that serves to read from and write to, the UI and external API.</p>
+<h3 id="api">API</h3>
+<p>On the API side of things, Ember Data is a package that abstracts the access to relational data records. After looking at my options, I decided against using Ember Data. So my API access made use of plain JQuery XHR support. This is idiomatic Ember. Many examples use the embedded JQuery that Ember provides for this purpose, so it&#39;s not something out of the ordinary.</p>
+<p>Mithril has its own Promise based XHR wrapper that handles query string construction and path parameter interpolation. No need to use anything like fetch API or axios unless you <em>seriously</em> prefer them.</p>
+<h3 id="two-way-data-binding">Two-way data binding</h3>
+<p>The thing Angular was famous for. The simplest example of two way data binding looks like is an input field bound to some model property. In Ember:</p>
+<pre><code class="lang-handlebars">{{input type=&quot;text&quot; value=firstName}}
+</code></pre>
+<p>In Mithril:</p>
+<pre><code class="lang-javascript">m(&quot;input&quot;, 
+  { oninput: m.withAttr(&quot;value&quot;, firstName), 
+    value: firstName()})
+</code></pre>
+<p>In the Ember snippet, we use a template helper and <code>firstName</code> refers to a property in the template&#39;s <a href="https://guides.emberjs.com/v2.0.0/templates/handlebars-basics/">current rendering context</a>, which is a Component or Controller object. In the Mithril snippet, <code>firstName</code> is a getter+setter function which serves as a mutable value holder called a <a href="http://mithril.js.org/stream.html">Stream</a>.</p>
+<h3 id="computed-properties">Computed properties</h3>
+<p>In Ember computed properties have extensive support. That is, a synthetic property that depends on other properties. When any of the values of its upstream properties change, Ember triggers the re-generation of the computed value. Here is an example straight from the guide (note the use of ES6 template literals, which is not part of Ember):</p>
+<pre><code>Person = Ember.Object.extend({
+  // these will be supplied by `create`
+  firstName: null,
+  lastName: null,
+
+  fullName: Ember.computed(&#39;firstName&#39;, &#39;lastName&#39;, function() {
+    return `${this.get(&#39;firstName&#39;)} ${this.get(&#39;lastName&#39;)}`;
+  })
+});
+
+let ironMan = Person.create({
+  firstName: &#39;Tony&#39;,
+  lastName:  &#39;Stark&#39;
+});
+
+ironMan.get(&#39;fullName&#39;); // &quot;Tony Stark&quot;
+</code></pre><p>Mithril has the Stream object. It allows for stringing together values in an update chain. The documentation likens it to spreadsheet cells. </p>
+<pre><code>var a = stream(&quot;hello&quot;)
+var b = stream(&quot;world&quot;)
+
+var greeting = stream.merge([a, b]).map(function(values) {
+    return values.join(&quot; &quot;)
+})
+
+console.log(greeting()) // logs &quot;hello world&quot;
+</code></pre><h2 id="the-measure">The measure</h2>
+<p>I have to explain the frame within which I&#39;m evaluating my experiences. In recent years I&#39;ve become increasingly aware of the burden that <strong>complex tools</strong> are. Any complexity, outside of the (admittedly arbitrary) scope of the problem you&#39;re solving is incidental. Complex tools <em>can</em>, and usually do make things easy (as evidenced by many popular examples), but when they break or we push them to the limits of their inteded purposes... how complex do you want them to be then? If you could choose, in your most dire moments of puzzle solving, what factors would you weigh? Judging the popularity of frameworks by the number of Stackoverflow questions is... wrong, just wrong. That number is a product of popularity, size and complexity. Hammers don&#39;t have user manuals.</p>
+<p>Mithril introduces fewer &#39;new&#39; concepts than Ember. None of the concepts are truly new, but there are always exceptions and implementation details that one needs to be aware of, so you can only ignore documentation so much. To understands Ember you have to get a hang of:</p>
+<ul>
+<li>Handlebars</li>
+<li>Template helpers are essential</li>
+<li>What services are and what is referred to when the documentation uses the word &#39;container&#39;</li>
+<li>The object model, especially to understand what triggers redraws, and what doesn&#39;t</li>
+</ul>
+<p>To understand Mithril you need to understand</p>
+<ul>
+<li>What a <code>vnode</code> is and how they map to the actual DOM</li>
+<li>What a component vnode is and how it&#39;s different from the regular ones</li>
+<li>What triggers redraws and when to manually trigger redraws</li>
+</ul>
+<p>There&#39;s more to both frameworks and these points may not be grouped very intuitively, but these are what I consider the bare necessities. Both frameworks have routers. Ember also has a CLI that if your&#39;e just starting out you would most likely have to get acquainted with. However, in their core they both just ways to present data in HTML. In that respect, Mihtril is less about imposing a structure than Ember is. Ember is more about pushing you towards good separation of concerns. You can screw up and make spaghetti code with any framework, but Ember (with its guides and concepts) really tries hard to get you halfway there. However, no amount of hand-holding can force someone to understand your framework&#39;s intentions. Mithril touts best-practices, but they&#39;re easier to miss or ignore. Mithril treats you like a grown-up and let&#39;s you learn on your own. Ember is about sharing knowledge and distilling it into an evolving &quot;Ember way&quot; of doing things. Mithril is about simplicity and elegance. Ember is about thoroughness and ease.</p>
+<p>All in all I think both frameworks have a similar learning curve, with Ember taking a bit more time to master. Ember simply does more, so there&#39;s more to learn that is part of Ember. A Mithril project still needs a build script and a method for managing state. Since you choose those yourself, that doesn&#39;t fall under the &quot;learn Mithril&quot; category. Mithril speaks to me more at this point in my career. I believe I&#39;m at the point where I&#39;m able to make good informed decisions and trade-offs when it comes to managing state and general software design. Ember has some powerful features, like nested routes and everything Ember Data does. Yet, these solve problems I don&#39;t yet have. Writing code as needed, I can master every aspect of my project as I get around to it.</p>
+
+</div>
+
+		</div>
+	</div>
+    
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+	<script src="/scripts/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
