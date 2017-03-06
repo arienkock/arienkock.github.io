@@ -210,10 +210,7 @@ gulp.task('serve', ['styles', 'copy:js', 'copy:css', 'fonts', 'html:index', 'pos
   });
 
   gulp.watch([
-    'app/*.html',
-    'app/scripts/**/*.js',
-    'app/images/**/*',
-    '.tmp/fonts/**/*'
+    '.tmp/**/*'
   ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
