@@ -32,7 +32,7 @@
     "through2": "^2.0.0"
   },
   "scripts": {
-    "deploy": "gulp && gulp deploy && git push --all"
+    "deploy": "gulp && gulp deploy && git push origin source"
   },
   "eslintConfig": {
     "env": {

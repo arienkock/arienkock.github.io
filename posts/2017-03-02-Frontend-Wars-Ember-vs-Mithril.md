@@ -3,7 +3,7 @@ title: 'Front-end Wars: Ember vs Mithril'
 teaser: Conclusions from actual projects
 ---
 
-JavaScript fatigue is [a thing](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4). Commit to any framework and your investment will pay itself back... but how soon and how much? If you stick to your first choice, then you can't really judge it accurately. Try many, and your time and mental resources get spread thin. So, I limited my scope during 2016 on things that for some ethereal reason gelled with me. I've worked with Ember (v2.10) and Mithril (v1.0) on personal projects and React+Flux on a commercial project. In this retrospective I'll focus on the former two.
+JavaScript fatigue is [a thing](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4). When you commit to any framework, your investment will pay itself back... but how soon and how much? If you stick to your first choice, can you really judge it accurately? Try many, and your time and mental resources get spread thin. To solve this dilemma, I limited my scope during 2016 on things that for some ethereal reason gelled with me. I've worked with Ember (v2.10) and Mithril (v1.0) on personal projects and React+Redux on a commercial project. In this retrospective I'll focus on the former two.
 
 ### Scope
 
@@ -28,7 +28,7 @@ m('.container',
     m('button', { onclick: doSomething }, vnode.attrs.label))
 ```
 
-Having your view expressed in code in (potentially the same file) is an important distinction. Handlebars, similar to [Mustache](https://mustache.github.io/) wants the template to be dumb. That is, to not contain any logic. To that end, the template language constructs are kept to a minimum, and any extension needs to be written [as a helper](https://guides.emberjs.com/v2.11.0/templates/writing-helpers/). As a Handlebars/Mustache user you are left wondering "Is joining an array of strings with a comma separator really logic?". Regardless of your answer, you have to implement outside of the template in the (view)model layer. Mithril OTOH, does not impose guard rails. Giving you more power to do in-view transformations without context switches. This, however, puts the responsibility of keeping business logic out of our presentation layer, entirely on the developer.
+Having your view expressed in code in (potentially the same file) is an important distinction. Handlebars, similar to [Mustache](https://mustache.github.io/) wants the template to be dumb. That is, to not contain any logic. To that end, the template language constructs are kept to a minimum, and any extension needs to be written [as a helper](https://guides.emberjs.com/v2.11.0/templates/writing-helpers/). As a Handlebars/Mustache user you are left wondering "Is joining an array of strings with a comma separator really **logic**?". Regardless of your answer, you have to implement outside of the template in (most likely) the view-model. Mithril on the other hand, does not impose any such guard rails. Giving you more power to do in-view transformations without context switches. This, however, puts the responsibility of keeping business logic out of our presentation layer, entirely on the developer.
 
 ### Components: UI building blocks
 
@@ -48,7 +48,7 @@ let Component = Ember.Component.extend({
 })
 ```
 
-Mithril defines a different lifecycle for components, but the concept is similar. It may be an implementation detail, but components in Mithril are an extension to its virtual DOM representation. In order to understand components in Mithril, you have to become familiar with at least part of its `vnode` structure, lifecycle and rendering capabilities. Mithril has a much more bare-bones feel to components developers have more choices they are allowed/forced to make (depending on your perspective).
+Mithril defines a different lifecycle for components, but the concept is similar. It may be an implementation detail, but components in Mithril are an extension to its virtual DOM representation. In order to understand components in Mithril, you have to become familiar with at least part of its `vnode` structure, lifecycle and rendering capabilities. Mithril has a much more bare-bones feel to components. Developers have more choices they are allowed/forced to make (depending on your perspective).
 
 ```javascript
 var Component = {
@@ -64,17 +64,17 @@ This snippet doesn't contain a definition of your actions, because there is no o
 
 ### Data binding
 
-Data binding here is informally defined as anything the frameworks provide that serves to read from and write to, the UI and external API.
+Data binding here is informally defined as: anything the frameworks provide that serves to read from and write to, the UI and external API.
 
 #### API
 
-On the API side of things, Ember Data is a package that abstracts the access to relational data records. After looking at my options, I decided against using Ember Data. So my API access made use of plain JQuery XHR support. This is idiomatic Ember. Many examples use the embedded JQuery that Ember provides for this purpose, so it's not something out of the ordinary.
+On the API side of things, there is the super sophisticated **Ember Data** module. It abstracts the access to relational data records, but you need a compatible API backend or write your own adapter. After looking at my options, I decided *against* using Ember Data. So, my API access made use of plain JQuery XHR functions. Take note: this **is** idiomatic Ember. Many Ember examples use the embedded JQuery that it provides for this purpose, so there is nothing out of the ordinary going on here.
 
-Mithril has its own Promise based XHR wrapper that handles query string construction and path parameter interpolation. No need to use anything like fetch API or axios unless you seriously prefer them.
+Mithril has its own Promise-based XHR wrapper that handles query-string construction and path parameter interpolation. No need to add a dependency on a fetch API polyfill or axios, unless you seriously prefer them.
 
 #### Two-way data binding
 
-The thing Angular was famous for. The simplest example of two way data binding looks like is an input field bound to some model property. In Ember:
+The thing Angular was famous for. The simplest example of two way data binding: an input field bound to some model property. In Ember:
 
 ```handlebars
 {{input type="text" value=firstName}}
