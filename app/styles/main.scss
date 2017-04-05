@@ -28,7 +28,7 @@
 //@import url(https://fonts.googleapis.com/css?family=Lato);
 //@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 //@import url(https://fonts.googleapis.com/css?family=Noto+Serif:700italic);
-@import url(https://fonts.googleapis.com/css?family=Lato|Inconsolata|Noto+Serif:700);
+@import url(https://fonts.googleapis.com/css?family=Lato|Inconsolata|Noto+Serif:700italic);
 @import 'reset.scss';
 
 $font-family-heading: 'Noto Serif', serif;//Fugaz One', cursive;
@@ -54,7 +54,7 @@ $color-bright: #E0E2E4;
 $color-quote: #657B83;
 $color-subtitle: #2AA198;
 
-$length-sentence: 39rem; 
+$length-sentence: 39rem;
 
 body {
 	font-family: $font-family-body;
@@ -212,9 +212,9 @@ a:hover, a:active, {
 			font-style: italic;
 			padding: 0 $length-base;
 			box-sizing: border-box;
-			border-left: ($length-base / 4) solid $color-body-fg; 
+			border-left: ($length-base / 4) solid $color-body-fg;
 		}
-		> p code {
+		> p code, ul code {
 			color: $color-code-inline-fg;
 		}
 		> p, h1, pre, ol, ul, blockquote {
