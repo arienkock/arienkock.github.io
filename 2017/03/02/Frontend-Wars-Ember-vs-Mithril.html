@@ -41,7 +41,7 @@
 <div class="article">
 <h1 class="articleTitle">Front-end Wars: Ember vs Mithril</h1>
 <div class="posted-on-date">Posted on 2017-3-2</div>
-<p>JavaScript fatigue is <a href="https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4">a thing</a>. Commit to any framework and your investment will pay itself back... but how soon and how much? If you stick to your first choice, then you can&#39;t really judge it accurately. Try many, and your time and mental resources get spread thin. So, I limited my scope during 2016 on things that for some ethereal reason gelled with me. I&#39;ve worked with Ember (v2.10) and Mithril (v1.0) on personal projects and React+Flux on a commercial project. In this retrospective I&#39;ll focus on the former two.</p>
+<p>JavaScript fatigue is <a href="https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4">a thing</a>. When you commit to any framework, your investment will pay itself back... but how soon and how much? If you stick to your first choice, can you really judge it accurately? Try many, and your time and mental resources get spread thin. To solve this dilemma, I limited my scope during 2016 on things that for some ethereal reason gelled with me. I&#39;ve worked with Ember (v2.10) and Mithril (v1.0) on personal projects and React+Redux on a commercial project. In this retrospective I&#39;ll focus on the former two.</p>
 <h3 id="scope">Scope</h3>
 <p>Mithril and Ember are both comprehensive. In order to compare apples with apples, I&#39;m going to compare the following related concepts which they both address:</p>
 <ul>
@@ -58,7 +58,7 @@
 <pre><code class="lang-javascript">m(&#39;.container&#39;, 
     m(&#39;button&#39;, { onclick: doSomething }, vnode.attrs.label))
 </code></pre>
-<p>Having your view expressed in code in (potentially the same file) is an important distinction. Handlebars, similar to <a href="https://mustache.github.io/">Mustache</a> wants the template to be dumb. That is, to not contain any logic. To that end, the template language constructs are kept to a minimum, and any extension needs to be written <a href="https://guides.emberjs.com/v2.11.0/templates/writing-helpers/">as a helper</a>. As a Handlebars/Mustache user you are left wondering &quot;Is joining an array of strings with a comma separator really logic?&quot;. Regardless of your answer, you have to implement outside of the template in the (view)model layer. Mithril OTOH, does not impose guard rails. Giving you more power to do in-view transformations without context switches. This, however, puts the responsibility of keeping business logic out of our presentation layer, entirely on the developer.</p>
+<p>Having your view expressed in code in (potentially the same file) is an important distinction. Handlebars, similar to <a href="https://mustache.github.io/">Mustache</a> wants the template to be dumb. That is, to not contain any logic. To that end, the template language constructs are kept to a minimum, and any extension needs to be written <a href="https://guides.emberjs.com/v2.11.0/templates/writing-helpers/">as a helper</a>. As a Handlebars/Mustache user you are left wondering &quot;Is joining an array of strings with a comma separator really <strong>logic</strong>?&quot;. Regardless of your answer, you have to implement outside of the template in (most likely) the view-model. Mithril on the other hand, does not impose any such guard rails. Giving you more power to do in-view transformations without context switches. This, however, puts the responsibility of keeping business logic out of our presentation layer, entirely on the developer.</p>
 <h3 id="components-ui-building-blocks">Components: UI building blocks</h3>
 <p>Like everything else in Ember, Components use the object model. In case you&#39;re new to Ember: there are a lot of concepts to learn in order to fully understand the framework. Ember applications live inside a container object that takes care of wiring together controllers, services and components. Ember also has its own class extension mechanism, and an object model which includes extensions to native arrays so that it can monitor changes to trigger redraws and calculate computed properties and other multi-directional binding magic. All these concepts come to a head in the <code>Ember.Component</code> class. Here is some sample code behind the Ember template from the previous chapter.</p>
 <pre><code class="lang-javascript">let Component = Ember.Component.extend({
@@ -73,7 +73,7 @@
     }
 })
 </code></pre>
-<p>Mithril defines a different lifecycle for components, but the concept is similar. It may be an implementation detail, but components in Mithril are an extension to its virtual DOM representation. In order to understand components in Mithril, you have to become familiar with at least part of its <code>vnode</code> structure, lifecycle and rendering capabilities. Mithril has a much more bare-bones feel to components developers have more choices they are allowed/forced to make (depending on your perspective).</p>
+<p>Mithril defines a different lifecycle for components, but the concept is similar. It may be an implementation detail, but components in Mithril are an extension to its virtual DOM representation. In order to understand components in Mithril, you have to become familiar with at least part of its <code>vnode</code> structure, lifecycle and rendering capabilities. Mithril has a much more bare-bones feel to components. Developers have more choices they are allowed/forced to make (depending on your perspective).</p>
 <pre><code class="lang-javascript">var Component = {
     onCreate: function(vnode) {
         // do some manual stuff to DOM, which is 
@@ -84,12 +84,12 @@
 </code></pre>
 <p>This snippet doesn&#39;t contain a definition of your actions, because there is no one way to do this. You can define your action functions anywhere you like. I like putting them in the <code>vnode.state</code> object so I can reference them through <code>this.doSomething</code>, but it&#39;s entirely up to you the developer.</p>
 <h3 id="data-binding">Data binding</h3>
-<p>Data binding here is informally defined as anything the frameworks provide that serves to read from and write to, the UI and external API.</p>
+<p>Data binding here is informally defined as: anything the frameworks provide that serves to read from and write to, the UI and external API.</p>
 <h4 id="api">API</h4>
-<p>On the API side of things, Ember Data is a package that abstracts the access to relational data records. After looking at my options, I decided against using Ember Data. So my API access made use of plain JQuery XHR support. This is idiomatic Ember. Many examples use the embedded JQuery that Ember provides for this purpose, so it&#39;s not something out of the ordinary.</p>
-<p>Mithril has its own Promise based XHR wrapper that handles query string construction and path parameter interpolation. No need to use anything like fetch API or axios unless you seriously prefer them.</p>
+<p>On the API side of things, there is the super sophisticated <strong>Ember Data</strong> module. It abstracts the access to relational data records, but you need a compatible API backend or write your own adapter. After looking at my options, I decided <em>against</em> using Ember Data. So, my API access made use of plain JQuery XHR functions. Take note: this <strong>is</strong> idiomatic Ember. Many Ember examples use the embedded JQuery that it provides for this purpose, so there is nothing out of the ordinary going on here.</p>
+<p>Mithril has its own Promise-based XHR wrapper that handles query-string construction and path parameter interpolation. No need to add a dependency on a fetch API polyfill or axios, unless you seriously prefer them.</p>
 <h4 id="two-way-data-binding">Two-way data binding</h4>
-<p>The thing Angular was famous for. The simplest example of two way data binding looks like is an input field bound to some model property. In Ember:</p>
+<p>The thing Angular was famous for. The simplest example of two way data binding: an input field bound to some model property. In Ember:</p>
 <pre><code class="lang-handlebars">{{input type=&quot;text&quot; value=firstName}}
 </code></pre>
 <p>In Mithril:</p>
