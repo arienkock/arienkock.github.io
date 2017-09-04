@@ -13,14 +13,14 @@
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="/styles/main.css">
-
+	
 	<link rel="stylesheet" href="/styles/highlight/solarized-dark-custom.css">
   </head>
   <body>
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+    
     <div class="container">
 		<div class="header">
 			<div class="logo">
@@ -43,7 +43,9 @@
 <div class="posted-on-date">Posted on 2015-12-21</div>
 <p>I hope this post will save someone from the frustration I&#39;ve lived through trying to get this to work.</p>
 <p>The RMI JMX ConnectorServer (what a name!) is the component that responds to the client when you try to load your MBeans into Visual VM or JConsole. The RMI documentation is pretty clear that a secondary connection is opened up which serves the actual remote object stub. This is why Jetty comes with a component that makes this slightly easier by unifying the ports. Did I lose you? I think it&#39;s likely that most Java devs don&#39;t work with RMI very often. Suffice it to say, two connections are required to get your JMX MBeans data. </p>
-<p>It was my grave mistake to assume that: Since, the second connection&#39;s endpoint is in the service URL (e.g. <code>service:jmx:rmi://&lt;TARGET_MACHINE&gt;:&lt;JMX_RMI_SERVER_PORT&gt;/jndi/rmi://&lt;TARGET_MACHINE&gt;:&lt;RMI_REGISTRY_PORT&gt;/jmxrmi</code>), that must also be the endpoint my client actually uses. Surely that would make sense. However, RMI (rightfully) doesn&#39;t know or care about JMX. So, RMI just knows that it needs to respond to the initial request with an IP and a port. That IP address is where things go wrong on EC2. EC2 instances don&#39;t know their external IP address. None of the network interfaces have it bound, so it cannot be resolved purely inside the instance. In <code>/$JETTY_HOME/etc/jetty-jmx-remote.xml</code> you can set a system property which tells the RMI Registry what its hostname is:</p>
+<p>It was my grave mistake to assume that: Since, the second connection&#39;s endpoint is in the service URL, that must also be the endpoint my client actually uses. This is what the URL is structured like:</p>
+<p><code>service:jmx:rmi://&lt;HOST&gt;:&lt;JMX_PORT&gt;/jndi/rmi://&lt;HOST&gt;:&lt;RMI_PORT&gt;/jmxrmi</code></p>
+<p>Surely that would make sense. However, RMI (rightfully) doesn&#39;t know or care about JMX. So, RMI just knows that it needs to respond to the initial request with an IP and a port. That IP address is where things go wrong on EC2. EC2 instances don&#39;t know their external IP address. None of the network interfaces have it bound, so it cannot be resolved purely inside the instance. In <code>/$JETTY_HOME/etc/jetty-jmx-remote.xml</code> you can set a system property which tells the RMI Registry what its hostname is:</p>
 <pre><code>  &lt;Call class=&quot;java.lang.System&quot; name=&quot;setProperty&quot;&gt;
     &lt;Arg&gt;java.rmi.server.hostname&lt;/Arg&gt;
     &lt;Arg&gt;[ec2_ip].[availability_zone].compute.amazonaws.com&lt;/Arg&gt;
@@ -55,7 +57,7 @@
 
 		</div>
 	</div>
-
+    
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
