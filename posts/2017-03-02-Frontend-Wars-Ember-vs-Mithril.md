@@ -74,7 +74,8 @@ Mithril has its own Promise based XHR wrapper that handles query string construc
 
 ### Two-way data binding
 
-The thing Angular was famous for. The simplest example of two way data binding looks like is an input field bound to some model property. In Ember:
+The thing Angular was famous for. The simplest example of two way data binding is an input field bound to some model property. In Ember:
+
 
 ```handlebars
 {{input type="text" value=firstName}}
@@ -130,11 +131,11 @@ console.log(greeting()) // logs "hello world"
 
 I have to explain the frame within which I'm evaluating my experiences. In recent years I've become increasingly aware of the burden that **complex tools** are. Any complexity, outside of the (admittedly arbitrary) scope of the problem you're solving is incidental. Complex tools *can*, and usually do make things easy (as evidenced by many popular examples), but when they break or we push them to the limits of their inteded purposes... how complex do you want them to be then? If you could choose, in your most dire moments of puzzle solving, what factors would you weigh? Judging the popularity of frameworks by the number of Stackoverflow questions is... wrong, just wrong. That number is a product of popularity, size and complexity. Hammers don't have user manuals.
 
-Mithril introduces fewer 'new' concepts than Ember. None of the concepts are truly new, but there are always exceptions and implementation details that one needs to be aware of, so you can only ignore documentation so much. To understands Ember you have to get a hang of:
+Mithril introduces fewer 'new' concepts than Ember. None of the concepts are truly new, but there are always exceptions and implementation details that one needs to be aware of, so you can only ignore documentation so much. To understand Ember you have to get a hang of:
 
 - Handlebars
 - Template helpers are essential
-- What services are and what is referred to when the documentation uses the word 'container'
+- What services are and what the 'container' is
 - The object model, especially to understand what triggers redraws, and what doesn't
 
 To understand Mithril you need to understand
@@ -143,6 +144,6 @@ To understand Mithril you need to understand
 - What a component vnode is and how it's different from the regular ones
 - What triggers redraws and when to manually trigger redraws
 
-There's more to both frameworks and these points may not be grouped very intuitively, but these are what I consider the bare necessities. Both frameworks have routers. Ember also has a CLI that if your'e just starting out you would most likely have to get acquainted with. However, in their core they both just ways to present data in HTML. In that respect, Mihtril is less about imposing a structure than Ember is. Ember is more about pushing you towards good separation of concerns. You can screw up and make spaghetti code with any framework, but Ember (with its guides and concepts) really tries hard to get you halfway there. However, no amount of hand-holding can force someone to understand your framework's intentions. Mithril touts best-practices, but they're easier to miss or ignore. Mithril treats you like a grown-up and let's you learn on your own. Ember is about sharing knowledge and distilling it into an evolving "Ember way" of doing things. Mithril is about simplicity and elegance. Ember is about thoroughness and ease.
+There's more to both frameworks and these points may not be grouped very intuitively, but these are what I consider the bare necessities. Both frameworks have routers. Ember also has a CLI that (if your'e just starting out) you would most likely have to get acquainted with. However, in their core they're both just ways to present data in HTML. In that respect, Mihtril is less about imposing a structure than Ember is. Ember is more about pushing you towards good separation of concerns. You can screw up and make spaghetti code with any framework, but Ember (with its guides and concepts) really tries hard to get you halfway there. However, no amount of hand-holding can force someone to understand your framework's intentions. Mithril touts best-practices, but they're easier to miss or ignore. Mithril treats you like a grown-up and let's you learn on your own. Ember is about sharing knowledge and distilling it into an evolving "Ember way" of doing things. Mithril is about simplicity and elegance. Ember is about thoroughness and ease.
 
 All in all I think both frameworks have a similar learning curve, with Ember taking a bit more time to master. Ember simply does more, so there's more to learn that is part of Ember. A Mithril project still needs a build script and a method for managing state. Since you choose those yourself, that doesn't fall under the "learn Mithril" category. Mithril speaks to me more at this point in my career. I believe I'm at the point where I'm able to make good informed decisions and trade-offs when it comes to managing state and general software design. Ember has some powerful features, like nested routes and everything Ember Data does. Yet, these solve problems I don't yet have. Writing code as needed, I can master every aspect of my project as I get around to it.
