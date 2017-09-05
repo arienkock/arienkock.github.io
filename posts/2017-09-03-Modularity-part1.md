@@ -3,7 +3,6 @@ title: "Modularity Deep Dive - pt. 1"
 teaser: Why bother with modules
 ---
 
-
 I don't like how much work it is to "do the right thing". Most of the time, it's harder to clean up my programs than it is to just insert more stream-of-consciousness code. My most dreaded yet most gratifying refactoring is: moving responsibility from one part of my program to another. "Most dreaded", because it changes the contract of the existing component in a breaking way, cascading changes throughout my program. "Most gratifying", because the component is now smaller, does fewer things and is easier to understand on its own. If I did it right I might even get to reuse the undressed components in new ways, giving me pause to ponder whether I've been a genius all these years without knowing it.
  
  I decided to make a study of modularity when project Jigsaw was first gaining attention, which feels like it was two years ago. Though the details of the JPMS have changed over that period: I was (and still am) by and large unhappy with its implications. The bookkeeping just seems so tedious, and it doesn't even segregate ClassLoaders. This pre-judgement was perhaps a bit unfair. However, this article isn't *about* JPMS in particular. It's about the things I learned while trying to figure out if I (or anyone) really needed such a hard-handed module system .
@@ -15,13 +14,13 @@ I don't like how much work it is to "do the right thing". Most of the time, it's
    
    > "Any sufficiently good advice is indistinguishable from common sense" - Me, just now
 
-The key take away form the paper, as the title suggests, is a rule that tells you where to draw the lines of abstraction. There's still some intuition involved, though. It is worth going through the examples in the paper to better appreciate the conclusion: difficult design decisions are the things you want to hide. How do we store our data? We're not sure yet. It might change. Abstract it! Data storage is now a module with an interface that abstracts away the details.
+The key take away from the paper, as the title suggests, is a rule that tells you where to draw the lines of abstraction. There's still some intuition involved, though. It is worth going through the examples in the paper to better appreciate the conclusion: difficult design decisions are the things you want to hide. How do we store our data? We're not sure yet. It might change. Abstract it! Data storage is now a module with an interface that abstracts away the details.
 
 This sounds a lot like [Robert Martin on Clean Architecture](https://youtu.be/Nsjsiz2A9mg?t=56m31s). There's a story he tells about abstracting away storage details into insignificance. You can keep postponing deciding what database to use and at some point it might just not matter anymore, which saves you the long discussions and futile attempts at predicting the future. What this has in common with Parnas' paper is that the word coupling is nowhere to be found. Modularity doesn't serve the purpose of keeping things loosely coupled, that's the effect and not the goal. The reason why we need to create modules, they say, is not in *order* to hide information, we hide information in order to **gain future agility**. Or as Bob puts it: 
 
 > "Later is always better when you're making decisions; you have more information later." 
 
-This might seem subtle, but the using "decision deferment" as a guiding principle produces different code structure. See Parnas' paper for concrete examples.
+This might seem subtle, but using "decision deferment" as a guiding principle produces different program structure. See Parnas' paper for concrete examples.
 
 ## What is a Module
 It might seem strange to define the word module after the previous chapter. I think doing it this way makes it easier on me, since we've already gotten the "big win" of modules out of the way. There is implicit knowledge that is assumed from someone interested in an article titled "Modularity", but humor me. Let's begin with the definition I want to use in this and future articles:

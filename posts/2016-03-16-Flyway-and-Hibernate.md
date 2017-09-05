@@ -3,7 +3,7 @@ title: Flyway and Hibernate
 teaser: Some tips on combinging the two
 ---
 
-How you use your RDBMS can vary wildly from: "I don't know or care about the specifics". All the way to: "I want to use as much SQL as possible and write my own RowMappers". A great write-up on the subject and accompanying controversy can be found in [The Vietnam of Computer Science](http://blogs.tedneward.com/post/the-vietnam-of-computer-science/). If your project tends to lean anywhere on the former side of that spectrum, you'll likely encounter problems when mis-management of your schema comes back to haunt you. You simply __can not__ ignore the specifics of your database. Enter Flyway. (I'll be up front and say that these tips aren't specific to either Flyway OR Hibernate, but I use these name since they are the tools I've used.)
+How you use your RDBMS can vary wildly from: "I don't know or care about the specifics". All the way to: "I want to use as much SQL as possible and write my own RowMappers". A great write-up on the subject and accompanying controversy can be found in [The Vietnam of Computer Science](http://blogs.tedneward.com/post/the-vietnam-of-computer-science/). If your project tends to lean anywhere on the former side of that spectrum, you'll likely encounter problems when mis-management of your schema comes back to haunt you. You simply __can not__ ignore the specifics of your database. Enter Flyway. (I'll be up front and say that these tips aren't specific to either Flyway OR Hibernate, but I use these names since they are the tools I've used.)
 
 ### Schema Changes
 

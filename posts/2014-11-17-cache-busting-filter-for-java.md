@@ -15,7 +15,7 @@ This weekend I was looking for a cache-busting solution in the form of a Gulp pl
 Many methods exist to accomplish the actual rewriting. Usually as part of the build tool du jour. These have counterparts in the backend code that resolve references inside templates and code to the newly rewritten file names. I found this two-tiered approach to be too involved, since the obvious solution isn't very complicated at all. 
 
 ### encodeURL()
-At least in Java, where (if you keep to the best-practices) your URL's all pass through [one central piece of code](https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String)). Even if you use Thymeleaf's `@{/style.css}` or JSP's with JSTL `<c:url/>` tags, they all pass through `encodeURL()`.
+At least in Java, where (if you keep to the best-practices) your URL's all pass through [one central piece of code](https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletResponse.html#encodeURL\(java.lang.String\)). Even if you use Thymeleaf's `@{/style.css}` or JSP's with JSTL `<c:url/>` tags, they all pass through `encodeURL()`.
 
 You can use this feature, which is intended for handling session ID's, to rewrite all your static resource URI's to the hashed equivalent, but that's not all. Since you're able to wrap the response object in a filter, the same filter will also be able to receive the hashed URI from browsers once they try to load your pages. That's our chance to remove the hash from the URI and forward the request to the default handling mechanism of our application container. That will fetch the resource who's real file name hasn't changed at all. So there is no need for build tools to mangle our file names.
 
