@@ -52,7 +52,7 @@
 <h3 id="-gulp-rev-etc-"><code>gulp-rev</code> etc.</h3>
 <p>Many methods exist to accomplish the actual rewriting. Usually as part of the build tool du jour. These have counterparts in the backend code that resolve references inside templates and code to the newly rewritten file names. I found this two-tiered approach to be too involved, since the obvious solution isn&#39;t very complicated at all. </p>
 <h3 id="encodeurl-">encodeURL()</h3>
-<p>At least in Java, where (if you keep to the best-practices) your URL&#39;s all pass through <a href="https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletResponse.html#encodeURL(java.lang.String">one central piece of code</a>). Even if you use Thymeleaf&#39;s <code>@{/style.css}</code> or JSP&#39;s with JSTL <code>&lt;c:url/&gt;</code> tags, they all pass through <code>encodeURL()</code>.</p>
+<p>At least in Java, where (if you keep to the best-practices) your URL&#39;s all pass through <a href="https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletResponse.html#encodeURL\(java.lang.String\">one central piece of code</a>). Even if you use Thymeleaf&#39;s <code>@{/style.css}</code> or JSP&#39;s with JSTL <code>&lt;c:url/&gt;</code> tags, they all pass through <code>encodeURL()</code>.</p>
 <p>You can use this feature, which is intended for handling session ID&#39;s, to rewrite all your static resource URI&#39;s to the hashed equivalent, but that&#39;s not all. Since you&#39;re able to wrap the response object in a filter, the same filter will also be able to receive the hashed URI from browsers once they try to load your pages. That&#39;s our chance to remove the hash from the URI and forward the request to the default handling mechanism of our application container. That will fetch the resource who&#39;s real file name hasn&#39;t changed at all. So there is no need for build tools to mangle our file names.</p>
 <h3 id="the-code">The code</h3>
 <p>Below is the code, which I documented more than I do most other stuff I write. I use a <code>CheckedInputStream</code> to calculate the hash in a streaming fashion.</p>
@@ -61,6 +61,7 @@
 <p>Thanks to @eranievs for pointing out a bug in the implementation. The filter didn&#39;t work with non-root context paths. The Gist has been updated.</p>
 <p></p><blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/ArenCawk">@ArenCawk</a> Using your Cache Busting Filter, but running into some issues. <a href="http://t.co/Y6exo4VEsc">http://t.co/Y6exo4VEsc</a></p>&mdash; Svein Are (@eranievs) <a href="https://twitter.com/eranievs/status/595511122066804736">May 5, 2015</a></blockquote><p></p>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 </div>
 
 		</div>

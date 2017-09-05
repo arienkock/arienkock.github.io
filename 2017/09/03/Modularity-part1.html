@@ -49,12 +49,12 @@
 <blockquote>
 <p>&quot;Any sufficiently good advice is indistinguishable from common sense&quot; - Me, just now</p>
 </blockquote>
-<p>The key take away form the paper, as the title suggests, is a rule that tells you where to draw the lines of abstraction. There&#39;s still some intuition involved, though. It is worth going through the examples in the paper to better appreciate the conclusion: difficult design decisions are the things you want to hide. How do we store our data? We&#39;re not sure yet. It might change. Abstract it! Data storage is now a module with an interface that abstracts away the details.</p>
+<p>The key take away from the paper, as the title suggests, is a rule that tells you where to draw the lines of abstraction. There&#39;s still some intuition involved, though. It is worth going through the examples in the paper to better appreciate the conclusion: difficult design decisions are the things you want to hide. How do we store our data? We&#39;re not sure yet. It might change. Abstract it! Data storage is now a module with an interface that abstracts away the details.</p>
 <p>This sounds a lot like <a href="https://youtu.be/Nsjsiz2A9mg?t=56m31s">Robert Martin on Clean Architecture</a>. There&#39;s a story he tells about abstracting away storage details into insignificance. You can keep postponing deciding what database to use and at some point it might just not matter anymore, which saves you the long discussions and futile attempts at predicting the future. What this has in common with Parnas&#39; paper is that the word coupling is nowhere to be found. Modularity doesn&#39;t serve the purpose of keeping things loosely coupled, that&#39;s the effect and not the goal. The reason why we need to create modules, they say, is not in <em>order</em> to hide information, we hide information in order to <strong>gain future agility</strong>. Or as Bob puts it: </p>
 <blockquote>
 <p>&quot;Later is always better when you&#39;re making decisions; you have more information later.&quot; </p>
 </blockquote>
-<p>This might seem subtle, but the using &quot;decision deferment&quot; as a guiding principle produces different code structure. See Parnas&#39; paper for concrete examples.</p>
+<p>This might seem subtle, but using &quot;decision deferment&quot; as a guiding principle produces different program structure. See Parnas&#39; paper for concrete examples.</p>
 <h2 id="what-is-a-module">What is a Module</h2>
 <p>It might seem strange to define the word module after the previous chapter. I think doing it this way makes it easier on me, since we&#39;ve already gotten the &quot;big win&quot; of modules out of the way. There is implicit knowledge that is assumed from someone interested in an article titled &quot;Modularity&quot;, but humor me. Let&#39;s begin with the definition I want to use in this and future articles:</p>
 <blockquote>
