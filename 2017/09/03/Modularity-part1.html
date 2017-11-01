@@ -41,17 +41,16 @@
 <div class="article">
 <h1 class="articleTitle">Modularity Deep Dive - pt. 1</h1>
 <div class="posted-on-date">Posted on 2017-9-3</div>
-<p>Part 1 | <a href="/2017/10/22/Modularity-part2.html">Part 2</a></p>
+<!-- Part 1 | [Part 2](/2017/10/22/Modularity-part2.html) -->
 <p>Why is it so hard to &quot;do the right thing&quot;? It&#39;s always easier to insert more code than it is to refactor. First you have to decide what belongs where as you take things apart. Then you have to reimplement all the tests and clean up all the errors that occur as responsibilities move and change. It&#39;s both difficult as well as a lot of work. But it&#39;s worth it. Sometimes, when I do a good job of it, I get to reuse the component in a new and unforseen way. Those moments make me feel like some sort of genius programmer. I like those moments. That is modularity. </p>
 <p>I wrote this post, because, approximately two years ago something happened. Project Jigsaw was getting a lot of attention and since then I spent a lot of time reading and thinking about modularity. This article isn&#39;t about JPMS, but rather modularity as a design concept. In this post I&#39;ll talk about:</p>
 <ol>
 <li>Why do we want to make things modular?</li>
-<li><p>What makes a good module?</p>
+<li>What makes a good module?</li>
+</ol>
 <h2 id="research">Research</h2>
 <p>I was born in &#39;82 and as a student I didn&#39;t do a lot of extracurricular reading. For a long time I&#39;ve been unaware of a lot of the academic history of computer science. Thankfully, I watch a lot of YouTube. I came across a video of <strong>GOTO conf 2016</strong> where at <a href="https://youtu.be/r18BaOHRpE8?t=34m43s">minute 34</a> the host seems to call me out personally for never having read <a href="https://en.wikipedia.org/wiki/David_Parnas">David L. Parnas&#39;</a> work on modularity. So, I did. </p>
 <p>The take-away from the paper &quot;<a href="https://www.cs.umd.edu/class/spring2003/cmsc838p/Design/criteria.pdf">On the Criteria To Be Used in Decomposing Systems into Modules</a>&quot;, as the title suggests, is a criterion. A <em>rule</em> that tells you where to draw the lines when you draw those boxes on paper. You know, those boxes that only vaguely map to the actual code you end up writing? The rule, Parnas concludes, is to <strong>modularize around difficult design decisions</strong>. For example: how do we store our data? Are we sure? How likely is it to change? Let&#39;s <em>abstract it</em>. Our data storage and schema is now abstracted into a module that hides the details. If done well, it makes it easier to change later. At the same time, it makes concrete what our requirements are. This rule sounds awfully familiar. I must have heard something similar somewhere else on YouTube.</p>
-</li>
-</ol>
 <p>It sounds a lot like <a href="https://youtu.be/Nsjsiz2A9mg?t=56m31s">Robert Martin on Clean Architecture</a>. Both Parnas&#39; paper and Clean Architecture highlight something important about software design. The reason why we need to create modules is to postpone decisions, which gives us <strong>future agility</strong>. Or as Bob puts it: </p>
 <blockquote>
 <p>&quot;Later is always better when you&#39;re making decisions; you have more information later.&quot; </p>
