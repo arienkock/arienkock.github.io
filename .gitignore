@@ -3,5 +3,6 @@ dist
 .tmp
 .sass-cache
 .publish
+.idea/
 bower_components
 test/bower_components
