@@ -31,7 +31,7 @@ At the level of functions, normally each one has its own signature. That's the o
 
 ## Building bigger things
 
-Composing functions is a good way of thinking about software composition. The more standard the signature is, the easier composition becomes. All your utilitiy functions become universal, because they can be applied to all other functions. If everything has the same shape, everything can interconnect effortlessly. Like Legos.
+Composing functions is a good way of thinking about software composition. The more standard the signature is, the easier composition becomes. All your utility functions become universal, because they can be applied to all other functions. If everything has the same shape, everything can interconnect effortlessly. Like Legos.
 
 Even though details about modules will differ, the parts they have in common help us integrate them. For example, at the service level, messaging can be shared. Services can declaratively specify what topics they are interested in and which ones they intend to publish events on. If all services did this and message formats were standard, then a higher level process could easily wire them up together so they can communicate without knowing anything about how messages are actually serialized and routed. They could be in the same process for all they know, it wouldn't matter.
 
