@@ -300,6 +300,12 @@ ol.restyled, ul.restyled, .article > ul, .article > ol {
 		left: -0.25rem;
 	}
 }
+.article > ol {
+	list-style-type: decimal;
+	> li:before {
+		display:none;
+	}
+}
 
 .work-experience-item {
 	margin: $length-base 0;

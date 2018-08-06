@@ -1,13 +1,13 @@
 // generated on 2016-01-05 using generator-gulp-webapp 1.0.4
-import gulp from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import browserSync from 'browser-sync';
-import del from 'del';
-import through from 'through2';
-import swig from 'swig';
-import path from 'path';
-import ghPages from 'gulp-gh-pages';
-import site from './site.json';
+const gulp = require('gulp');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const browserSync = require('browser-sync');
+const del = require('del');
+const through = require('through2');
+const swig = require('swig');
+const path = require('path');
+const ghPages = require('gulp-gh-pages');
+const site = require('./site.json');
 
 const $ = gulpLoadPlugins({ rename: {'front-matter': 'frontMatter'}});
 const reload = browserSync.reload;
