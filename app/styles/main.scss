@@ -36,12 +36,12 @@ $font-family-mono: 'Inconsolata', Courier;
 $font-family-body: 'Lato', sans-serif;
 $line-height: 1.15;
 $font-size-scale-down: 0.5rem;
-$font-size-scale-1: 2rem;
-$font-size-scale-2: 3rem;
+$font-size-scale-1: 1.5rem;
+$font-size-scale-2: 2rem;
 $length-base: $line-height * 1rem;
 
-$color-body-bg: #002B36;
-$color-body-fg: #839496;
+$color-body-bg: #252b2c;
+$color-body-fg: #afbabb;
 $color-link: #D33682;
 $color-code-bg: darken(#002B36, 5%);
 $color-code-fg: #B58900;
@@ -218,7 +218,7 @@ a:hover, a:active, {
 			color: $color-code-inline-fg;
 		}
 		> p, h1, pre, ol, ul, blockquote {
-			margin-bottom: $length-base * 2;
+			margin-bottom: $length-base * 1.5;
 		}
 		> pre {
 			white-space: pre-wrap;
@@ -322,4 +322,8 @@ ol.restyled, ul.restyled, .article > ul, .article > ol {
 	border-radius: 1rem;
 	box-shadow: 0 0 1rem $color-code-bg;
 	margin: $length-base;
+}
+
+#disqus_thread {
+	width: 100%;
 }

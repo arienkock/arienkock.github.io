@@ -80,6 +80,7 @@ function applyTemplate(templateFile) {
         var data = {
             site: site,
             page: file.page,
+            path: file.relative,
             content: file.contents.toString()
         };            
         file.contents = new Buffer(tpl(data), 'utf8');
@@ -99,6 +100,7 @@ function filename2date() {
             var basename = match[4];
             file.page.date = new Date(year, month - 1, day);
             file.page.url  = '/' + year + '/' + month + '/' + day + '/' + basename;
+            file.page.basename = basename;
         }
         
         this.push(file);
@@ -111,7 +113,6 @@ function collectPosts() {
     return through.obj(function (file, enc, cb) {
         posts.push(file.page);
         posts[posts.length - 1].content = file.contents.toString();
-        
         if (file.page.tags) {
             file.page.tags.forEach(function (tag) {
                 if (tags.indexOf(tag) == -1) {
@@ -119,7 +120,6 @@ function collectPosts() {
                 }
             });
         }
-        
         this.push(file);
         cb();
     },

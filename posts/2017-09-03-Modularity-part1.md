@@ -5,9 +5,9 @@ teaser: Why bother with modules
 
 Part 1 | [Part 2](/2017/10/22/Modularity-part2.html)
 
-Why is it so hard to "do the right thing"? It's always easier to insert more code than it is to refactor. First you have to decide what belongs where as you take things apart. Then you have to reimplement all the tests and clean up all the errors that occur as responsibilities move and change. It's both difficult as well as a lot of work. Sometimes, when I do a good job of it, I get to reuse the component in a new and unforseen way. Those moments make me feel like some sort of genius programmer. I like those moments. That, among other things, is what modularity can do for you.
+Why is it so hard to "do the right thing"? It's always easier to insert more code than it is to refactor. First, you have to decide what goes where, as you take things apart. Then you have to re-implement all the tests and clean up all the errors that occur as responsibilities move and change. It's both difficult and a lot of work. Sometimes, when I do a good job of it, I get to reuse the component in a new, and unforeseen way. Those moments make me feel like some sort of genius programmer. I like those moments. That, among other things, is what modularity can do for you.
 
-I wrote this post, because, approximately two years ago something happened. Project Jigsaw was getting a lot of attention and since then I've spent a lot of time reading and thinking about modularity. This article isn't about JPMS, but rather modularity as a design concept. In this post I'll talk about:
+I wrote this post, because, approximately two years ago project Jigsaw was getting a lot of attention. Since then, I've spent a lot of time reading and thinking about modularity. This article is not about JPMS, but modularity as a design concept. In this post I'll talk about:
 
 1. Why do we want to make things modular?
 1. What makes a good module?
@@ -15,7 +15,7 @@ I wrote this post, because, approximately two years ago something happened. Proj
 
 ## Research
 
-I was born in '82 and as a student I didn't do a lot of extracurricular reading. For a long time I've been unaware of a lot of the academic history of computer science. Thankfully, I watch a lot of YouTube. I came across a video of **GOTO conf 2016** where at [minute 34](https://youtu.be/r18BaOHRpE8?t=34m43s) the host seems to call me out personally for never having read [David L. Parnas'](https://en.wikipedia.org/wiki/David_Parnas) work on modularity. So, I did. 
+I was born in '82 and, as a student, I didn't do a lot of extracurricular reading. For a long time I've been unaware of a lot of the academic history of computer science. Thankfully, I watch a lot of YouTube. I came across a video of **GOTO conf 2016** where at [minute 34](https://youtu.be/r18BaOHRpE8?t=34m43s) the host seems to call me out personally for never having read [David L. Parnas'](https://en.wikipedia.org/wiki/David_Parnas) work on modularity. So, I did.
  
 The take-away from the paper "[On the Criteria To Be Used in Decomposing Systems into Modules](https://www.cs.umd.edu/class/spring2003/cmsc838p/Design/criteria.pdf)", as the title suggests, is a criterion. A *rule* that tells you where to draw the lines when you draw those boxes on paper. You know, those boxes that only vaguely map to the actual code you end up writing? The rule, Parnas concludes, is to **modularize around difficult design decisions**. For example: how do we store our data? Are we sure? How likely is it to change? Let's *abstract it*. Our data storage and schema is now abstracted into a module that hides the details. If done well, it makes it easier to change later. At the same time, it makes concrete what our requirements are. This rule sounds awfully familiar. I must have heard it somewhere else on YouTube.
 
@@ -27,6 +27,8 @@ Using "decision deferment" as a guiding principle produces a different delineati
 
 ## Conclusion
 
-The answer to the first question "Why write modular code?" is: *In order to remain agile*. Had you asked me two years ago, I might have said something about *reusability*. But now I knot that reusability is a feature/property of how they are implemented, but not the cause. Being agile is easy at the start, because you have no other code. Staying agile takes deliberate and careful design. Now the answer to the second question "What makes a good module?" seems pretty obvious: *One that makes future change easy*. I believe modules can do these things. But only when we, the programmers, make thoughtful choices.
+The answer to the first question "Why write modular code?" is: *In order to remain agile*. Had you asked me two years ago, I might have said something about *reusability*. But now I know that reusability is an emergent feature of how modules are implemented, and not the primary reason for them. Being agile is easy at the start of a project, because you have no other code. Staying agile takes deliberate and careful design. 
+
+Now the answer to the second question "What makes a good module?" seems pretty obvious: *One that makes future change easy*. I believe modules can do these things. But only when we, the programmers, make thoughtful choices.
 
 Part 1 | [Part 2](/2017/10/22/Modularity-part2.html)
