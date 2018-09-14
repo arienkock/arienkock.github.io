@@ -1,0 +1,141 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Arien Kock is Positor, a freelance Java web developer and consultant. I build connected applications and continuous delivery pipelines. This is home to my blog and professional profile.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SOLID Principles to First Principles - Positor</title>
+	<link rel="icon" href="/images/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/images/favicon.png">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="/styles/main.css">
+
+	<link rel="stylesheet" href="/styles/highlight/solarized-dark-custom.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="container">
+		<div class="header">
+			<div class="logo">
+				<a href="/">
+				<h1>Positor</h1>
+				<p>Building solutions with code</p>
+				</a>
+			</div>
+			<!--div class="menu">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item navItem"><a href="/">Blog</a></div>
+				<div class="item navItem"><a href="/profile.html">Profile</a></div>
+			</div-->
+		</div>
+		<div class="content">
+			
+<div class="article">
+<h1 class="articleTitle">SOLID Principles to First Principles</h1>
+<div class="posted-on-date">Posted on 2018-9-14</div>
+<p>Yet another article on SOLID. Why? Most articles focus on making these abstract principles more concrete. I&#39;m going in the other direction. Hopefully hitting on things you could call <a href="https://en.wikipedia.org/wiki/First_principle">&quot;first principles&quot;</a>. This is <strong>not</strong> an introduction.</p>
+<p>In this article I will use subjective, loosely-defined, abstract terminology. That&#39;s the point. I aim to be <em>very brief</em>. I hope you revisit this article as your definitions evolve and gather new insights. I&#39;ll try to update it as mine do too.</p>
+<h1 id="first-abstraction">First Abstraction</h1>
+<p>The first iteration takes the &quot;known&quot; definitions of the SOLID principles and produces short, analogous, higher-level statements.</p>
+<h2 id="srp-single-responsibility-principle">SRP – Single Responsibility Principle</h2>
+<blockquote>
+<p>Your thing should do only <strong>one</strong> thing.</p>
+</blockquote>
+<p>I can&#39;t think of many things at the same time. It&#39;s hard to use or change something that I don&#39;t understand.</p>
+<h2 id="ocp-open-closed-principle">OCP – Open/Closed Principle</h2>
+<blockquote>
+<p>It should be easy to do more, and hard to do less.</p>
+</blockquote>
+<p>Suddenly doing less, breaks the contract I have with others. Inevitably people want me to do more, it would be nice if that were easy.</p>
+<h2 id="lsp-liskov-substitution-principle">LSP – Liskov Substitution Principle</h2>
+<blockquote>
+<p>A special type of thing, is still a thing.</p>
+</blockquote>
+<p>If you say you can do one thing, but also do other things. Those other things shouldn&#39;t interfere with you fulfilling your first duty.</p>
+<h2 id="isp-interface-segregation-principle">ISP – Interface Segregation Principle</h2>
+<blockquote>
+<p>The less I know about you, the better.</p>
+</blockquote>
+<p>There might be many aspects to you. But give me a finger, and I <em>might</em> take your whole hand.</p>
+<h2 id="dip-dependency-inversion-principle">DIP – Dependency Inversion Principle</h2>
+<blockquote>
+<p>I don&#39;t depend on you, I depend on something <strong>like</strong> you.</p>
+</blockquote>
+<p>I don&#39;t want the police officer&#39;s home phone number, I want to call 911 and get help!</p>
+<h1 id="second-abstraction">Second Abstraction</h1>
+<p>The second iteration aggregates and abstracts the ideas some more.</p>
+<h2 id="srp-isp-dip">SRP + ISP + DIP</h2>
+<blockquote>
+<p>I can do more with less</p>
+</blockquote>
+<h2 id="lsp-isp-dip">LSP + ISP + DIP</h2>
+<blockquote>
+<p>A deal is a deal! Read the contract!</p>
+</blockquote>
+<h2 id="srp-ocp-lsp-isp-dip">SRP + OCP + LSP + ISP + DIP</h2>
+<blockquote>
+<p>I want to be free to change.</p>
+</blockquote>
+<p>and/or</p>
+<blockquote>
+<p>I&#39;m selfish. You&#39;re a black box to me.</p>
+</blockquote>
+<h1 id="third-abstraction">Third Abstraction</h1>
+<p>Even more abstract...</p>
+<blockquote>
+<p>Specify, but keep it short.</p>
+</blockquote>
+<p>and</p>
+<blockquote>
+<p>Build on top of things that don&#39;t change.</p>
+</blockquote>
+<h1 id="finally-">Finally...</h1>
+<p>After four iterations, my efforts produce this &quot;first principle&quot;.</p>
+<blockquote>
+<p>Connect the pieces using only a few, well-defined, and lasting support structures.</p>
+</blockquote>
+<h1 id="final-thoughts">Final thoughts</h1>
+<p>Perhaps it was inevitable that my &quot;first principle&quot; ended up the way it did. <a href="/2017/09/03/Modularity-part1.html#research">My research on modularity</a> brought me to the same conclusion, and I have been looking at the world through those glasses ever since. This idea is ubiquitous. You can see it in <a href="https://www.youtube.com/watch?v=rI8tNMsozo0&amp;feature=youtu.be&amp;t=6m4s">Rich Hickey&#39;s &quot;Simple Made Easy&quot; talk</a>. Where he puts it as:</p>
+<blockquote>
+<p>&quot;Architectural agility dominates!&quot;</p>
+</blockquote>
+<p>Software design principles are often contradictory. There is tension between wanting &quot;fewer components&quot; <em>and</em> &quot;smaller components&quot;. There are no truths, only trade-offs. This distilled principle is no different. Different interpretations of it will lead to contradictions. What it has going for itself is that it is, itself, a <strong>single</strong> principle.</p>
+
+</div>
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+this.page.url = 'http://positor.nl/2018/09/14/solid-principles-first-principles.html';
+this.page.identifier = 'solid-principles-first-principles.html';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://positor-blog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+		</div>
+	</div>
+
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-19252179-3');ga('send','pageview');
+    </script>
+	<script src="/scripts/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

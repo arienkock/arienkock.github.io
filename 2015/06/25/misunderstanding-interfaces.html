@@ -56,6 +56,19 @@
 <p>When you separate concerns you can do so in varying degrees. Part of the way: Introduce a naming convention or namespaces. All the way: make any code that is not part of the public interface invisible or otherwise unreachable from the other modules. When going the second route, you&#39;re making it so hard to do the wrong thing that anyone trying to screw up would have to make an effort. I&#39;m a strong believer in making the &quot;right thing&quot; easier to do than the wrong thing (a.k.a. <a href="http://blog.codinghorror.com/falling-into-the-pit-of-success/">falling into the pit of success</a>). Applying this whenever you design an API or in the case of code: project structure. Interfaces are one of several tools you can use to achieve this. However, if you leave it at simply <em>having</em> interfaces, it can be hard to understand why they&#39;re there. If it&#39;s clear that they represent a boundary, because they are opaque, then respecting that boundary becomes easy because it&#39;s necessary. As a result, you&#39;ll write cleaner code.</p>
 
 </div>
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+this.page.url = 'http://positor.nl/2015/06/25/misunderstanding-interfaces.html';
+this.page.identifier = 'misunderstanding-interfaces.html';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://positor-blog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
 
 		</div>
 	</div>

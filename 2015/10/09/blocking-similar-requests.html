@@ -62,6 +62,19 @@
 </code></pre><p>It&#39;s interesting because it has a synchronization block which is used to perform an atomic operation. However, blocking is slow. So what I did was do the &quot;should I do X?&quot; check before getting a lock, then after acquiring the lock I do a &quot;should I <em>still</em> do X?&quot; check to make sure nothing&#39;s changed between the first and second checks. Doing double the work may seem wasteful, but locking tends to be slow and the idea is that most code will NOT do double work, but back off after the first check fails.</p>
 
 </div>
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+this.page.url = 'http://positor.nl/2015/10/09/blocking-similar-requests.html';
+this.page.identifier = 'blocking-similar-requests.html';
+};
+(function() {
+var d = document, s = d.createElement('script');
+s.src = 'https://positor-blog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
 
 		</div>
 	</div>
