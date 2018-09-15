@@ -1,6 +1,6 @@
 ---
 title: "SOLID Principles to First Principles"
-teaser: a teaching experiment at a WebDev bootcamp
+teaser: distilling SOLID into a single core principle
 ---
 
 Yet another article on SOLID. Why? Most articles focus on making these abstract principles more concrete. I'm going in the other direction. Hopefully hitting on things you could call ["first principles"](https://en.wikipedia.org/wiki/First_principle). This is **not** an introduction.
@@ -75,7 +75,7 @@ and
 
 After four iterations, my efforts produce this "first principle".
 
-> Connect the pieces using only a few, well-defined, and lasting support structures.
+> Connect the pieces using a minimal set of well-defined, and lasting support structures.
 
 # Final thoughts
 
@@ -84,3 +84,7 @@ Perhaps it was inevitable that my "first principle" ended up the way it did. [My
 > "Architectural agility dominates!"
 
 Software design principles are often contradictory. There is tension between wanting "fewer components" *and* "smaller components". There are no truths, only trade-offs. This distilled principle is no different. Different interpretations of it will lead to contradictions. What it has going for itself is that it is, itself, a **single** principle.
+
+<span style="font-size: 75%">
+*_Updated wording of first principle based on feedback on HN._
+</span>
