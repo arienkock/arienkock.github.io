@@ -1,0 +1,50 @@
+---
+layout: default
+title: Archive
+subtitle: Older posts from 2013–2018
+permalink: /archive/
+---
+<div class="container">
+  <header class="post-header">
+    <div class="post-header__meta">
+      <span class="badge badge--archive">Archive</span>
+    </div>
+    <h1>Archive</h1>
+    <p class="post-header__subtitle">Older posts, preserved as-is</p>
+  </header>
+
+  <div class="archive-notice">
+    These posts were written between 2013 and 2018 and reflect thinking from that era.
+    They live here for reference — new writing is on the <a href="{{ '/' | relative_url }}">home page</a>.
+  </div>
+
+  {% assign archive_posts = site.archive | sort: 'date' | reverse %}
+  {% assign current_year = '' %}
+
+  <div class="post-list">
+    {% for post in archive_posts %}
+      {% assign year = post.date | date: "%Y" %}
+      {% if year != current_year %}
+        {% unless forloop.first %}</div>{% endunless %}
+        <h2 class="archive-year">{{ year }}</h2>
+        <div class="post-list">
+        {% assign current_year = year %}
+      {% endif %}
+
+      <article class="post-item">
+        <a class="post-item__link" href="{{ post.url | relative_url }}">
+          <time class="post-item__date" datetime="{{ post.date | date_to_xmlschema }}">
+            {{ post.date | date: "%Y-%m-%d" }}
+          </time>
+          <div>
+            <h3 class="post-item__title">{{ post.title }}</h3>
+            {% if post.subtitle %}
+              <p class="post-item__teaser">{{ post.subtitle }}</p>
+            {% endif %}
+          </div>
+        </a>
+      </article>
+    {% endfor %}
+    {% unless archive_posts.size == 0 %}</div>{% endunless %}
+  </div>
+</div>

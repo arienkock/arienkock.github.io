@@ -1,0 +1,68 @@
+# Site settings
+title: My Blog
+tagline: Notes, essays, and experiments
+description: >-
+  A blog about software, design, and whatever else is on my mind.
+author:
+  name: Your Name
+  email: you@example.com
+
+# Build for a user GitHub Pages site (arienkock.github.io) served from root
+url: "https://arienkock.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:slug/
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+  toc_levels: 2..3
+
+# Collections — archive posts live here so they stay out of the way.
+collections:
+  archive:
+    output: true
+    permalink: /archive/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: archive
+    values:
+      layout: archive-post
+  - scope:
+      path: ""
+    values:
+      layout: page
+
+# Pagination
+paginate: 10
+paginate_path: "/page:num/"
+
+# Plugins (all GitHub Pages safe)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - .gitignore
+  - scripts/old-build.sh
+  # legacy folders — kept in repo history but not built
+  - legacy/

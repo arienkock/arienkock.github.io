@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <div class="container-wide site-footer__inner">
+    <span>© {{ 'now' | date: "%Y" }} {{ site.author.name | default: site.title }}</span>
+    <span>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      ·
+      <a href="{{ '/archive/' | relative_url }}">Archive</a>
+    </span>
+  </div>
+</footer>
