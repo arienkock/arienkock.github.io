@@ -5,19 +5,16 @@ subtitle: A short introduction
 permalink: /about/
 ---
 
-Hello — this is a placeholder about page.
+I've always been interested in how things fit together—and why they often don't.
 
-Replace this content with your own introduction, background, and anything else
-you want readers to know. Markdown works here: **bold**, _italic_, `code`,
-[links](https://example.com), lists, and images.
+I see software development primarily as a process of knowledge creation. In my experience, that process tends to get messy. Whether it's a sprawling technical architecture or the way a team interacts, complexity usually finds a way to hide the signals we actually need.
 
-## What you'll find here
+I use this space to work through that mess. My approach is grounded in systems thinking, LEAN principles, and DevOps research. I'm interested in feedback loops that work, socio-technical systems that make sense, and finding the shortest path to clarity.
 
-- Short notes and essays
-- Longer technical writing
-- Occasional experiments
+No grand theories—just some notes on untangling the work.
 
 ## Elsewhere
 
 - [GitHub](https://github.com/arienkock)
-- email@example.com
+- [X / Twitter](https://x.com/ArenCawk)
+- [LinkedIn](https://www.linkedin.com/in/arienkock)

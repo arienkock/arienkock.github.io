@@ -3,6 +3,7 @@ title: Hello, new blog
 subtitle: A fresh start — and what to expect here
 date: 2026-04-17
 tags: [meta]
+published: false
 ---
 
 This is a placeholder post demonstrating the layout. Delete it or replace the

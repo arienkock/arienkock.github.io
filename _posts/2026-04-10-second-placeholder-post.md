@@ -2,6 +2,7 @@
 title: A second placeholder post
 subtitle: Just here to show what a list of posts looks like
 date: 2026-04-10
+published: false
 ---
 
 This post exists purely so the home page shows more than one item in the list.
