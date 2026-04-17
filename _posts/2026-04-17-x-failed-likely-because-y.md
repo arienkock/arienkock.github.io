@@ -7,7 +7,21 @@ tags: [ai, reasoning]
 
 I noticed something specific while using Gemini. Occasionally, it would output a phrase like *"X failed, likely because Y."* It caught my attention because that specific language pattern seemed to change the model's trajectory. And I suspect it was trained to do so. By articulating the failure and a hypothesis, the model **reflected on its own state** and made a better decision.
 
-![Flow state versus analytical pattern: passive drifting on the left, deliberate structured action on the right](/images/flow-state-vs-analytical-pattern.png)
+<picture>
+  <source
+    type="image/webp"
+    srcset="/images/flow-state-vs-analytical-pattern-640.webp 640w, /images/flow-state-vs-analytical-pattern-960.webp 960w, /images/flow-state-vs-analytical-pattern-1280.webp 1280w, /images/flow-state-vs-analytical-pattern-1920.webp 1920w"
+    sizes="(max-width: 768px) calc(100vw - 3rem), 672px">
+  <img
+    src="/images/flow-state-vs-analytical-pattern-960.png"
+    srcset="/images/flow-state-vs-analytical-pattern-640.png 640w, /images/flow-state-vs-analytical-pattern-960.png 960w, /images/flow-state-vs-analytical-pattern-1280.png 1280w, /images/flow-state-vs-analytical-pattern-1920.png 1920w"
+    sizes="(max-width: 768px) calc(100vw - 3rem), 672px"
+    width="2752"
+    height="1536"
+    alt="Flow state versus analytical pattern: passive drifting on the left, deliberate structured action on the right"
+    loading="lazy"
+    decoding="async">
+</picture>
 
 ## The Down Side of Flow State
 
