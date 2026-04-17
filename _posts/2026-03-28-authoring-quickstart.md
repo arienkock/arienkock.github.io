@@ -3,6 +3,7 @@ title: Authoring quickstart
 subtitle: How to add a new post
 date: 2026-03-28
 tags: [meta, guide]
+published: false
 ---
 
 To add a new post:
