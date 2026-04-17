@@ -11,7 +11,7 @@ I noticed something specific while using Gemini. Occasionally, it would output a
 
 ## The Down Side of Flow State
 
-A vast majority of the time, as most poeple, I tend to think on auto-pilot. It's the path of least resistance. But *"going with the flow"* is often just another way of saying I'm not being rigorous. When I work that way, I'm just moving toward an output without checking the logic behind it.
+A vast majority of the time, as most people, I tend to think on auto-pilot. It's the path of least resistance. But *"going with the flow"* is often just another way of saying I'm not being rigorous. When I work that way, I'm just moving toward an output without checking the logic behind it.
 
 Without a structured pattern, it's easy to skip the actual reasoning and head straight for a conclusion that might be wrong.
 
