@@ -6,6 +6,8 @@ date: 2026-04-10
 
 I’m worried about what Mythos represents, but the truth is, this wake-up call should have come much sooner. It literally kept me up last night. If you don’t care about AI yet, now is a good time to start. You need to be informed. I’ve spent my career warning people about building on shaky foundations. With the Mythos + Glasswing event, we are seeing the structural failure of our global security model.
 
+![a new threat is on the horizon](/images/digital-precipice.png)
+
 Before Mythos, sophisticated hacking was already available at €20 a month. Now, beyond-human level hacking is around the corner. The world isn't fundamentally different than it was before these models dropped, but the acceleration is about to turn into a series of enterprise-ending events. We are standing at a precipice where the speed of the tool has finally outrun the speed of the defense. Well, if we change nothing…
 
 ### Access Control
