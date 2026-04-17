@@ -7,7 +7,7 @@ tags: [ai, reasoning]
 
 I noticed something specific while using Gemini. Occasionally, it would output a phrase like *"X failed, likely because Y."* It caught my attention because that specific language pattern seemed to change the model's trajectory. And I suspect it was trained to do so. By articulating the failure and a hypothesis, the model **reflected on its own state** and made a better decision.
 
-![A diagram of a colored neural network with interconnected nodes across three layers, representing structured patterns of thought](/images/colored_neural_network.png)
+![Flow state versus analytical pattern: passive drifting on the left, deliberate structured action on the right](/images/flow-state-vs-analytical-pattern.png)
 
 ## The Down Side of Flow State
 
