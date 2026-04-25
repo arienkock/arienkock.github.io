@@ -11,6 +11,22 @@ Right now, many people building with AI are focusing on "meta" tools. These are 
 
 There is not enough attention on products that could have been built without AI. Many such products are now possible because development is easier and costs are lower. AI should be an enabler, not just a technology you build on top of.
 
+<picture>
+  <source
+    type="image/webp"
+    srcset="/images/IMG_9117-640.webp 640w, /images/IMG_9117-960.webp 960w, /images/IMG_9117-1280.webp 1280w, /images/IMG_9117.png 1584w"
+    sizes="(max-width: 768px) calc(100vw - 3rem), 672px">
+  <img
+    src="/images/IMG_9117-960.png"
+    srcset="/images/IMG_9117-640.png 640w, /images/IMG_9117-960.png 960w, /images/IMG_9117-1280.png 1280w, /images/IMG_9117.png 1584w"
+    sizes="(max-width: 768px) calc(100vw - 3rem), 672px"
+    width="1584"
+    height="672"
+    alt="sunrise over a mountain lake"
+    loading="lazy"
+    decoding="async">
+</picture>
+
 ### The Misconception of Quality
 
 A lot of attention is going to people making amateur mistakes. Non-developers are building products with gaping security issues, like putting backend features in the frontend. Others build on platforms like Supabase, Lovable, or Replit. They can iterate quickly, but they lack the experience to build for scale or avoid vendor lock-in.
