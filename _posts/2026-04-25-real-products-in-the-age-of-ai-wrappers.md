@@ -2,14 +2,14 @@
 title: Real Products in the Age of AI Wrappers
 date: 2026-04-25
 tags: [ai, software, productivity]
-published: false
+published: true
 ---
 
 ## The Shift from Meta-Tools to Real Products
 
 Right now, many people building with AI are focusing on "meta" tools. These are often products built for other developers. Most are just wrappers around AI features. These wrappers are being quickly absorbed as AI models become more powerful.
 
-There is not enough attention on products that could have been built without AI. These projects are now possible because development is easier and costs are lower. AI should be an enabler, not just a technology you build on top of.
+There is not enough attention on products that could have been built without AI. Many such products are now possible because development is easier and costs are lower. AI should be an enabler, not just a technology you build on top of.
 
 ### The Misconception of Quality
 
