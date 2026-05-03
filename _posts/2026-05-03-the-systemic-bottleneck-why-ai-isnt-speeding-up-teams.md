@@ -9,6 +9,22 @@ published: true
 
 As teams adopt AI for coding, we are seeing that AI doesn't *necessarily* provide a team-level productivity boost, even though individuals experience one. [Research from Uplevel (2024)](https://resources.uplevelteam.com/gen-ai-for-coding) analyzed thousands of developers and found that while individuals *felt* faster, there was **no significant increase in team-level cycle time or throughput**, and it even noted a potential increase in "burnout-related" metrics because the systemic bottlenecks remained. This discussion has been frequent recently, and it is becoming clear: writing code was **never actually the bottleneck**.
 
+<picture>
+  <source
+    type="image/webp"
+    srcset="/images/IMG_9191-640.webp 640w, /images/IMG_9191-960.webp 960w, /images/IMG_9191-1280.webp 1280w, /images/IMG_9191.png 1408w"
+    sizes="(max-width: 768px) calc(100vw - 3rem), 672px">
+  <img
+    src="/images/IMG_9191-960.png"
+    srcset="/images/IMG_9191-640.png 640w, /images/IMG_9191-960.png 960w, /images/IMG_9191-1280.png 1280w, /images/IMG_9191.png 1408w"
+    sizes="(max-width: 768px) calc(100vw - 3rem), 672px"
+    width="1408"
+    height="768"
+    alt="siloed teams connected by tangled, frail bridges representing broken working agreements"
+    loading="lazy"
+    decoding="async">
+</picture>
+
 ## The Forgotten Warning
 
 While AI coding is undeniably making things faster, it isn't doing so in a **systemic** way. This brings us back to Fred Brooks and his timely article, ["No Silver Bullet."](https://worrydream.com/refs/Brooks_1986_-_No_Silver_Bullet.pdf) Brooks did a fantastic job of distilling a message that many people feel intuitively. Referring to that article and going back to read it is a great way to organize the thoughts you have as a person working in software development. It provides a solid foundation and a thought structure to organize the concepts in your brain.
