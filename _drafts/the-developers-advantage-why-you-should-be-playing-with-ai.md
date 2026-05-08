@@ -2,7 +2,7 @@
 title: "The Developer's Advantage: Why You Should Be Playing With AI"
 date: 2026-05-08
 tags: [ai, software, developers, productivity]
-published: false
+published: true
 ---
 
 ## The Developer's Advantage: Why You Should Be Playing With AI
