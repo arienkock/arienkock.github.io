@@ -1,5 +1,5 @@
 ---
-title: "The Developer's Advantage: Why You Should Be Playing With AI"
+title: "The Developer's Advantage: The Window for Early Movers"
 date: 2026-05-08
 tags: [ai, software, developers, productivity]
 published: true
