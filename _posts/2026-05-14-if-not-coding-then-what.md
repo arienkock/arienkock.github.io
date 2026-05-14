@@ -110,9 +110,9 @@ Here's a prompt you can paste directly into any AI chat. Tweak the options below
   <div class="pb-group">
     <span>Session goal</span>
     <div class="pb-opts" data-g="goal">
-      <button class="pb-opt on" data-v="Help me identify what the main bottleneck is.">Find the bottleneck</button>
-      <button class="pb-opt" data-v="I have a hunch about the bottleneck — help me validate or challenge it.">Validate my hunch</button>
-      <button class="pb-opt" data-v="Once we identify the bottleneck, help me build a concrete action plan.">Get an action plan</button>
+      <button class="pb-opt on" data-v="Help me identify the main bottleneck in my software delivery process.">Find the bottleneck</button>
+      <button class="pb-opt" data-v="I have a hunch about what's bottlenecking my software delivery — help me validate or challenge it.">Validate my hunch</button>
+      <button class="pb-opt" data-v="We have tried to fix our delivery problems before but the improvements didn't stick. Help me understand the bottleneck, and factor in why past interventions may have failed when suggesting solutions.">We've tried fixing this before</button>
     </div>
   </div>
   <div class="pb-out">
@@ -125,9 +125,9 @@ Here's a prompt you can paste directly into any AI chat. Tweak the options below
 
 <script>
 (function(){
-  var TMPL="Help me understand the bottleneck in my software delivery process. Use everything you know about DORA research, Continuous Delivery, Accelerate, Lean Software Development, Theory of Constraints, The Goal, The Mythical Man-Month, and statistical process control.\n\nInterview me using the Socratic method. Ask focused questions, one at a time. Keep your responses under 100 words. Aim to pinpoint the bottleneck in fewer than 20 questions.\n\nContext: {role} {symptom} {goal}";
-  var s={role:"I'm a software developer on the team.",symptom:"Our biggest pain is that things take too long to ship.",goal:"Help me identify what the main bottleneck is."};
-  function render(){document.getElementById("pb-text").textContent=TMPL.replace("{role}",s.role).replace("{symptom}",s.symptom).replace("{goal}",s.goal);}
+  var TMPL="{goal} Use everything you know about DORA research, Continuous Delivery, Accelerate, Lean Software Development, Theory of Constraints, The Goal, The Mythical Man-Month, and statistical process control.\n\nInterview me using the Socratic method. Ask focused questions, one at a time. Keep your responses under 100 words. Aim to pinpoint the bottleneck in fewer than 20 questions.\n\nWhen you think you've identified the root cause or are wrapping up: suggest three concrete initiatives to address it. Frame each one to maximise team ownership and avoid top-down micromanagement.\n\nContext: {role} {symptom}";
+  var s={role:"I'm a software developer on the team.",symptom:"Our biggest pain is that things take too long to ship.",goal:"Help me identify the main bottleneck in my software delivery process."};
+  function render(){document.getElementById("pb-text").textContent=TMPL.replace("{goal}",s.goal).replace("{role}",s.role).replace("{symptom}",s.symptom);}
   document.querySelectorAll(".pb-opts").forEach(function(g){
     g.querySelectorAll(".pb-opt").forEach(function(b){
       b.addEventListener("click",function(){
