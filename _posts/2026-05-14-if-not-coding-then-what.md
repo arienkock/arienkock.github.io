@@ -1,6 +1,6 @@
 ---
 title: "The Moving Target: Why AI Coding Tools Haven't Fixed Your Bottleneck"
-date: 2026-05-08
+date: 2026-05-14
 tags: [ai, software, developers, productivity]
 published: true
 ---
