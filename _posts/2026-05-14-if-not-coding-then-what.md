@@ -5,7 +5,7 @@ tags: [ai, software, developers, productivity]
 published: true
 ---
 
-In my previous article, I claimed that the bottleneck in software delivery is rarely actually the coding itself. This explains why most companies aren't seeing a organization-wide increase in productivity despite the new wave of AI tools. _(See [Research from Uplevel (2024)](https://resources.uplevelteam.com/gen-ai-for-coding) and [DORA: ROI of AI-assisted Software Development report](https://cloud.google.com/resources/content/dora-roi-of-ai-assisted-software-development))_
+In my previous article, I claimed that the bottleneck in software delivery is rarely actually the coding itself. This explains why most companies aren't seeing an organization-wide increase in productivity despite the new wave of AI tools. _(See [Research from Uplevel (2024)](https://resources.uplevelteam.com/gen-ai-for-coding) and [DORA: ROI of AI-assisted Software Development report](https://cloud.google.com/resources/content/dora-roi-of-ai-assisted-software-development))_
 
 That begs the question: if it’s not the coding, **what is the bottleneck?**
 
@@ -19,9 +19,9 @@ The biggest limitation on an organization's throughput is the sheer amount of ti
 
 As I see them, a developer's core responsibilities at a high level are:
 
-* **Refinement:** Understanding what needs to be built and why. This includes technical designs and and non-functionals like security. AI can help here, but I don't see it applied often.
+* **Refinement:** Understanding what needs to be built and why. This includes technical designs and non-functionals like security. AI can help here, but I don't see it applied often.
 * **Execution:** Building the thing and reviewing the work of peers. This is the part that most people target with AI coding agents.
-* **Maintenance:** Keeping the code clean, refactoring, and updating dependencies to maintain long-term velocity. AI coding tools can definitely help here too. But in general this never gets enough attention. Even before AI, so that hasn't changed.
+* **Maintenance:** Keeping the code clean, refactoring, and updating dependencies to maintain long-term velocity. AI coding tools can definitely help here too. But in general this never gets enough attention. This was true even before AI.
 * **Operational Health:** Monitoring performance and seeing how things behave in production.
 
 However, these responsibilities are **constantly under pressure** from (mostly) necessary distractions like HR tasks, performance evaluations, endless meetings with stakeholders, and sudden escalations. Then there are the new ad-hoc initiatives (often handed down from higher management) that don't fall into the team's core work. I’m not saying we should do away with these things entirely, but we have to admit they put **a massive squeeze on the time actually spent delivering software**. 
@@ -30,9 +30,9 @@ However, these responsibilities are **constantly under pressure** from (mostly) 
 
 Another major bottleneck is **the integration of multiple parallel changes**. We often see teams working on separate tracks, which eventually results in large batches of code being merged at once for various reasons.
 
-There is often a time squeeze and fan in right before a release acts as a massive throughput blocker. It makes it much harder to push to production regularly, regardless of how fast the individual features were coded.
+There is often a time squeeze and fan-in right before a release, which acts as a massive throughput blocker. It makes it much harder to push to production regularly, regardless of how fast the individual features were coded.
 
-This may sound like this is an engineering problem. In part it is, since we can always choose to do fewer things at a time and do more together. However, this is **also a consequence of feature scoping and slicing** (or lack thereof).
+This may sound like an engineering problem. In part it is, since we can always choose to do fewer things at a time and do more together. However, this is **also a consequence of feature scoping and slicing** (or lack thereof).
 
 ## 3. The Review/QA Handoff
 
@@ -40,23 +40,23 @@ In between the coding and the integration, there is the simple hurdle of getting
 
 ## From Bad to Worse
 
-When your teams are struggling things tend to get worse not better. When you have a large blast radius, you naturally encounter more issues that are harder to troubleshoot. Disappointing delivery performance can lead to well-meaning interventions by management that risk making things worse:
+When your teams are struggling, things tend to get worse, not better. When you have a large blast radius, you naturally encounter more issues that are harder to troubleshoot. Disappointing delivery performance can lead to well-meaning interventions by management that risk making things worse:
 
- - **More teams working in parallel** - Leads to more integrations pressure, more meetings, more responsilibity dead-zones.
+ - **More teams working in parallel** - Leads to more integration pressure, more meetings, more responsibility dead-zones.
  - **Grow the team** - Almost guaranteed short term performance dip. Increased stress on existing team. It's a gamble. A bad hire sucks the energy out of everyone.
- - **Extract QA/Security/Ops into a separate team** - The goal is to gain focus time, but unless you manage to make those teams be practically invisible to one another (smooth handoffs and no meetings or coordination needed) you're not going to get it. It's a typical local optimization.
+ - **Extract QA/Security/Ops into a separate team** - The goal is to gain focus time, but unless you manage to make those teams practically invisible to one another (smooth handoffs and no meetings or coordination needed), you're not going to get it. It's a typical local optimization.
 
-Exactly the same intervention, **but executed well** *can* lead to performance gains. But my point here is that it's actually really hard to do these org changes well. So we should postpone them until we're highly confident they'll work.
+Exactly the same intervention, **but executed well,** *can* lead to performance gains. But my point here is that it's actually really hard to do these org changes well. So we should postpone them until we're highly confident they'll work.
 
-Keeping things small and in close proximity (a small single multi-disciplinary team) allows us to compensate for bad process. That may sound cynical, but it's more an acknowledgement that making an optimal process that _both teams and their stakeholders are eager to adopt_ is... hard.
+Keeping things small and in close proximity (a single multi-disciplinary team) allows us to compensate for bad process. That may sound cynical, but it's more an acknowledgement that making an optimal process that _both teams and their stakeholders are eager to adopt_ is... hard.
 
 ## Damn, That's Bleak Bro..
 
-I started off talking about AI coding and then went down the value-stream Lean detour around mis-management mountain. But now we're back and the question is _"what do we do about it?"_ and _"can AI help?"_.
+I started off talking about AI coding and then went down the value-stream Lean detour around mismanagement mountain. But now we're back and the question is _"what do we do about it?"_ and _"can AI help?"_.
 
-To do anything about this you need knowledge of theory and of people. Have a focused dialog with an LLM, and it is likely to help you organise your thoughts.
+To do anything about this, you need knowledge of theory and of people. Have a focused dialog with an LLM, and it is likely to help you organise your thoughts.
 
-But what theory? There's so much work out there that all references and builds on top of one another, and it's hard to point at one thing. So here is a (mostly) unordered and incomplete list:
+But what theory? There's so much work out there, all of which references and builds on top of one another, and it's hard to point at one thing. So here is a (mostly) unordered and incomplete list:
 
 - [Continuous Delivery](https://continuousdelivery.com/)
 - [Accelerate](https://itrevolution.com/product/accelerate/)
@@ -67,7 +67,7 @@ But what theory? There's so much work out there that all references and builds o
 - [Process control diagrams](https://en.wikipedia.org/wiki/Control_chart)
 
 
-Then how do you apply that knowledge to identify your constraints and come up with an initiative? How do you propose it in such a way to maximise your chances of people giving it a good-faith attempt?
+Then how do you apply that knowledge to identify your constraints and come up with an initiative? How do you propose it in a way that maximises your chances of people giving it a good-faith attempt?
 
 ## Start the Conversation
 
