@@ -5,13 +5,11 @@ subtitle: A short introduction
 permalink: /about/
 ---
 
-I've always been interested in how things fit together—and why they often don't.
+I'm mostly an introvert that can't shut up if you ask me about software architecture or development processes.
 
-I see software development primarily as a process of knowledge creation. In my experience, that process tends to get messy. Whether it's a sprawling technical architecture or the way a team interacts, complexity usually finds a way to hide the signals we actually need.
+I've worked as a developer across most of the stack, led teams, taught, and managed engineering departments. All of that has given me a broad but grounded view on software. These days I'm most fascinated by AI, though what I'm ultimately passionate about is the impact of what we build and the effectiveness with which we build it.
 
-I use this space to work through that mess. My approach is grounded in systems thinking, LEAN principles, and DevOps research. I'm interested in feedback loops that work, socio-technical systems that make sense, and finding the shortest path to clarity.
-
-No grand theories—just some notes on untangling the work.
+I write because I often leave a room wishing I'd communicated better. Writing gives me the time to organise my thinking and actually land the point. And if I'm honest, I like the feeling of being heard and understood.
 
 ## Elsewhere
 
