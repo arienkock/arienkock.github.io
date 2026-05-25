@@ -1,116 +1,63 @@
 ---
-title: What supervisor hierarchies can teach us about code reviews in the AI era
-subtitle: Reliability thinking from Erlang, applied to a messy engineering debate
-date: 2026-04-17
+title: The Best Use of AI In Your Development Cycle
+subtitle: What supervisor hierarchies can teach us about code reviews in the AI era
+date: 2026-05-25
 tags: [engineering, ai, code-review]
-published: false
+published: true
 ---
 
-One of Joe Armstrong's enduring ideas is that resilient systems are not built by pretending failure will not happen. They are built by assuming failure is normal, then shaping the system so failures are isolated, detected quickly, and recovered from automatically.
+I suspect that most people pushing for AI adoption in organisations are doing it with the intent of writing better code faster. One would expect to see a boost in developer productivity. And you do, kind of, but only at the level of the individual. As I claimed in a previous article: ["Writing code is rarely the bottleneck"](https://arienkock.github.io/2026/05/14/if-not-coding-then-what/).
 
-That mindset came through strongly in his talks about supervisor hierarchies: small processes doing one thing, linked into trees, with supervisors deciding what to restart and when. The point is not perfection in each worker process. The point is resilience in the whole.
+[DORA's recent AI ROI report](https://cloud.google.com/resources/content/dora-roi-of-ai-assisted-software-development) shows a dip in quality/stability during early AI adoption. So what we're saying then is that AI adoption, the way it's usually done, does not boost overall productivity. It puts such a high load on the quality gates that we actually produce lower quality changes.
 
-I keep thinking about that while watching the current "what do we even do with code reviews now?" debate, especially with AI-assisted coding becoming normal.
+I suspect most people's reactions when finding this out is either "The data must be wrong!", "I told you so!" or... "I've been scammed!".
 
-## The framing problem
+## The Verification Gap / Crisis
 
-A lot of arguments about code review get stuck because they frame review as a gate for catching bad code before merge, full stop.
+When AI-written code is usually good enough, you start checking it less. When AI-written code is written in such high volume that you can't keep up, you start checking it less.
 
-That was never the whole story, but AI makes the limitation obvious:
+People have written about how verifying/checking code is becoming a bigger part of our work. And that's not something people are generally excited about. The prompting part is fun, but the checking part is not. It takes quite a bit of time and energy. Check out:
 
-- Generated code can look plausible while hiding subtle design mistakes.
-- Volume goes up, so reviewer attention becomes the scarcest resource.
-- If we treat every PR as a full manual audit, we burn people out.
+- [When AI Writes the World's Software, Who Verifies It? - 
+Leonardo de Moura](https://leodemoura.github.io/blog/2026-2-28-when-ai-writes-the-worlds-software-who-verifies-it/)
+- [The Verification Crisis: Why Checking Generated Code Is Harder Than Writing It](https://smarterarticles.co.uk/the-verification-crisis-why-checking-generated-code-is-harder-than-writing-it)
 
-So the old binary framing breaks down:
+This isn't new, because this was the sucky part of code reviews to begin with. And now we have to do it more often? No thanks.
 
-- "Review everything deeply" does not scale.
-- "Review nothing, just ship" fails predictably.
+## A Hierarchy of Verification
 
-The more useful question is: what review structure gives us system-level resilience when individual changes and individual reviewers will both fail sometimes?
+Erlang popularised the concept of supervision hierarchies. The core idea is that you can get highly fault-tolerant systems if you build them in such a way.
 
-## Supervisor trees as a mental model for review
+If our goal is defect tolerance instead of fault tolerance, then a hierarchy of verification should be a powerful architecture. It simultaneously addresses the bottleneck of reviews, while enabling us to broaden the scope of verifications via automation. Automation handles menial and repetitive verifications better than humans do.
 
-In supervisor hierarchies, responsibilities are explicit and layered. We can map that to code review practice.
+Take this example: have AI check for conceptual duplication, i.e. code that may look different, but mean the same thing. You're going to get what you asked for, but some of them might not be feasible to fix. Other are just the AI making stretch. Have adversarial reviews, an AI can check that work and reduce the noise. If you're going to ask for a code review from an AI, you're always going to get **something**. Have that work checked in a hierarchy of verifications, and it could actually end up concluding that it's good to go.
 
-### Layer 1: local checks (worker-level)
+The human sits at the top, because (of course) the human developer takes final responsibility for the result. It's a human checking the work of an AI that checked a human's work.
 
-This is linting, tests, static analysis, type checks, policy checks, and AI-generated review hints. These are cheap, fast, and relentless.
+With the rise of token costs this may sound like yet another way to burn through cash. But there are definitely ways to deal with that.
 
-They should catch routine breakage so humans do not spend cognition on obvious defects.
+## AI Verification On a Budget
 
-### Layer 2: peer review (first-line supervisor)
+Having an LLM read the entire codebase for every update is expensive. Nobody is questioning that. Token costs will skyrocket with continuous manual AI checks.
 
-A human reviewer focuses on what automation is still bad at:
+However, many verification checks can be evaluated deterministically. If a verification can be performed by looking at an AST or directory structure, there may already be a tool there to do it. If so, use AI to write the rule. If not, use AI to write the check as code.
 
-- domain fit
-- architectural alignment
-- maintainability
-- clarity of intent
+That's leverage. Having AI write code that replaces itself completely, or in part, is how you truly scale up the benefits. Also, if the AI bubble goes bust, you still have your custom-built tooling.
 
-This is not "find every bug." It is "is this change healthy for the system?"
+Some checks are partially deterministic and partially subjective. Have AI write a script to wrap the AI in a harness. These scripts isolate the problem and only call the LLM for the subjective bits.
 
-### Layer 3: ownership and architecture review (higher-level supervisor)
+## You Can Start Right Now
 
-High-risk areas need stronger supervision: security-sensitive modules, core platform code, distributed system boundaries, money movement, privacy logic, data model migrations.
+Who is the person that you wish would review every PR? Ask them to imagine what they would review if they had infinite time and motivation. What are the invariants? What are the architecture rules that live in their mind and materialised through past decisions?
 
-Not every PR needs this level. But some absolutely do, and pretending otherwise is just wishful thinking.
+Use this documented wishlist as your foundation for automated rules. Have your team use AI to generate deterministic tests for these rules. Implement these generated tests directly into your continuous integration pipeline.
 
-### Layer 4: production feedback loops (recovery strategy)
+Identify the remaining complex rules from the wishlist. Frame them as full agent prompts with structured outputs that your CI pipeline can pick up.
 
-Even good review systems miss things. Resilience comes from what happens next:
+## Conclusion: Targeted Improvements to Your Software Delivery Performance
 
-- observability that spots regressions early
-- feature flags and rollout controls
-- quick rollback paths
-- post-incident learning that feeds back into checks and review heuristics
+Automating verifications addresses the most likely bottlenecks: human verifications. Addressing your system's constraint gets you higher throughput. In particular, this approach also gets you (in all likelihood) higher quality changes. It doesn't have to break the bank if you're smart about it.
 
-This is the equivalent of restart strategy. If your only safety mechanism is "catch it in PR," your recovery model is weak.
+There is only one reason I can think of that this isn't the first and most common use of AI in software development. Reviewing and maintenance are some of the least fun things to do for a developer.
 
-## What this means for the AI code review debate
-
-I think both extreme positions are wrong:
-
-- "AI means human review is obsolete"
-- "AI means every line now needs more human review than before"
-
-AI changes where effort should go, not whether effort is needed.
-
-The opportunity is to move humans up the stack:
-
-- less time on syntax-level policing
-- more time on system boundaries and risk
-- clearer ownership for high-consequence changes
-
-Put differently: AI can be an excellent worker process in the review hierarchy, but it should not be the entire supervision strategy.
-
-## A practical policy I would start with
-
-If I had to set team policy tomorrow, I would start with this:
-
-1. **Default automation-first checks.** No human reviews for changes that fail baseline quality gates.
-2. **Risk-tiered human review.** Lightweight review for low-risk changes, deeper required review for high-risk areas.
-3. **Explicit ownership matrix.** Define who must review what, based on blast radius.
-4. **Fast recovery discipline.** Every significant change needs rollback and monitoring plans.
-5. **Monthly calibration.** Sample escaped defects and review misses; adjust rules instead of blaming individuals.
-
-This is not glamorous, but it is robust.
-
-## Where I still feel tension
-
-There is still a cultural question here: teams often use review for mentorship, alignment, and social trust, not just defect prevention. If we over-automate, we might save time but lose learning.
-
-I do not have a perfect answer yet. My current view is that we should separate goals instead of mixing them:
-
-- keep mandatory review focused on risk and correctness
-- create intentional spaces for mentoring and design discussion
-
-When those are conflated, both get worse.
-
-## Draft notes to expand
-
-- Add one concrete example of a "looked fine in review, failed in production" change and show how layered supervision would have reduced impact.
-- Reference one specific Joe Armstrong quote/talk segment for precision.
-- Add a short section on incentives: velocity metrics often punish resilient review behavior.
-
-That is where I am landing right now: code review should be designed like a resilient system, not a single checkpoint. Assume mistakes, structure recovery, and put scarce human judgment where it matters most.
+Well great! If it hurts, do it more often. Make it easier, cheaper, and faster. What's stopping you?
